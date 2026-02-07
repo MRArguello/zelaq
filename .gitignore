@@ -1,0 +1,6 @@
+packages/ui/node_modules/
+app/native/node_modules/
+apps/native/ZelaqNativePlayground/node_modules/
+packages/ui/dist/
+*.log
+.DS_Store
