@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, Button, TextInput, Switch, StyleSheet } from 'react-native';
-import { UIProvider, useTheme } from '@zelaq/ui/provider';
+import { UIProvider, useTheme, Button as RNButtton } from '@zelaq/ui';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const KitchenSink: React.FC = () => {
     const theme: any = useTheme();
@@ -32,11 +32,12 @@ const KitchenSink: React.FC = () => {
 
 export default function App() {
     return (
-        // <UIProvider>
+        <UIProvider>
             <SafeAreaView style={{ flex: 1 }}>
                 <KitchenSink />
+                <RNButtton />
             </SafeAreaView>
-        // </UIProvider>
+        </UIProvider>
     );
 }
 
