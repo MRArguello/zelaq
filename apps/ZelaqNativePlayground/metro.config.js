@@ -2,12 +2,12 @@ const path = require('path');
 
 const workspaceRoot = path.resolve(__dirname, '..', '..');
 const appNodeModules = path.resolve(__dirname, 'node_modules');
-const uiPackageSrc = path.resolve(workspaceRoot, '../packages', 'ui', 'src');
+const uiPackageSrc = path.resolve(workspaceRoot, 'packages', 'ui', 'src');
 
 module.exports = {
     projectRoot: __dirname,
     watchFolders: [
-        path.resolve(workspaceRoot, '../packages'),
+        path.resolve(workspaceRoot, 'packages'),
         path.resolve(workspaceRoot)
     ],
     resolver: {
