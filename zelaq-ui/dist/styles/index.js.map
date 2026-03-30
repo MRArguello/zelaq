@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/styles/index.ts"],"sourcesContent":["// Web platform - re-export from styled-components\nexport { styled, css, ThemeProvider, createGlobalStyle } from 'styled-components';\nexport type { DefaultTheme } from 'styled-components';\n"],"mappings":";;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AACA,+BAA8D;","names":[]}
