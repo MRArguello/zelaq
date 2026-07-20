@@ -1,0 +1,114 @@
+{
+    "name": "@zelaq/ui",
+    "version": "0.1.0",
+    "description": "Cross-platform UI kit for React and React Native",
+    "license": "MIT",
+    "sideEffects": false,
+    "source": "./src/index.ts",
+    "main": "./lib/commonjs/index.js",
+    "module": "./lib/module/index.js",
+    "types": "./lib/typescript/commonjs/index.d.ts",
+    "react-native": "./lib/module/index.js",
+    "exports": {
+        ".": {
+            "react-native": {
+                "types": "./lib/typescript/commonjs/index.d.ts",
+                "default": "./lib/module/index.js"
+            },
+            "import": {
+                "types": "./lib/typescript/module/index.d.ts",
+                "default": "./lib/module/index.js"
+            },
+            "require": {
+                "types": "./lib/typescript/commonjs/index.d.ts",
+                "default": "./lib/commonjs/index.js"
+            },
+            "default": "./lib/module/index.js"
+        },
+        "./button": {
+            "react-native": {
+                "types": "./lib/typescript/commonjs/button/index.d.ts",
+                "default": "./lib/module/button/index.js"
+            },
+            "import": {
+                "types": "./lib/typescript/module/button/index.d.ts",
+                "default": "./lib/module/button/index.js"
+            },
+            "require": {
+                "types": "./lib/typescript/commonjs/button/index.d.ts",
+                "default": "./lib/commonjs/button/index.js"
+            },
+            "default": "./lib/module/button/index.js"
+        },
+        "./theme": {
+            "react-native": {
+                "types": "./lib/typescript/commonjs/theme/index.d.ts",
+                "default": "./lib/module/theme/index.js"
+            },
+            "import": {
+                "types": "./lib/typescript/module/theme/index.d.ts",
+                "default": "./lib/module/theme/index.js"
+            },
+            "require": {
+                "types": "./lib/typescript/commonjs/theme/index.d.ts",
+                "default": "./lib/commonjs/theme/index.js"
+            },
+            "default": "./lib/module/theme/index.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "lib",
+        "src",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "clean": "rimraf lib",
+        "build": "bob build",
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint src --ext .ts,.tsx",
+        "prepack": "pnpm clean && pnpm build"
+    },
+    "peerDependencies": {
+        "react": ">=19.0.0",
+        "react-native": ">=0.81.0",
+        "react-native-web": ">=0.19.0"
+    },
+    "peerDependenciesMeta": {
+        "react-native-web": {
+            "optional": true
+        }
+    },
+    "devDependencies": {
+        "@types/react": "~19.1.0",
+        "react": "19.1.0",
+        "react-native": "0.81.5",
+        "react-native-builder-bob": "^0.40.18",
+        "rimraf": "^6.0.1",
+        "typescript": "~5.9.2"
+    },
+    "packageManager": "pnpm@9.15.0",
+    "publishConfig": {
+        "access": "public"
+    },
+    "react-native-builder-bob": {
+        "source": "src",
+        "output": "lib",
+        "targets": [
+            [
+                "module",
+                {
+                    "esm": true
+                }
+            ],
+            "commonjs",
+            [
+                "typescript",
+                {
+                    "project": "tsconfig.build.json"
+                }
+            ]
+        ]
+    }
+}

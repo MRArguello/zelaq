@@ -4,3 +4,4 @@ apps/ZelaqWebPlayground/node_modules/
 packages/ui/dist/
 *.log
 .DS_Store
+node_modules
