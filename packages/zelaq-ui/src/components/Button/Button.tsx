@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { CSSProperties } from 'react'
 import type { ButtonProps } from './Button.types'
-import { getButtonTokens, opacity } from '../../theme'
+import { getButtonTokens, useTheme } from '../../theme'
 
 type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
     onPress?: React.MouseEventHandler<HTMLButtonElement>
@@ -19,7 +19,8 @@ export function Button({
     testID,
 }: WebButtonProps) {
     const [pressed, setPressed] = React.useState(false)
-    const tokens = getButtonTokens(variant, disabled)
+    const theme = useTheme()
+    const tokens = getButtonTokens(variant, disabled, theme)
 
     const containerStyle: CSSProperties = {
         minHeight: tokens.container.minHeight,
@@ -28,7 +29,7 @@ export function Button({
         borderRadius: tokens.container.borderRadius,
         background: tokens.container.backgroundColor,
         border: `${tokens.container.borderWidth}px solid ${tokens.container.borderColor}`,
-        opacity: pressed && !disabled ? opacity.pressed : tokens.container.opacity,
+        opacity: pressed && !disabled ? theme.opacity.pressed : tokens.container.opacity,
         cursor: disabled ? 'not-allowed' : 'pointer',
         display: 'inline-flex',
         alignItems: 'center',

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '@zelaq/ui';
 import './button.css';
 

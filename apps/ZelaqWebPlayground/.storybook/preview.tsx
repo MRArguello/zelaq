@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react-vite'
+import { UIProvider } from '@zelaq/ui'
 
 const preview: Preview = {
   parameters: {
@@ -16,6 +17,13 @@ const preview: Preview = {
       test: 'todo'
     }
   },
+  decorators: [
+    (Story) => (
+      <UIProvider>
+        <Story />
+      </UIProvider>
+    ),
+  ],
 };
 
 export default preview;

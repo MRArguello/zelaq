@@ -1,17 +1,7 @@
-// import { Button as RNButton } from 'react-native';
-
-// export const Button: React.FC<{ title: string; onPress: () => void; disabled?: boolean }> =
-//     ({ title, onPress, disabled }) => {
-//         return (
-//             <RNButton title={title} onPress={onPress} disabled={disabled} />
-
-//         );
-//     }
-
 import * as React from 'react'
 import { Pressable, Text, StyleSheet } from 'react-native'
 import type { ButtonProps } from './Button.types'
-import { getButtonTokens, opacity } from '../../theme'
+import { getButtonTokens, useTheme } from '../../theme'
 
 export function Button({
     children,
@@ -22,7 +12,8 @@ export function Button({
     textStyle,
     testID,
 }: ButtonProps) {
-    const tokens = getButtonTokens(variant, disabled)
+    const theme = useTheme()
+    const tokens = getButtonTokens(variant, disabled, theme)
 
     return (
         <Pressable
@@ -33,7 +24,7 @@ export function Button({
             style={({ pressed }) => [
                 styles.base,
                 tokens.container,
-                pressed && !disabled ? styles.pressed : null,
+                pressed && !disabled ? { opacity: theme.opacity.pressed } : null,
                 style,
             ]}
         >
@@ -48,7 +39,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     labelBase: {},
-    pressed: {
-        opacity: opacity.pressed,
-    },
 })

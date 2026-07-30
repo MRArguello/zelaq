@@ -1,8 +1,11 @@
-import { colors, opacity, radii, sizes, space, typography } from './tokens'
+import { defaultTheme } from './tokens'
+import type { Theme } from './types'
 
 export type ButtonVariant = 'primary' | 'secondary'
 
-export function getButtonTokens(variant: ButtonVariant, disabled: boolean) {
+export function getButtonTokens(variant: ButtonVariant, disabled: boolean, theme: Theme = defaultTheme) {
+    const { colors, space, radii, typography, sizes, opacity } = theme
+
     if (variant === 'secondary') {
         return {
             container: {

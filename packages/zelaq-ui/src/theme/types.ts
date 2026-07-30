@@ -1,64 +1,51 @@
-/**
- * Theme types and interfaces
- */
-
 export interface ColorTokens {
-    primary: string;
-    secondary: string;
-    accent: string;
-    background: string;
-    foreground: string;
-    border: string;
-    error: string;
-    warning: string;
-    success: string;
-    info: string;
+    primary: string
+    primaryPressed: string
+    primaryDisabled: string
+    secondaryBackground: string
+    secondaryBorder: string
+    secondaryText: string
+    textOnPrimary: string
 }
 
-export interface SpacingTokens {
-    xs: number;
-    sm: number;
-    md: number;
-    lg: number;
-    xl: number;
-    xxl: number;
+export interface SpaceTokens {
+    2: number
+    3: number
+    4: number
 }
 
 export interface RadiiTokens {
-    sm: number;
-    md: number;
-    lg: number;
-    full: number;
+    sm: number
+    md: number
+    pill: number
 }
 
 export interface TypographyTokens {
-    fontSizeXs: number;
-    fontSizeSm: number;
-    fontSizeMd: number;
-    fontSizeLg: number;
-    fontSizeXl: number;
-    fontWeight: {
-        regular: number;
-        medium: number;
-        semibold: number;
-        bold: number;
-    };
-    lineHeight: {
-        tight: number;
-        normal: number;
-        relaxed: number;
-    };
+    button: {
+        fontSize: number
+        fontWeight: '400' | '500' | '600' | '700'
+        lineHeight: number
+    }
+}
+
+export interface SizeTokens {
+    touchMin: number
+}
+
+export interface OpacityTokens {
+    disabled: number
+    pressed: number
 }
 
 export interface Theme {
-    colors: ColorTokens;
-    spacing: SpacingTokens;
-    radii: RadiiTokens;
-    typography: TypographyTokens;
+    colors: ColorTokens
+    space: SpaceTokens
+    radii: RadiiTokens
+    typography: TypographyTokens
+    sizes: SizeTokens
+    opacity: OpacityTokens
 }
 
-export interface ThemeProviderProps {
-    theme?: Theme | Partial<Theme> | ((base: Theme) => Theme);
-    mode?: 'light' | 'dark' | 'system';
-    children?: React.ReactNode;
+export type ThemeOverride = {
+    [K in keyof Theme]?: Partial<Theme[K]>
 }
