@@ -9,6 +9,18 @@ type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
     textStyle?: CSSProperties
 }
 
+const srOnlyStyle: CSSProperties = {
+    position: 'absolute',
+    width: 1,
+    height: 1,
+    padding: 0,
+    margin: -1,
+    overflow: 'hidden',
+    clip: 'rect(0, 0, 0, 0)',
+    whiteSpace: 'nowrap',
+    border: 0,
+}
+
 export function Button({
     children,
     variant = 'primary',
@@ -17,10 +29,14 @@ export function Button({
     style,
     textStyle,
     testID,
+    accessibilityLabel,
+    accessibilityHint,
+    accessible = true,
 }: WebButtonProps) {
     const [pressed, setPressed] = React.useState(false)
     const theme = useTheme()
     const tokens = getButtonTokens(variant, disabled, theme)
+    const hintId = React.useId()
 
     const containerStyle: CSSProperties = {
         minHeight: tokens.container.minHeight,
@@ -53,8 +69,17 @@ export function Button({
             onMouseDown={() => !disabled && setPressed(true)}
             onMouseUp={() => setPressed(false)}
             onMouseLeave={() => setPressed(false)}
+            aria-label={accessibilityLabel}
+            aria-describedby={accessibilityHint ? hintId : undefined}
+            aria-hidden={accessible ? undefined : true}
+            tabIndex={accessible ? undefined : -1}
         >
             <span style={{ ...labelStyle, ...textStyle }}>{children}</span>
+            {accessibilityHint ? (
+                <span id={hintId} style={srOnlyStyle}>
+                    {accessibilityHint}
+                </span>
+            ) : null}
         </button>
     )
 }

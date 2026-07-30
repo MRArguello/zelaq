@@ -11,6 +11,9 @@ export function Button({
     style,
     textStyle,
     testID,
+    accessibilityLabel,
+    accessibilityHint,
+    accessible = true,
 }: ButtonProps) {
     const theme = useTheme()
     const tokens = getButtonTokens(variant, disabled, theme)
@@ -18,6 +21,10 @@ export function Button({
     return (
         <Pressable
             accessibilityRole="button"
+            accessible={accessible}
+            accessibilityLabel={accessibilityLabel}
+            accessibilityHint={accessibilityHint}
+            accessibilityState={{ disabled }}
             disabled={disabled}
             onPress={onPress}
             testID={testID}
