@@ -5,3 +5,4 @@ packages/zelaq-ui/lib/
 *.log
 .DS_Store
 node_modules
+DECISIONS.md
