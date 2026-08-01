@@ -1,0 +1,15 @@
+diff --git a/dist/manager/runtime.js b/dist/manager/runtime.js
+index 2118339367872e899b2af7305d82de03539c08e0..9adcdeada96c490bd76093c2167ffed119611305 100644
+--- a/dist/manager/runtime.js
++++ b/dist/manager/runtime.js
+@@ -11276,8 +11276,8 @@ var PreviewContainer = styled.div({
+     gridTemplateColumns: "100%",
+     gridTemplateRows: "100%",
+     position: "relative",
+-    minWidth: "100%",
+-    minHeight: "100%"
++    width: "100%",
++    height: "100%"
+   },
+   ({ show }) => ({ display: show ? "grid" : "none" })
+ ), UnstyledLink = styled(Link2)({

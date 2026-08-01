@@ -6,6 +6,8 @@ import reactNativeA11y from 'eslint-plugin-react-native-a11y'
 import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
+const dirname = import.meta.dirname
+
 export default defineConfig([
     globalIgnores(['lib']),
     {
@@ -14,6 +16,9 @@ export default defineConfig([
         languageOptions: {
             ecmaVersion: 2020,
             globals: { ...globals.browser, ...globals.node },
+            parserOptions: {
+                tsconfigRootDir: dirname,
+            },
         },
     },
     {
