@@ -1,7 +1,8 @@
 import * as React from 'react'
 import type { CSSProperties } from 'react'
 import type { ButtonProps } from './Button.types'
-import { getButtonTokens, useTheme } from '../../theme'
+import { useTheme } from '../../theme'
+import { getButtonTokens } from '../../theme/button'
 
 type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
     onPress?: React.MouseEventHandler<HTMLButtonElement>

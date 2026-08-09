@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { Pressable, Text, StyleSheet } from 'react-native'
 import type { ButtonProps } from './Button.types'
-import { getButtonTokens, useTheme } from '../../theme'
+import { useTheme } from '../../theme'
+import { getButtonTokens } from '../../theme/button'
 
 export function Button({
     children,

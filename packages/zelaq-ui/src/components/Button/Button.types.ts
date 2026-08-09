@@ -1,5 +1,5 @@
 import type { GestureResponderEvent, StyleProp, TextStyle, ViewStyle } from 'react-native'
-import type { ButtonVariant } from '../../theme'
+import type { ButtonVariant } from '../../theme/button'
 
 export type ButtonProps = {
     children: React.ReactNode
