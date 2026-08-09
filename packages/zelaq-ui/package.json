@@ -3,6 +3,11 @@
     "version": "0.1.0",
     "description": "Cross-platform UI kit for React and React Native",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MRArguello/zelaq.git",
+        "directory": "packages/zelaq-ui"
+    },
     "sideEffects": false,
     "source": "./src/index.ts",
     "main": "./lib/commonjs/index.js",

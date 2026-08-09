@@ -1,3 +1,5 @@
+<img src="./assets/wordmark.png" alt="Zelaq" width="240" />
+
 # @zelaq/ui
 
 Cross-platform component library for React and React Native.
