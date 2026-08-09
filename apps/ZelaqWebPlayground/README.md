@@ -1,6 +1,6 @@
 # Zelaq Web Playground
 
-Web playground for developing and testing [`@zelaq/ui`](../../packages/zelaq-ui). Not a
+Web playground for developing and testing [`zelaq-ui`](../../packages/zelaq-ui). Not a
 standalone app — its only purpose is exercising the library's components on web.
 
 ## Running
@@ -19,7 +19,7 @@ This starts Storybook on `http://localhost:6006`, where components are documente
 pnpm dev
 ```
 
-Rebuild `@zelaq/ui` after changing its source:
+Rebuild `zelaq-ui` after changing its source:
 
 ```bash
 pnpm build:ui

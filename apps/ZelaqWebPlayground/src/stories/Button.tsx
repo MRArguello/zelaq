@@ -1,4 +1,4 @@
-import { Button } from '@zelaq/ui';
+import { Button } from 'zelaq-ui';
 
 export interface WebButtonProps {
   label: string;

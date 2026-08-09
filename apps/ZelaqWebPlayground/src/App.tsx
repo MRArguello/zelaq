@@ -1,4 +1,4 @@
-import { Button, UIProvider } from '@zelaq/ui'
+import { Button, UIProvider } from 'zelaq-ui'
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { UIProvider } from "@zelaq/ui";
+import { UIProvider } from "zelaq-ui";
 
 export default function RootLayout() {
   return (

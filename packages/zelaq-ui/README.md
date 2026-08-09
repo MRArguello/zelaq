@@ -1,13 +1,13 @@
 <img src="./assets/wordmark.png" alt="Zelaq" width="240" />
 
-# @zelaq/ui
+# zelaq-ui
 
 Cross-platform component library for React and React Native.
 
 ## Installation
 
 ```bash
-npm install @zelaq/ui
+npm install zelaq-ui
 ```
 
 Peer dependencies: `react`, `react-native`. No `react-native-web` — each component has separate
@@ -16,7 +16,7 @@ web and native implementations, picked automatically at build time.
 ## Usage
 
 ```tsx
-import { UIProvider, Button, useTheme } from '@zelaq/ui';
+import { UIProvider, Button, useTheme } from 'zelaq-ui';
 
 function App() {
   return (

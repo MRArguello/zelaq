@@ -18,10 +18,10 @@
         "moduleDetection": "force",
         "baseUrl": ".",
         "paths": {
-            "@zelaq/ui": [
+            "zelaq-ui": [
                 "./src/index.ts"
             ],
-            "@zelaq/ui/*": [
+            "zelaq-ui/*": [
                 "./src/*"
             ]
         }
