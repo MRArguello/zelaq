@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Pressable, Text, StyleSheet } from 'react-native'
+import { Pressable, Text, View, StyleSheet } from 'react-native'
 import type { ButtonProps } from './Button.types'
 import { useTheme } from '../../theme'
 import { getButtonTokens } from '../../theme/button'
@@ -15,6 +15,8 @@ export function Button({
     accessibilityLabel,
     accessibilityHint,
     accessible = true,
+    startIcon,
+    endIcon,
 }: ButtonProps) {
     const theme = useTheme()
     const tokens = getButtonTokens(variant, disabled, theme)
@@ -36,13 +38,22 @@ export function Button({
                 style,
             ]}
         >
-            <Text style={[styles.labelBase, tokens.label, textStyle]}>{children}</Text>
+            <View style={[styles.content, { gap: theme.space[2] }]}>
+                {startIcon}
+                <Text style={[styles.labelBase, tokens.label, textStyle]}>{children}</Text>
+                {endIcon}
+            </View>
         </Pressable>
     )
 }
 
 const styles = StyleSheet.create({
     base: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    content: {
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
     },

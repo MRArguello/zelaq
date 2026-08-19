@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react'
 import type { ButtonProps } from './Button.types'
 import { useTheme } from '../../theme'
 import { getButtonTokens } from '../../theme/button'
+import { srOnlyStyle } from '../../internal/srOnlyStyle'
 
 type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
     onPress?: React.MouseEventHandler<HTMLButtonElement>
@@ -10,16 +11,9 @@ type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
     textStyle?: CSSProperties
 }
 
-const srOnlyStyle: CSSProperties = {
-    position: 'absolute',
-    width: 1,
-    height: 1,
-    padding: 0,
-    margin: -1,
-    overflow: 'hidden',
-    clip: 'rect(0, 0, 0, 0)',
-    whiteSpace: 'nowrap',
-    border: 0,
+function decorate(icon: React.ReactElement | undefined) {
+    if (!icon) return null
+    return React.cloneElement(icon, { 'aria-hidden': true, focusable: false } as React.SVGAttributes<SVGSVGElement>)
 }
 
 export function Button({
@@ -33,6 +27,8 @@ export function Button({
     accessibilityLabel,
     accessibilityHint,
     accessible = true,
+    startIcon,
+    endIcon,
 }: WebButtonProps) {
     const [pressed, setPressed] = React.useState(false)
     const theme = useTheme()
@@ -51,6 +47,10 @@ export function Button({
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: startIcon || endIcon ? theme.space[2] : undefined,
+        // Sets currentColor for startIcon/endIcon, which are siblings of (not descendants of)
+        // the label span below and so don't inherit its color on their own.
+        color: tokens.label.color,
     }
 
     const labelStyle: CSSProperties = {
@@ -75,7 +75,9 @@ export function Button({
             aria-hidden={accessible ? undefined : true}
             tabIndex={accessible ? undefined : -1}
         >
+            {decorate(startIcon)}
             <span style={{ ...labelStyle, ...textStyle }}>{children}</span>
+            {decorate(endIcon)}
             {accessibilityHint ? (
                 <span id={hintId} style={srOnlyStyle}>
                     {accessibilityHint}
