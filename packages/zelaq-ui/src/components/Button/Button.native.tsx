@@ -3,6 +3,7 @@ import { Pressable, Text, View, StyleSheet } from 'react-native'
 import type { ButtonProps } from './Button.types'
 import { useTheme } from '../../theme'
 import { getButtonTokens } from '../../theme/button'
+import { withDefaultIconColor } from '../../internal/withDefaultIconColor'
 
 export function Button({
     children,
@@ -39,9 +40,9 @@ export function Button({
             ]}
         >
             <View style={[styles.content, { gap: theme.space[2] }]}>
-                {startIcon}
+                {startIcon ? withDefaultIconColor(startIcon, tokens.label.color) : null}
                 <Text style={[styles.labelBase, tokens.label, textStyle]}>{children}</Text>
-                {endIcon}
+                {endIcon ? withDefaultIconColor(endIcon, tokens.label.color) : null}
             </View>
         </Pressable>
     )

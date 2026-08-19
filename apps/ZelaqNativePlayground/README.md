@@ -20,4 +20,4 @@ Rebuild `zelaq-ui` after changing its source:
 pnpm build:ui
 ```
 
-App entry is `app/index.tsx`, wrapped in `UIProvider` in `app/_layout.tsx`.
+App entry is `app/index.tsx`, wrapped in `ZelaqProvider` in `app/_layout.tsx`.

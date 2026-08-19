@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react-vite'
-import { UIProvider } from 'zelaq-ui'
+import { ZelaqProvider } from 'zelaq-ui'
 
 const preview: Preview = {
   parameters: {
@@ -19,9 +19,9 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <UIProvider>
+      <ZelaqProvider>
         <Story />
-      </UIProvider>
+      </ZelaqProvider>
     ),
   ],
 };

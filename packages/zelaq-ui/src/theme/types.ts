@@ -46,6 +46,10 @@ export interface Theme {
     opacity: OpacityTokens
 }
 
-export type ThemeOverride = {
-    [K in keyof Theme]?: Partial<Theme[K]>
+type DeepPartial<T> = {
+    [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K]
 }
+
+export type ThemeOverride = DeepPartial<Theme>
+
+export type ThemeMode = 'light' | 'dark' | 'system'

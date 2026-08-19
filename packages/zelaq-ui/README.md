@@ -16,15 +16,15 @@ web and native implementations, picked automatically at build time.
 ## Usage
 
 ```tsx
-import { UIProvider, Button, useTheme } from 'zelaq-ui';
+import { ZelaqProvider, Button, useTheme } from 'zelaq-ui';
 
 function App() {
   return (
-    <UIProvider theme={{ colors: { primary: '#7c3aed' } }}>
+    <ZelaqProvider theme={{ colors: { primary: '#7c3aed' } }}>
       <Button variant="primary" onPress={() => {}}>
         Save
       </Button>
-    </UIProvider>
+    </ZelaqProvider>
   );
 }
 
@@ -34,7 +34,13 @@ function Custom() {
 }
 ```
 
-`theme` on `UIProvider` is a partial override merged over the defaults.
+`theme` on `ZelaqProvider` is a partial override, deep-merged over the defaults at every nesting
+level — overriding one nested field (e.g. just `typography.button.fontSize`) doesn't drop the
+rest of that object.
+
+`ZelaqProvider` also takes a `mode` prop — `'light' | 'dark' | 'system'`, defaults to `'light'`.
+`'system'` follows the OS/browser color scheme and updates live if it changes (`matchMedia` on
+web, `useColorScheme` on React Native).
 
 ## Icons
 
@@ -108,5 +114,7 @@ description) stay two separate announcements, which is what `aria-describedby` i
 
 ## API
 
-- **`UIProvider`** — provides theme context to its subtree. `theme` prop is a partial override.
-- **`useTheme()`** — hook returning the theme in effect (defaults + any `UIProvider` override).
+- **`ZelaqProvider`** — provides theme context to its subtree. `theme` is a deep partial override;
+  `mode` (`'light' | 'dark' | 'system'`, default `'light'`) picks the base palette.
+- **`useTheme()`** — hook returning the theme in effect (base palette for the resolved mode,
+  merged with any `ZelaqProvider` override).

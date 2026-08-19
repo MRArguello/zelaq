@@ -10,6 +10,16 @@ export const colors = {
     textOnPrimary: '#ffffff',
 } as const
 
+export const darkColors = {
+    primary: '#e5e7eb',
+    primaryPressed: '#d1d5db',
+    primaryDisabled: '#4b5563',
+    secondaryBackground: '#1f2937',
+    secondaryBorder: '#374151',
+    secondaryText: '#f9fafb',
+    textOnPrimary: '#111827',
+} as const
+
 export const space = {
     2: 8,
     3: 12,
@@ -39,7 +49,7 @@ export const opacity = {
     pressed: 0.85,
 } as const
 
-export const defaultTheme: Theme = {
+export const lightTheme: Theme = {
     colors,
     space,
     radii,
@@ -47,3 +57,15 @@ export const defaultTheme: Theme = {
     sizes,
     opacity,
 }
+
+export const darkTheme: Theme = {
+    colors: darkColors,
+    space,
+    radii,
+    typography,
+    sizes,
+    opacity,
+}
+
+/** Alias for lightTheme — internal fallback used when no ZelaqProvider is present. */
+export const defaultTheme: Theme = lightTheme

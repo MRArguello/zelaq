@@ -3,6 +3,7 @@ import { ActivityIndicator, Pressable, StyleSheet } from 'react-native'
 import type { IconButtonProps } from './IconButton.types'
 import { useTheme } from '../../theme'
 import { getIconButtonTokens } from '../../theme/iconButton'
+import { withDefaultIconColor } from '../../internal/withDefaultIconColor'
 
 export function IconButton({
     icon,
@@ -36,7 +37,11 @@ export function IconButton({
                 style,
             ]}
         >
-            {loading ? <ActivityIndicator size="small" color={tokens.iconColor} /> : icon}
+            {loading ? (
+                <ActivityIndicator size="small" color={tokens.iconColor} />
+            ) : (
+                withDefaultIconColor(icon, tokens.iconColor)
+            )}
         </Pressable>
     )
 }

@@ -1,14 +1,24 @@
-import { Button, UIProvider } from 'zelaq-ui'
+import { useState } from 'react'
+import { Button, ZelaqProvider } from 'zelaq-ui'
+import type { ThemeMode } from 'zelaq-ui'
 
 function App() {
+  const [mode, setMode] = useState<ThemeMode>('light')
+
   return (
-    <UIProvider theme={{ colors: { primary: '#7c3aed' } }}>
+    <ZelaqProvider mode={mode}>
       <img src="/zelaq-wordmark.png" alt="Zelaq" height={40} />
       <p>Web Playground</p>
+      <Button
+        variant="secondary"
+        onPress={() => setMode((current) => (current === 'dark' ? 'light' : 'dark'))}
+      >
+        Switch to {mode === 'dark' ? 'light' : 'dark'} mode
+      </Button>
       <Button onPress={() => console.log('web button pressed')}>
         Web button
       </Button>
-    </UIProvider>
+    </ZelaqProvider>
   )
 }
 export default App
