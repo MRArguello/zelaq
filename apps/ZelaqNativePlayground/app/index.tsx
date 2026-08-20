@@ -1,7 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { View } from 'react-native'
 import { Search, Settings, Trash2 } from 'lucide-react-native'
-import { Button, IconButton } from 'zelaq-ui'
+import { Button, IconButton, Text } from 'zelaq-ui'
 import { useThemeModeToggle } from './_layout'
 
 export default function App() {
@@ -43,6 +43,12 @@ export default function App() {
                         onPress={() => console.log('delete pressed')}
                     />
                 </View>
+
+                <Text variant="heading2">Section heading</Text>
+                <Text variant="body">Regular body text</Text>
+                <Text variant="bodySmall" tone="muted">Supporting text</Text>
+                <Text variant="hero4" tone="danger" align="center">Validation message</Text>
+                <Text variant="body" tone="success">Saved successfully</Text>
             </View>
         </SafeAreaView>
     )

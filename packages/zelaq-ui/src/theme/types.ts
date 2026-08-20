@@ -14,9 +14,15 @@ export interface ColorTokens {
 }
 
 export interface SpaceTokens {
-    2: number
-    3: number
-    4: number
+    sm: number
+    md: number
+    '2md': number
+    base: number
+    lg: number
+    xl: number
+    '2xl': number
+    '3xl': number
+    '4xl': number
 }
 
 export interface RadiiTokens {
@@ -39,10 +45,19 @@ export interface TypographyStyle {
 export interface TypographyTokens {
     fontFamily: FontFamilyTokens
     button: TypographyStyle
-    heading: TypographyStyle
-    body: TypographyStyle
+    bodyXxs: TypographyStyle
+    bodyXs: TypographyStyle
     bodySmall: TypographyStyle
-    label: TypographyStyle
+    body: TypographyStyle
+    subheading: TypographyStyle
+    heading4: TypographyStyle
+    heading3: TypographyStyle
+    heading2: TypographyStyle
+    heading1: TypographyStyle
+    hero4: TypographyStyle
+    hero3: TypographyStyle
+    hero2: TypographyStyle
+    hero1: TypographyStyle
 }
 
 export interface SizeTokens {

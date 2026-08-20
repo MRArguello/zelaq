@@ -1,5 +1,5 @@
 import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native'
-import type { ButtonVariant } from '../../theme/button'
+import type { ButtonVariant } from '../Button/Button.theme'
 
 export type IconButtonProps = {
     /** Always treated as decorative — the accessible name comes from accessibilityLabel. */

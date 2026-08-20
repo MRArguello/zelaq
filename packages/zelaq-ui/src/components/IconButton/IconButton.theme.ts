@@ -1,6 +1,6 @@
-import { defaultTheme } from './tokens'
-import type { Theme } from './types'
-import type { ButtonVariant } from './button'
+import { defaultTheme } from '../../theme/tokens'
+import type { Theme } from '../../theme/types'
+import type { ButtonVariant } from '../Button/Button.theme'
 
 export function getIconButtonTokens(
     variant: ButtonVariant,

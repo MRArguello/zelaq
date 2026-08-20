@@ -2,9 +2,10 @@ import * as React from 'react'
 import type { CSSProperties } from 'react'
 import type { ButtonProps } from './Button.types'
 import { useTheme } from '../../theme'
-import { getButtonTokens } from '../../theme/button'
+import { getButtonTokens } from './Button.theme'
 import { srOnlyStyle } from '../../internal/srOnlyStyle'
 import { withFontFallback } from '../../internal/withFontFallback'
+import { toRem } from '../../internal/toRem'
 
 type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
     onPress?: React.MouseEventHandler<HTMLButtonElement>
@@ -39,7 +40,7 @@ export function Button({
     const containerStyle: CSSProperties = {
         minHeight: tokens.container.minHeight,
         minWidth: tokens.container.minWidth,
-        padding: `${tokens.container.paddingVertical}px ${tokens.container.paddingHorizontal}px`,
+        padding: `${toRem(tokens.container.paddingVertical)} ${toRem(tokens.container.paddingHorizontal)}`,
         borderRadius: tokens.container.borderRadius,
         background: tokens.container.backgroundColor,
         border: `${tokens.container.borderWidth}px solid ${tokens.container.borderColor}`,
@@ -48,7 +49,7 @@ export function Button({
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: startIcon || endIcon ? theme.space[2] : undefined,
+        gap: startIcon || endIcon ? toRem(tokens.container.gap) : undefined,
         // currentColor for startIcon/endIcon — siblings of the label span, don't inherit its color otherwise.
         color: tokens.label.color,
     }
@@ -56,9 +57,9 @@ export function Button({
     const labelStyle: CSSProperties = {
         color: tokens.label.color,
         fontFamily: withFontFallback(tokens.label.fontFamily),
-        fontSize: tokens.label.fontSize,
+        fontSize: toRem(tokens.label.fontSize),
         fontWeight: tokens.label.fontWeight,
-        lineHeight: `${tokens.label.lineHeight}px`,
+        lineHeight: toRem(tokens.label.lineHeight),
     }
 
     return (

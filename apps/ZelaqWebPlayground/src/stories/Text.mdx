@@ -1,0 +1,23 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TextStories from './Text.stories';
+
+<Meta of={TextStories} />
+
+# Text
+
+<Canvas of={TextStories.AllVariants} />
+
+<Controls />
+
+`variant` maps to a typography token, `tone` maps to a semantic text color — both theme-aware and
+mode-aware like everything else. `align` sets text alignment.
+
+## Heading levels
+
+Variants map to a default element: `heading1`–`heading4` render `<h1>`–`<h4>`, `subheading`
+renders `<h2>`, `hero1`–`hero4` render `<h1>`, and body variants render `<p>`/`<span>`. Override
+with `as` for real document structure independent of the visual styling — `as="h1"` for a page
+title, `as="h3"` for a nested subsection. `as` accepts `h1`–`h6`/`p`/`span` and is web-only; native
+always renders RN's `Text`, which has no element/semantic-level concept.
+
+<Canvas of={TextStories.HeadingLevels} />

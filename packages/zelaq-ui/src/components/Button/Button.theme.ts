@@ -1,5 +1,5 @@
-import { defaultTheme } from './tokens'
-import type { Theme } from './types'
+import { defaultTheme } from '../../theme/tokens'
+import type { Theme } from '../../theme/types'
 
 export type ButtonVariant = 'primary' | 'secondary'
 
@@ -11,8 +11,9 @@ export function getButtonTokens(variant: ButtonVariant, disabled: boolean, theme
             container: {
                 minHeight: sizes.touchMin,
                 minWidth: sizes.touchMin,
-                paddingHorizontal: space[4],
-                paddingVertical: space[3],
+                paddingHorizontal: space.base,
+                paddingVertical: space['2md'],
+                gap: space.md,
                 borderRadius: radii.md,
                 backgroundColor: colors.secondaryBackground,
                 borderColor: colors.secondaryBorder,
@@ -30,8 +31,9 @@ export function getButtonTokens(variant: ButtonVariant, disabled: boolean, theme
         container: {
             minHeight: sizes.touchMin,
             minWidth: sizes.touchMin,
-            paddingHorizontal: space[4],
-            paddingVertical: space[3],
+            paddingHorizontal: space.base,
+            paddingVertical: space['2md'],
+            gap: space.md,
             borderRadius: radii.md,
             backgroundColor: disabled ? colors.primaryDisabled : colors.primary,
             borderColor: 'transparent',

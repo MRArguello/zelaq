@@ -78,24 +78,5 @@
     "packageManager": "pnpm@9.15.0",
     "publishConfig": {
         "access": "public"
-    },
-    "react-native-builder-bob": {
-        "source": "src",
-        "output": "lib",
-        "targets": [
-            [
-                "module",
-                {
-                    "esm": true
-                }
-            ],
-            "commonjs",
-            [
-                "typescript",
-                {
-                    "project": "tsconfig.build.json"
-                }
-            ]
-        ]
     }
 }

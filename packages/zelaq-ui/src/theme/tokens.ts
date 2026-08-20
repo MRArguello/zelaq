@@ -31,9 +31,15 @@ export const darkColors = {
 } as const
 
 export const space = {
-    2: 8,
-    3: 12,
-    4: 16,
+    sm: 4,
+    md: 8,
+    '2md': 12,
+    base: 16,
+    lg: 24,
+    xl: 32,
+    '2xl': 40,
+    '3xl': 64,
+    '4xl': 96,
 } as const
 
 export const radii = {
@@ -52,17 +58,17 @@ export const typography = {
         fontWeight: '500' as const,
         lineHeight: 20,
     },
-    heading: {
+    bodyXxs: {
         fontFamily: 'Satoshi',
-        fontSize: 24,
-        fontWeight: '700' as const,
-        lineHeight: 32,
-    },
-    body: {
-        fontFamily: 'Satoshi',
-        fontSize: 16,
+        fontSize: 10,
         fontWeight: '400' as const,
-        lineHeight: 24,
+        lineHeight: 16,
+    },
+    bodyXs: {
+        fontFamily: 'Satoshi',
+        fontSize: 12,
+        fontWeight: '400' as const,
+        lineHeight: 18,
     },
     bodySmall: {
         fontFamily: 'Satoshi',
@@ -70,11 +76,65 @@ export const typography = {
         fontWeight: '400' as const,
         lineHeight: 20,
     },
-    label: {
+    body: {
         fontFamily: 'Satoshi',
-        fontSize: 14,
-        fontWeight: '500' as const,
-        lineHeight: 20,
+        fontSize: 16,
+        fontWeight: '400' as const,
+        lineHeight: 24,
+    },
+    subheading: {
+        fontFamily: 'Satoshi',
+        fontSize: 24,
+        fontWeight: '700' as const,
+        lineHeight: 32,
+    },
+    heading4: {
+        fontFamily: 'Satoshi',
+        fontSize: 20,
+        fontWeight: '700' as const,
+        lineHeight: 25,
+    },
+    heading3: {
+        fontFamily: 'Satoshi',
+        fontSize: 24,
+        fontWeight: '700' as const,
+        lineHeight: 30,
+    },
+    heading2: {
+        fontFamily: 'Satoshi',
+        fontSize: 32,
+        fontWeight: '700' as const,
+        lineHeight: 40,
+    },
+    heading1: {
+        fontFamily: 'Satoshi',
+        fontSize: 40,
+        fontWeight: '700' as const,
+        lineHeight: 50,
+    },
+    hero4: {
+        fontFamily: 'Satoshi',
+        fontSize: 64,
+        fontWeight: '700' as const,
+        lineHeight: 70,
+    },
+    hero3: {
+        fontFamily: 'Satoshi',
+        fontSize: 76,
+        fontWeight: '700' as const,
+        lineHeight: 83,
+    },
+    hero2: {
+        fontFamily: 'Satoshi',
+        fontSize: 96,
+        fontWeight: '700' as const,
+        lineHeight: 105,
+    },
+    hero1: {
+        fontFamily: 'Satoshi',
+        fontSize: 120,
+        fontWeight: '700' as const,
+        lineHeight: 132,
     },
 } as const
 

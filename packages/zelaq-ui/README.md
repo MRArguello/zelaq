@@ -72,18 +72,32 @@ icons is documented on that component's Storybook page.
 
 ```ts
 theme.typography.fontFamily.sans // 'Satoshi'
-theme.typography.body            // { fontFamily, fontSize: 16, fontWeight: '400', lineHeight: 24 }
+theme.typography.bodyXxs         // { fontFamily, fontSize: 10, fontWeight: '400', lineHeight: 16 }
+theme.typography.bodyXs          // { fontFamily, fontSize: 12, fontWeight: '400', lineHeight: 18 }
 theme.typography.bodySmall       // { fontFamily, fontSize: 14, fontWeight: '400', lineHeight: 20 }
-theme.typography.label           // { fontFamily, fontSize: 14, fontWeight: '500', lineHeight: 20 }
-theme.typography.heading         // { fontFamily, fontSize: 24, fontWeight: '700', lineHeight: 32 }
+theme.typography.body            // { fontFamily, fontSize: 16, fontWeight: '400', lineHeight: 24 }
+theme.typography.subheading      // { fontFamily, fontSize: 24, fontWeight: '700', lineHeight: 32 }
+theme.typography.heading4        // { fontFamily, fontSize: 20, fontWeight: '700', lineHeight: 25 }
+theme.typography.heading3        // { fontFamily, fontSize: 24, fontWeight: '700', lineHeight: 30 }
+theme.typography.heading2        // { fontFamily, fontSize: 32, fontWeight: '700', lineHeight: 40 }
+theme.typography.heading1        // { fontFamily, fontSize: 40, fontWeight: '700', lineHeight: 50 }
+theme.typography.hero4           // { fontFamily, fontSize: 64, fontWeight: '700', lineHeight: 70 }
+theme.typography.hero3           // { fontFamily, fontSize: 76, fontWeight: '700', lineHeight: 83 }
+theme.typography.hero2           // { fontFamily, fontSize: 96, fontWeight: '700', lineHeight: 105 }
+theme.typography.hero1           // { fontFamily, fontSize: 120, fontWeight: '700', lineHeight: 132 }
 theme.typography.button          // { fontFamily, fontSize: 16, fontWeight: '500', lineHeight: 20 }
 ```
 
 One family (`Satoshi`) across the kit — `fontFamily` on each style, plus the raw name at
 `typography.fontFamily.sans` for anything that needs just the family. Weights used: `400`
-(Regular) for body, `500` (Medium) for labels/buttons, `700` (Bold) for headings — Satoshi has no
-Semibold/`600` weight, so `500` stands in for it. Override `typography` via `ZelaqProvider`'s
-`theme` prop to use a different font entirely.
+(Regular) for body variants, `700` (Bold) for subheading/heading/hero variants, `500` (Medium) for
+the button label — Satoshi has no Semibold/`600` weight, so `500` stands in for it there. Override
+`typography` via `ZelaqProvider`'s `theme` prop to use a different font entirely.
+
+`fontSize`/`lineHeight` are stored as px-equivalent numbers (native consumes them directly). On
+web, `Text` and `Button` format them as `rem` rather than `px`, so they scale with the browser's
+or OS's font-size/zoom setting instead of staying visually fixed — the same accessibility behavior
+native gets for free via `allowFontScaling`.
 
 ### Font loading
 

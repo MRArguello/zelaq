@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ActivityIndicator, Pressable, StyleSheet } from 'react-native'
 import type { IconButtonProps } from './IconButton.types'
 import { useTheme } from '../../theme'
-import { getIconButtonTokens } from '../../theme/iconButton'
+import { getIconButtonTokens } from './IconButton.theme'
 import { withDefaultIconColor } from '../../internal/withDefaultIconColor'
 
 export function IconButton({

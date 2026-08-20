@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, ZelaqProvider } from 'zelaq-ui'
+import { Button, Text, ZelaqProvider } from 'zelaq-ui'
 import type { ThemeMode } from 'zelaq-ui'
 
 function App() {
@@ -18,6 +18,12 @@ function App() {
       <Button onPress={() => console.log('web button pressed')}>
         Web button
       </Button>
+
+      <Text variant="heading2">Section heading</Text>
+      <Text variant="body">Regular body text</Text>
+      <Text variant="bodySmall" tone="muted">Supporting text</Text>
+      <Text variant="hero4" tone="danger" align="center">Validation message</Text>
+      <Text variant="body" tone="success">Saved successfully</Text>
     </ZelaqProvider>
   )
 }

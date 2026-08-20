@@ -2,7 +2,7 @@ import * as React from 'react'
 import type { CSSProperties } from 'react'
 import type { IconButtonProps } from './IconButton.types'
 import { useTheme } from '../../theme'
-import { getIconButtonTokens } from '../../theme/iconButton'
+import { getIconButtonTokens } from './IconButton.theme'
 import { srOnlyStyle } from '../../internal/srOnlyStyle'
 
 type WebIconButtonProps = Omit<IconButtonProps, 'style' | 'onPress'> & {
