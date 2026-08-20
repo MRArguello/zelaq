@@ -5,7 +5,9 @@ export const colors = {
     primaryPressed: '#1f2937',
     primaryDisabled: '#9ca3af',
     secondaryBackground: '#ffffff',
-    secondaryBorder: '#d1d5db',
+    // #d1d5db (gray-300) was 1.47:1 against white — fails WCAG 1.4.11's 3:1 minimum for UI
+    // component boundaries. #6b7280 (gray-500) clears it at 4.83:1.
+    secondaryBorder: '#6b7280',
     secondaryText: '#111827',
     textOnPrimary: '#ffffff',
     textDefault: '#111827',
@@ -20,7 +22,9 @@ export const darkColors = {
     primaryPressed: '#d1d5db',
     primaryDisabled: '#4b5563',
     secondaryBackground: '#1f2937',
-    secondaryBorder: '#374151',
+    // #374151 (gray-700) was 1.42:1 against the dark surface — fails WCAG 1.4.11's 3:1 minimum.
+    // #9ca3af (gray-400) clears it at 5.78:1.
+    secondaryBorder: '#9ca3af',
     secondaryText: '#f9fafb',
     textOnPrimary: '#111827',
     textDefault: '#f9fafb',
