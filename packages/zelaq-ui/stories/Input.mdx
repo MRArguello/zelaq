@@ -1,0 +1,50 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as InputStories from './Input.stories';
+
+<Meta of={InputStories} />
+
+# Input
+
+<Canvas of={InputStories.Default} />
+
+<Controls of={InputStories.Default} />
+
+A theme-aware text field — surface, border, radius, and padding come from the same tokens
+`Card`/`Button` already use (`colors.secondaryBackground`/`secondaryBorder`, `radii.md`,
+`space.base`). No dedicated focus/disabled/error color tokens exist or were added: focus reuses
+`colors.primary` (the brand color, same as `Button`'s primary variant), error reuses
+`colors.textDanger` (same as `Text tone="danger"`), and disabled reuses `opacity.disabled` over the
+same surface colors — the exact same pattern `Button`'s secondary variant already uses for its own
+disabled state. Label, helper text, and error text are rendered with the existing `Text`
+component, not a second typography system.
+
+## Helper and error text
+
+`errorMessage` takes priority over `helperText` when both are present, and switches the border and
+message color to `textDanger`.
+
+<Canvas of={InputStories.WithHelperText} />
+<Canvas of={InputStories.ErrorState} />
+
+## Disabled
+
+<Canvas of={InputStories.DisabledState} />
+
+## Controlled value
+
+`value`/`onChangeText` work like any other controlled input — `onChangeText` receives the plain
+string value on both platforms (React Native's own native API; web's `onChange` event is adapted
+to match it internally).
+
+<Canvas of={InputStories.Controlled} />
+
+## All states
+
+<Canvas of={InputStories.AllStates} />
+
+## Platform notes
+
+Web can't theme the `::placeholder` pseudo-element through inline styles (this library has no
+stylesheet/CSS-in-JS layer), so placeholder text uses the browser's native styling. Native uses
+`placeholderTextColor` from `colors.textMuted` directly, since `TextInput` exposes it as a real
+prop.

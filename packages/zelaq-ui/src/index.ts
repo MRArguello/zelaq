@@ -13,5 +13,8 @@ export type { StackProps } from './components/Stack'
 export { Card } from './components/Card'
 export type { CardProps } from './components/Card'
 
+export { Input } from './components/Input'
+export type { InputProps } from './components/Input'
+
 export { ZelaqProvider, useTheme } from './theme'
 export type { Theme, ThemeOverride, ThemeMode, ZelaqProviderProps } from './theme'

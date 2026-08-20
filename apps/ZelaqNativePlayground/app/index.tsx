@@ -1,11 +1,13 @@
+import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView, View } from 'react-native'
 import { Search, Settings, Trash2 } from 'lucide-react-native'
-import { Button, Card, IconButton, Stack, Text, ZelaqProvider } from 'zelaq-ui'
+import { Button, Card, IconButton, Input, Stack, Text, ZelaqProvider } from 'zelaq-ui'
 import { useThemeModeToggle } from './_layout'
 
 export default function App() {
     const { mode, toggleMode } = useThemeModeToggle()
+    const [email, setEmail] = useState('')
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -118,6 +120,36 @@ export default function App() {
                                 <Text tone="muted">Elevated, custom theme override</Text>
                             </Card>
                         </Stack>
+                    </ZelaqProvider>
+                </Stack>
+
+                <Stack gap="md" style={{ width: 280 }}>
+                    <Text variant="heading2">Zelaq UI</Text>
+
+                    <Input label="Name" placeholder="Ada Lovelace" />
+
+                    <Input
+                        label="Email address"
+                        value={email}
+                        onChangeText={setEmail}
+                        placeholder="you@example.com"
+                        helperText="Use your work email."
+                    />
+
+                    <Input
+                        label="Invalid email"
+                        value="not-an-email"
+                        errorMessage="Enter a valid email address."
+                    />
+
+                    <Input label="Disabled field" value="Unavailable" disabled />
+
+                    {/* Theme override: confirms Input's border/focus/error colors re-resolve, not just Card's. */}
+                    <ZelaqProvider
+                        mode={mode}
+                        theme={{ colors: { primary: '#6366f1', secondaryBorder: '#a5b4fc' } }}
+                    >
+                        <Input label="Custom theme override" placeholder="Focus me to see the border" />
                     </ZelaqProvider>
                 </Stack>
             </ScrollView>

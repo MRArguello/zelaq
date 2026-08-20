@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Button, Card, Stack, Text, ZelaqProvider } from 'zelaq-ui'
+import { Button, Card, Input, Stack, Text, ZelaqProvider } from 'zelaq-ui'
 import type { ThemeMode } from 'zelaq-ui'
 
 function App() {
   const [mode, setMode] = useState<ThemeMode>('light')
+  const [email, setEmail] = useState('')
 
   return (
     <ZelaqProvider mode={mode}>
@@ -93,6 +94,36 @@ function App() {
               <Text tone="muted">Elevated, custom theme override</Text>
             </Card>
           </Stack>
+        </ZelaqProvider>
+      </Stack>
+
+      <Stack gap="md" style={{ width: 280 }}>
+        <Text variant="heading2">Zelaq UI</Text>
+
+        <Input label="Name" placeholder="Ada Lovelace" />
+
+        <Input
+          label="Email address"
+          value={email}
+          onChangeText={setEmail}
+          placeholder="you@example.com"
+          helperText="Use your work email."
+        />
+
+        <Input
+          label="Invalid email"
+          value="not-an-email"
+          errorMessage="Enter a valid email address."
+        />
+
+        <Input label="Disabled field" value="Unavailable" disabled />
+
+        {/* Theme override: confirms Input's border/focus/error colors re-resolve, not just Card's. */}
+        <ZelaqProvider
+          mode={mode}
+          theme={{ colors: { primary: '#6366f1', secondaryBorder: '#a5b4fc' } }}
+        >
+          <Input label="Custom theme override" placeholder="Focus me to see the border" />
         </ZelaqProvider>
       </Stack>
     </ZelaqProvider>
