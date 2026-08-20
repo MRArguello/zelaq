@@ -18,7 +18,7 @@ function deepMerge(base: Record<string, unknown>, override: Record<string, unkno
     return result
 }
 
-/** Recursively merges a partial theme override over a base theme, at every nesting level (not just the top level). Never mutates either input. */
+/** Deep merge, not shallow — a nested override (e.g. typography.button.fontSize) doesn't drop its siblings. */
 export function mergeTheme(base: Theme, override?: ThemeOverride): Theme {
     if (!override) return base
     return deepMerge(base as unknown as Record<string, unknown>, override as Record<string, unknown>) as unknown as Theme

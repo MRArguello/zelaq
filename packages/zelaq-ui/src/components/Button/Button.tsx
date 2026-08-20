@@ -48,8 +48,7 @@ export function Button({
         alignItems: 'center',
         justifyContent: 'center',
         gap: startIcon || endIcon ? theme.space[2] : undefined,
-        // Sets currentColor for startIcon/endIcon, which are siblings of (not descendants of)
-        // the label span below and so don't inherit its color on their own.
+        // currentColor for startIcon/endIcon — siblings of the label span, don't inherit its color otherwise.
         color: tokens.label.color,
     }
 

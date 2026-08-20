@@ -4,6 +4,10 @@
 
 Cross-platform component library for React and React Native.
 
+Component-level docs (props, usage, accessibility behavior) live in Storybook, not here — run
+`pnpm dev:web` and see each component's Docs tab. This README covers what applies across the
+whole library.
+
 ## Installation
 
 ```bash
@@ -29,7 +33,7 @@ function App() {
 }
 
 function Custom() {
-  const theme = useTheme(); 
+  const theme = useTheme();
   return <Text style={{ color: theme.colors.primary }}>Hi</Text>;
 }
 ```
@@ -44,9 +48,9 @@ web, `useColorScheme` on React Native).
 
 ## Icons
 
-`zelaq-ui` doesn't bundle or depend on an icon library — `Button`'s `startIcon`/`endIcon` and
-`IconButton`'s `icon` accept any rendered React element, sized and colored by you. We build and
-test against [Lucide](https://lucide.dev), installed separately in your own app:
+`zelaq-ui` doesn't bundle or depend on an icon library — icon props across components accept any
+rendered React element, sized and colored by you. We build and test against
+[Lucide](https://lucide.dev), installed separately in your own app:
 
 ```bash
 # React (web)
@@ -61,56 +65,42 @@ npm install lucide-react-native react-native-svg
 Use `lucide-react` in web code and `lucide-react-native` in React Native code — they're different
 packages with the same icon set; don't cross-import one into the other. `react-native-svg` is a
 native module `lucide-react-native` renders through, so it needs the Expo/RN install path above
-(not a plain `npm install`) to get a build correctly linked for your app.
+(not a plain `npm install`) to get a build correctly linked for your app. How each component uses
+icons is documented on that component's Storybook page.
 
-```tsx
-// web
-import { Search } from 'lucide-react';
-<Button startIcon={<Search size={16} />}>Search</Button>
+## Typography
 
-// React Native
-import { Search } from 'lucide-react-native';
-<Button startIcon={<Search size={16} color="#ffffff" />}>Search</Button>
+```ts
+theme.typography.fontFamily.sans // 'Satoshi'
+theme.typography.body            // { fontFamily, fontSize: 16, fontWeight: '400', lineHeight: 24 }
+theme.typography.bodySmall       // { fontFamily, fontSize: 14, fontWeight: '400', lineHeight: 20 }
+theme.typography.label           // { fontFamily, fontSize: 14, fontWeight: '500', lineHeight: 20 }
+theme.typography.heading         // { fontFamily, fontSize: 24, fontWeight: '700', lineHeight: 32 }
+theme.typography.button          // { fontFamily, fontSize: 16, fontWeight: '500', lineHeight: 20 }
 ```
 
-Icons passed this way are automatically treated as decorative (hidden from assistive tech) —
-`Button` already has an accessible name from its text label, so the icon shouldn't be announced
-a second time.
+One family (`Satoshi`) across the kit — `fontFamily` on each style, plus the raw name at
+`typography.fontFamily.sans` for anything that needs just the family. Weights used: `400`
+(Regular) for body, `500` (Medium) for labels/buttons, `700` (Bold) for headings — Satoshi has no
+Semibold/`600` weight, so `500` stands in for it. Override `typography` via `ZelaqProvider`'s
+`theme` prop to use a different font entirely.
 
-### IconButton
+### Font loading
 
-An icon with no visible text label needs an explicit accessible name — `IconButton` makes
-`accessibilityLabel` a required prop, not optional, so this can't be skipped by accident:
+[Satoshi](https://www.fontshare.com/fonts/satoshi) is provided by Fontshare / Indian Type
+Foundry, under the [ITF Free Font License](https://www.fontshare.com/licenses/itf-ffl), which
+permits embedding it in mobile and desktop applications for permitted uses. **The `zelaq-ui` npm
+package does not include or redistribute Satoshi font files** — loading it is the consuming
+app's responsibility. If it isn't loaded, components fall back to the platform default sans-serif
+rather than failing.
 
-```tsx
-import { Settings, Trash2 } from 'lucide-react';
-import { IconButton } from 'zelaq-ui';
-
-<IconButton icon={<Settings size={18} />} accessibilityLabel="Open settings" onPress={...} />
-
-<IconButton
-  icon={<Trash2 size={18} />}
-  accessibilityLabel="Delete file"
-  accessibilityHint="Permanently deletes the selected file"
-  onPress={...}
-/>
-```
-
-`accessibilityHint` is optional on both platforms, and available on both `Button` and
-`IconButton` — supplemental context for when the result of an action isn't obvious from the label
-alone. That's not limited to icon-only buttons: `accessibilityLabel="Delete Account"` on a regular
-text `Button` is clear about *what* happens but not necessarily how consequential it is, so a hint
-like `accessibilityHint="Permanently deletes your account and all associated data"` still adds
-real information. Don't restate the label (`accessibilityLabel="Close"` +
-`accessibilityHint="Closes"` tells a screen reader user nothing new) and don't use it as a
-substitute for a real label. On React Native it forwards straight to `Pressable`'s own
-`accessibilityHint`. On web there's no native hint concept, so it's rendered as a visually-hidden
-element linked via `aria-describedby` — `aria-label`/the label text (the name) and the hint (the
-description) stay two separate announcements, which is what `aria-describedby` is for.
-
-`IconButton` also supports `variant` (`primary`/`secondary`, same as `Button`), `disabled`,
-`loading` (shows a spinner, implies disabled, sets `aria-busy`/`accessibilityState.busy`), and
-`selected` (toggled/active visual state, exposed as `aria-pressed`/`accessibilityState.selected`).
+- **Web**: the playground loads Satoshi via Fontshare's hosted web font CSS/API — see
+  `apps/ZelaqWebPlayground/index.html`.
+- **React Native**: obtain the font files directly from Fontshare and load them with
+  `expo-font`'s `useFonts` (or the bare-RN equivalent) — see `apps/ZelaqNativePlayground/README.md`.
+  Review the current license and confirm the exact filenames/weights against what you actually
+  download before shipping. Static weight rendering can differ on Android — you may need to
+  register a separate font family per weight rather than relying on `fontWeight` alone.
 
 ## API
 

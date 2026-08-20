@@ -40,9 +40,7 @@ export function IconButton({
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        // Sets currentColor so `icon` (a consumer-provided element, typically Lucide's default
-        // stroke="currentColor") picks up the right color per variant without the consumer
-        // needing to pass one explicitly.
+        // currentColor so an icon without its own color prop picks up the right one per variant.
         color: tokens.iconColor,
     }
 

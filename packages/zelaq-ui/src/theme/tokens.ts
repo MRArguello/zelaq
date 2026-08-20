@@ -67,5 +67,5 @@ export const darkTheme: Theme = {
     opacity,
 }
 
-/** Alias for lightTheme — internal fallback used when no ZelaqProvider is present. */
+/** Alias for lightTheme — default param for resolvers called without an explicit theme. */
 export const defaultTheme: Theme = lightTheme

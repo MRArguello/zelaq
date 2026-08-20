@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 
-/** Visually hides content while keeping it in the accessibility tree — used to render accessibilityHint text on web via aria-describedby. */
+/** Visually hides content while keeping it in the accessibility tree. */
 export const srOnlyStyle: CSSProperties = {
     position: 'absolute',
     width: 1,

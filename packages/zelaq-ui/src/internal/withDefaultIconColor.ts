@@ -1,11 +1,6 @@
 import * as React from 'react'
 
-/**
- * Native has no CSS currentColor equivalent, so icons don't automatically track theme changes
- * the way they do on web. This clones a consumer-provided icon element and injects the themed
- * default color — but only when the consumer hasn't already set one explicitly, so an intentional
- * custom color (e.g. a warning-colored icon) is never overridden.
- */
+/** Native has no currentColor equivalent, so this fills in a theme default — only if the consumer hasn't already set a color. */
 export function withDefaultIconColor(icon: React.ReactElement, defaultColor: string): React.ReactElement {
     const props = icon.props as { color?: unknown }
     if (props && props.color !== undefined) return icon

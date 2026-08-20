@@ -1,0 +1,41 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+<Canvas of={ButtonStories.Primary} />
+
+<Controls />
+
+## Icons
+
+`startIcon`/`endIcon` accept any rendered element — sized and colored by you, no bundled icon
+library. They're automatically treated as decorative (hidden from assistive tech); `Button`
+already has an accessible name from its text label.
+
+<Canvas of={ButtonStories.WithStartIcon} />
+
+```tsx
+// web
+import { Search } from 'lucide-react';
+<Button startIcon={<Search size={16} />}>Search</Button>
+
+// React Native
+import { Search } from 'lucide-react-native';
+<Button startIcon={<Search size={16} color="#ffffff" />}>Search</Button>
+```
+
+## accessibilityHint
+
+Supplemental context for when the result of an action isn't obvious from the label alone — not
+limited to icon-only controls. `accessibilityLabel="Delete Account"` is clear about *what*
+happens but not how consequential it is, so a hint still adds real information. Don't restate the
+label, and don't use it as a substitute for a real label.
+
+On React Native it forwards straight to `Pressable`'s own `accessibilityHint`. On web there's no
+native hint concept, so it's rendered as a visually-hidden element linked via `aria-describedby`
+— the label and the hint stay two separate screen-reader announcements.
+
+<Canvas of={ButtonStories.WithAccessibilityHint} />

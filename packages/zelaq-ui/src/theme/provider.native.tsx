@@ -8,7 +8,7 @@ const ThemeContext = React.createContext<Theme>(lightTheme)
 
 export type ZelaqProviderProps = {
     theme?: ThemeOverride
-    /** 'light' | 'dark' | 'system'. Defaults to 'light'. */
+    /** Default 'light'. */
     mode?: ThemeMode
     children?: React.ReactNode
 }

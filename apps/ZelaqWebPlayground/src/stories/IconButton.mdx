@@ -1,0 +1,30 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as IconButtonStories from './IconButton.stories';
+
+<Meta of={IconButtonStories} />
+
+# IconButton
+
+An icon with no visible text label needs an explicit accessible name — `accessibilityLabel` is
+required, not optional, so this can't be skipped by accident.
+
+<Canvas of={IconButtonStories.Default} />
+
+<Controls />
+
+## States
+
+`variant` (`primary`/`secondary`, same as `Button`), `disabled`, `loading` (spinner in place of
+the icon, implies disabled, sets `aria-busy`/`accessibilityState.busy`), and `selected`
+(toggled/active, exposed as `aria-pressed`/`accessibilityState.selected`).
+
+<Canvas of={IconButtonStories.Loading} />
+<Canvas of={IconButtonStories.Selected} />
+
+## accessibilityHint
+
+Same behavior as `Button`'s — optional supplemental context for when the label alone doesn't
+convey the result. Especially relevant for destructive icon-only actions, where the icon and
+label alone may not fully convey the consequence:
+
+<Canvas of={IconButtonStories.WithAccessibilityHint} />
