@@ -126,24 +126,9 @@ importers:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
     devDependencies:
-      '@chromatic-com/storybook':
-        specifier: ^5.0.0
-        version: 5.1.1(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.4
-      '@storybook/addon-a11y':
-        specifier: ^10.2.7
-        version: 10.3.3(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
-      '@storybook/addon-docs':
-        specifier: ^10.2.7
-        version: 10.3.3(@types/react@19.2.14)(esbuild@0.27.4)(rollup@4.60.1)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
-      '@storybook/addon-vitest':
-        specifier: ^10.2.7
-        version: 10.3.3(@vitest/browser-playwright@4.1.2)(@vitest/browser@4.1.2(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.2))(@vitest/runner@4.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vitest@4.1.2)
-      '@storybook/react-vite':
-        specifier: ^10.2.7
-        version: 10.3.3(esbuild@0.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.60.1)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
       '@types/node':
         specifier: ^24.10.1
         version: 24.12.0
@@ -156,12 +141,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^5.1.1
         version: 5.2.0(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
-      '@vitest/browser-playwright':
-        specifier: ^4.0.18
-        version: 4.1.2(playwright@1.58.2)(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.2)
-      '@vitest/coverage-v8':
-        specifier: ^4.0.18
-        version: 4.1.2(@vitest/browser@4.1.2(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.2))(vitest@4.1.2)
       eslint:
         specifier: ^9.39.1
         version: 9.39.4
@@ -171,21 +150,9 @@ importers:
       eslint-plugin-react-refresh:
         specifier: ^0.4.24
         version: 0.4.26(eslint@9.39.4)
-      eslint-plugin-storybook:
-        specifier: ^10.2.7
-        version: 10.3.3(eslint@9.39.4)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)
       globals:
         specifier: ^16.5.0
         version: 16.5.0
-      lucide-react:
-        specifier: ^1.31.0
-        version: 1.31.0(react@19.1.0)
-      playwright:
-        specifier: ^1.58.2
-        version: 1.58.2
-      storybook:
-        specifier: ^10.2.7
-        version: 10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -195,21 +162,48 @@ importers:
       vite:
         specifier: ^7.2.4
         version: 7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3)
-      vitest:
-        specifier: ^4.0.18
-        version: 4.1.2(@types/node@24.12.0)(@vitest/browser-playwright@4.1.2)(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
       zelaq-ui:
         specifier: workspace:*
         version: link:../../packages/zelaq-ui
 
   packages/zelaq-ui:
     devDependencies:
+      '@chromatic-com/storybook':
+        specifier: ^5.0.0
+        version: 5.1.1(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.4
+      '@storybook/addon-a11y':
+        specifier: ^10.2.7
+        version: 10.3.3(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+      '@storybook/addon-docs':
+        specifier: ^10.2.7
+        version: 10.3.3(@types/react@19.1.17)(esbuild@0.27.4)(rollup@4.60.1)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
+      '@storybook/addon-vitest':
+        specifier: ^10.2.7
+        version: 10.3.3(@vitest/browser-playwright@4.1.2)(@vitest/browser@4.1.2(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.2))(@vitest/runner@4.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vitest@4.1.2)
+      '@storybook/react-vite':
+        specifier: ^10.2.7
+        version: 10.3.3(esbuild@0.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.60.1)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.12.0
       '@types/react':
         specifier: ~19.1.0
         version: 19.1.17
+      '@types/react-dom':
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@19.1.17)
+      '@vitejs/plugin-react':
+        specifier: ^5.1.1
+        version: 5.2.0(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
+      '@vitest/browser-playwright':
+        specifier: ^4.0.18
+        version: 4.1.2(playwright@1.58.2)(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.2)
+      '@vitest/coverage-v8':
+        specifier: ^4.0.18
+        version: 4.1.2(@vitest/browser@4.1.2(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.2))(vitest@4.1.2)
       eslint:
         specifier: ^9.39.1
         version: 9.39.4
@@ -222,12 +216,24 @@ importers:
       eslint-plugin-react-native-a11y:
         specifier: ^3.5.1
         version: 3.5.1(eslint@9.39.4)
+      eslint-plugin-storybook:
+        specifier: ^10.2.7
+        version: 10.3.3(eslint@9.39.4)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)
       globals:
         specifier: ^16.5.0
         version: 16.5.0
+      lucide-react:
+        specifier: ^1.31.0
+        version: 1.31.0(react@19.1.0)
+      playwright:
+        specifier: ^1.58.2
+        version: 1.58.2
       react:
         specifier: 19.1.0
         version: 19.1.0
+      react-dom:
+        specifier: 19.1.0
+        version: 19.1.0(react@19.1.0)
       react-native:
         specifier: 0.81.5
         version: 0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0)
@@ -237,12 +243,21 @@ importers:
       rimraf:
         specifier: ^6.0.1
         version: 6.1.3
+      storybook:
+        specifier: ^10.2.7
+        version: 10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       typescript:
         specifier: ~5.9.2
         version: 5.9.3
       typescript-eslint:
         specifier: ^8.46.4
         version: 8.58.0(eslint@9.39.4)(typescript@5.9.3)
+      vite:
+        specifier: ^7.2.4
+        version: 7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3)
+      vitest:
+        specifier: ^4.0.18
+        version: 4.1.2(@types/node@24.12.0)(@vitest/browser-playwright@4.1.2)(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
 
 packages:
 
@@ -7424,10 +7439,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@mdx-js/react@3.1.1(@types/react@19.2.14)(react@19.1.0)':
+  '@mdx-js/react@3.1.1(@types/react@19.1.17)(react@19.1.0)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 19.2.14
+      '@types/react': 19.1.17
       react: 19.1.0
 
   '@napi-rs/wasm-runtime@0.2.12':
@@ -7949,9 +7964,9 @@ snapshots:
       axe-core: 4.11.1
       storybook: 10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
-  '@storybook/addon-docs@10.3.3(@types/react@19.2.14)(esbuild@0.27.4)(rollup@4.60.1)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))':
+  '@storybook/addon-docs@10.3.3(@types/react@19.1.17)(esbuild@0.27.4)(rollup@4.60.1)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))':
     dependencies:
-      '@mdx-js/react': 3.1.1(@types/react@19.2.14)(react@19.1.0)
+      '@mdx-js/react': 3.1.1(@types/react@19.1.17)(react@19.1.0)
       '@storybook/csf-plugin': 10.3.3(esbuild@0.27.4)(rollup@4.60.1)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@7.3.1(@types/node@24.12.0)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
       '@storybook/icons': 2.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@storybook/react-dom-shim': 10.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@10.3.3(patch_hash=ku6hkxdswv2lu5mrthspfxdxey)(@testing-library/dom@10.4.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
@@ -8141,7 +8156,6 @@ snapshots:
   '@types/react-dom@19.2.3(@types/react@19.1.17)':
     dependencies:
       '@types/react': 19.1.17
-    optional: true
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
@@ -9363,9 +9377,9 @@ snapshots:
       '@typescript-eslint/eslint-plugin': 8.58.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4)(typescript@5.9.3)
       '@typescript-eslint/parser': 8.58.0(eslint@9.39.4)(typescript@5.9.3)
       eslint: 9.39.4
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4)
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4))(eslint@9.39.4)
       eslint-plugin-expo: 1.0.0(eslint@9.39.4)(typescript@5.9.3)
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4))(eslint@9.39.4))(eslint@9.39.4)
       eslint-plugin-react: 7.37.5(eslint@9.39.4)
       eslint-plugin-react-hooks: 5.2.0(eslint@9.39.4)
       globals: 16.5.0
@@ -9383,7 +9397,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4):
+  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4))(eslint@9.39.4):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
       debug: 4.4.3
@@ -9394,18 +9408,18 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4))(eslint@9.39.4))(eslint@9.39.4)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4))(eslint@9.39.4))(eslint@9.39.4):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 8.58.0(eslint@9.39.4)(typescript@5.9.3)
       eslint: 9.39.4
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4)
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4))(eslint@9.39.4)
     transitivePeerDependencies:
       - supports-color
 
@@ -9418,7 +9432,7 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4))(eslint@9.39.4))(eslint@9.39.4):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -9429,7 +9443,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.39.4
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4)
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4))(eslint@9.39.4))(eslint@9.39.4)
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3

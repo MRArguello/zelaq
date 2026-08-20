@@ -108,8 +108,8 @@ package does not include or redistribute Satoshi font files** — loading it is 
 app's responsibility. If it isn't loaded, components fall back to the platform default sans-serif
 rather than failing.
 
-- **Web**: the playground loads Satoshi via Fontshare's hosted web font CSS/API — see
-  `apps/ZelaqWebPlayground/index.html`.
+- **Web**: Storybook and the playground both load Satoshi via Fontshare's hosted web font CSS/API
+  — see `.storybook/preview-head.html` and `apps/ZelaqWebPlayground/index.html`.
 - **React Native**: obtain the font files directly from Fontshare and load them with
   `expo-font`'s `useFonts` (or the bare-RN equivalent) — see `apps/ZelaqNativePlayground/README.md`.
   Review the current license and confirm the exact filenames/weights against what you actually

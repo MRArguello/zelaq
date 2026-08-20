@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react-vite'
-import { ZelaqProvider } from 'zelaq-ui'
+import { ZelaqProvider } from '../src'
 
 const preview: Preview = {
   parameters: {

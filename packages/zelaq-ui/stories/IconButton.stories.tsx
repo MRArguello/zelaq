@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 import { Settings, Trash2, X, ChevronDown, Check, Menu, AlertCircle } from 'lucide-react';
-import { IconButton } from 'zelaq-ui';
+import { IconButton } from '../src';
 
 const meta = {
   title: 'Components/IconButton',

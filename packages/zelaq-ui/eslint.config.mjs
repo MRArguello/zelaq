@@ -3,13 +3,14 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import reactNativeA11y from 'eslint-plugin-react-native-a11y'
+import storybook from 'eslint-plugin-storybook'
 import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 const dirname = import.meta.dirname
 
 export default defineConfig([
-    globalIgnores(['lib']),
+    globalIgnores(['lib', 'storybook-static']),
     {
         files: ['**/*.{ts,tsx}'],
         extends: [js.configs.recommended, tseslint.configs.recommended, reactHooks.configs.flat.recommended],
@@ -46,4 +47,5 @@ export default defineConfig([
             'react-native-a11y/no-nested-touchables': 'error',
         },
     },
+    ...storybook.configs['flat/recommended'],
 ])

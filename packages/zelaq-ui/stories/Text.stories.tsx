@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Text } from 'zelaq-ui';
+import { Text } from '../src';
 
 const meta = {
   title: 'Components/Text',
