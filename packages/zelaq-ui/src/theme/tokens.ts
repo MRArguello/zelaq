@@ -8,6 +8,11 @@ export const colors = {
     secondaryBorder: '#d1d5db',
     secondaryText: '#111827',
     textOnPrimary: '#ffffff',
+    textDefault: '#111827',
+    textMuted: '#6b7280',
+    textInverse: '#ffffff',
+    textDanger: '#dc2626',
+    textSuccess: '#15803d',
 } as const
 
 export const darkColors = {
@@ -18,6 +23,11 @@ export const darkColors = {
     secondaryBorder: '#374151',
     secondaryText: '#f9fafb',
     textOnPrimary: '#111827',
+    textDefault: '#f9fafb',
+    textMuted: '#9ca3af',
+    textInverse: '#111827',
+    textDanger: '#f87171',
+    textSuccess: '#4ade80',
 } as const
 
 export const space = {
@@ -33,9 +43,37 @@ export const radii = {
 } as const
 
 export const typography = {
+    fontFamily: {
+        sans: 'Satoshi',
+    },
     button: {
+        fontFamily: 'Satoshi',
         fontSize: 16,
-        fontWeight: '600' as const,
+        fontWeight: '500' as const,
+        lineHeight: 20,
+    },
+    heading: {
+        fontFamily: 'Satoshi',
+        fontSize: 24,
+        fontWeight: '700' as const,
+        lineHeight: 32,
+    },
+    body: {
+        fontFamily: 'Satoshi',
+        fontSize: 16,
+        fontWeight: '400' as const,
+        lineHeight: 24,
+    },
+    bodySmall: {
+        fontFamily: 'Satoshi',
+        fontSize: 14,
+        fontWeight: '400' as const,
+        lineHeight: 20,
+    },
+    label: {
+        fontFamily: 'Satoshi',
+        fontSize: 14,
+        fontWeight: '500' as const,
         lineHeight: 20,
     },
 } as const

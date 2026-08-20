@@ -4,6 +4,7 @@ import type { ButtonProps } from './Button.types'
 import { useTheme } from '../../theme'
 import { getButtonTokens } from '../../theme/button'
 import { srOnlyStyle } from '../../internal/srOnlyStyle'
+import { withFontFallback } from '../../internal/withFontFallback'
 
 type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
     onPress?: React.MouseEventHandler<HTMLButtonElement>
@@ -54,6 +55,7 @@ export function Button({
 
     const labelStyle: CSSProperties = {
         color: tokens.label.color,
+        fontFamily: withFontFallback(tokens.label.fontFamily),
         fontSize: tokens.label.fontSize,
         fontWeight: tokens.label.fontWeight,
         lineHeight: `${tokens.label.lineHeight}px`,

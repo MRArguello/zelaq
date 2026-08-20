@@ -6,6 +6,11 @@ export interface ColorTokens {
     secondaryBorder: string
     secondaryText: string
     textOnPrimary: string
+    textDefault: string
+    textMuted: string
+    textInverse: string
+    textDanger: string
+    textSuccess: string
 }
 
 export interface SpaceTokens {
@@ -20,12 +25,24 @@ export interface RadiiTokens {
     pill: number
 }
 
+export interface FontFamilyTokens {
+    sans: string
+}
+
+export interface TypographyStyle {
+    fontFamily: string
+    fontSize: number
+    fontWeight: '400' | '500' | '600' | '700'
+    lineHeight: number
+}
+
 export interface TypographyTokens {
-    button: {
-        fontSize: number
-        fontWeight: '400' | '500' | '600' | '700'
-        lineHeight: number
-    }
+    fontFamily: FontFamilyTokens
+    button: TypographyStyle
+    heading: TypographyStyle
+    body: TypographyStyle
+    bodySmall: TypographyStyle
+    label: TypographyStyle
 }
 
 export interface SizeTokens {
