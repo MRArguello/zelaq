@@ -4,8 +4,9 @@
 
 Cross-platform component library for React and React Native.
 
-Component-level docs (props, usage, accessibility behavior) live in Storybook, not here — run
-`pnpm dev:web` and see each component's Docs tab. This README covers what applies across the
+Component-level docs (props, usage, accessibility behavior) live in Storybook, not here — see the
+deployed version at [zelaq-ui.netlify.app](https://zelaq-ui.netlify.app), or run `pnpm dev:web`
+for the local copy and see each component's Docs tab. This README covers what applies across the
 whole library.
 
 ## Installation
