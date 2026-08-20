@@ -1,5 +1,5 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Search, Settings, Trash2 } from 'lucide-react-native'
 import { Button, IconButton, Text } from 'zelaq-ui'
 import { useThemeModeToggle } from './_layout'
@@ -8,8 +8,8 @@ export default function App() {
     const { mode, toggleMode } = useThemeModeToggle()
 
     return (
-        <SafeAreaView>
-            <View style={{ padding: 24, gap: 16 }}>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView contentContainerStyle={{ padding: 24, gap: 16 }}>
                 <Button variant="secondary" onPress={toggleMode}>
                     Switch to {mode === 'dark' ? 'light' : 'dark'} mode
                 </Button>
@@ -49,7 +49,7 @@ export default function App() {
                 <Text variant="bodySmall" tone="muted">Supporting text</Text>
                 <Text variant="hero4" tone="danger" align="center">Validation message</Text>
                 <Text variant="body" tone="success">Saved successfully</Text>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
