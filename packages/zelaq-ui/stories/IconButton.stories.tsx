@@ -10,6 +10,10 @@ const meta = {
     layout: 'centered',
   },
   args: { onPress: fn() },
+  argTypes: {
+    // ReactElement prop — no safe way to offer a control without a JSON editor that can crash the story.
+    icon: { control: false },
+  },
 } satisfies Meta<typeof IconButton>;
 
 export default meta;

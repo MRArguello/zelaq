@@ -7,19 +7,59 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
+  argTypes: {
+    // Always a composed Text/Button tree in these stories — docgen shows it as a plain string,
+    // but editing it as text would just replace the composition, not demonstrate anything.
+    children: { control: false },
+  },
 } satisfies Meta<typeof Stack>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
-  render: () => (
-    <Stack gap="lg">
-      <Text variant="heading2">Zelaq UI</Text>
-      <Text tone="muted">A themeable cross-platform component library.</Text>
-      <Button>Continue</Button>
-    </Stack>
-  ),
+  args: {
+    gap: 'lg',
+    children: (
+      <>
+        <Text variant="heading2">Zelaq UI</Text>
+        <Text tone="muted">A themeable cross-platform component library.</Text>
+        <Button>Continue</Button>
+      </>
+    ),
+  },
+};
+
+export const CenterAligned: Story = {
+  name: 'Center alignment',
+  args: {
+    gap: 'md',
+    align: 'center',
+    style: { width: 320, background: '#f3f4f6', padding: 16 },
+    children: (
+      <>
+        <Text variant="body">Centered</Text>
+        <Button>Short</Button>
+        <Button>A longer button label</Button>
+      </>
+    ),
+  },
+};
+
+export const SpaceBetween: Story = {
+  name: 'Space-between justification',
+  args: {
+    gap: 'md',
+    justify: 'between',
+    style: { height: 200, width: 240, background: '#f3f4f6', padding: 16 },
+    children: (
+      <>
+        <Text variant="body">Top</Text>
+        <Text variant="body">Middle</Text>
+        <Text variant="body">Bottom</Text>
+      </>
+    ),
+  },
 };
 
 export const GapValues: Story = {
@@ -39,31 +79,5 @@ export const GapValues: Story = {
         </div>
       ))}
     </div>
-  ),
-};
-
-export const CenterAligned: Story = {
-  name: 'Center alignment',
-  render: () => (
-    <Stack gap="md" align="center" style={{ width: 320, background: '#f3f4f6', padding: 16 }}>
-      <Text variant="body">Centered</Text>
-      <Button>Short</Button>
-      <Button>A longer button label</Button>
-    </Stack>
-  ),
-};
-
-export const SpaceBetween: Story = {
-  name: 'Space-between justification',
-  render: () => (
-    <Stack
-      gap="md"
-      justify="between"
-      style={{ height: 200, width: 240, background: '#f3f4f6', padding: 16 }}
-    >
-      <Text variant="body">Top</Text>
-      <Text variant="body">Middle</Text>
-      <Text variant="body">Bottom</Text>
-    </Stack>
   ),
 };
