@@ -64,6 +64,20 @@ export interface SizeTokens {
     touchMin: number
 }
 
+export interface ShadowStyle {
+    /** Ready-to-use color, including alpha (e.g. an rgba string) — consumed as-is by both platforms. */
+    color: string
+    offsetX: number
+    offsetY: number
+    blurRadius: number
+    /** Android-only fallback; ignored on web/iOS. */
+    elevation: number
+}
+
+export interface ShadowTokens {
+    elevated: ShadowStyle
+}
+
 export interface OpacityTokens {
     disabled: number
     pressed: number
@@ -76,6 +90,7 @@ export interface Theme {
     typography: TypographyTokens
     sizes: SizeTokens
     opacity: OpacityTokens
+    shadow: ShadowTokens
 }
 
 type DeepPartial<T> = {

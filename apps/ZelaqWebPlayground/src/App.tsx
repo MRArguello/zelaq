@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Stack, Text, ZelaqProvider } from 'zelaq-ui'
+import { Button, Card, Stack, Text, ZelaqProvider } from 'zelaq-ui'
 import type { ThemeMode } from 'zelaq-ui'
 
 function App() {
@@ -50,6 +50,50 @@ function App() {
       >
         <Text variant="bodySmall">Top</Text>
         <Text variant="bodySmall">Bottom</Text>
+      </Stack>
+
+      <Stack gap="lg">
+        <Text variant="heading2">Zelaq UI</Text>
+
+        <Card variant="subtle" style={{ width: 280 }}>
+          <Stack gap="sm">
+            <Text variant="heading4">Subtle</Text>
+            <Text tone="muted">Everything is up to date.</Text>
+          </Stack>
+        </Card>
+
+        <Card variant="outlined" style={{ width: 280 }}>
+          <Stack gap="sm">
+            <Text variant="heading4">Outlined</Text>
+            <Text tone="muted">Everything is up to date.</Text>
+          </Stack>
+        </Card>
+
+        <Card variant="elevated" style={{ width: 280 }}>
+          <Stack gap="sm">
+            <Text variant="heading4">Project status</Text>
+            <Text tone="muted">Everything is up to date.</Text>
+            <Button>View project</Button>
+          </Stack>
+        </Card>
+
+        {/* Theme override: confirms Card surfaces/borders/shadow re-resolve, not just Button/Text. */}
+        <ZelaqProvider
+          mode={mode}
+          theme={{
+            colors: { secondaryBackground: '#eef2ff', secondaryBorder: '#6366f1' },
+            shadow: { elevated: { color: 'rgba(99, 102, 241, 0.35)', blurRadius: 16 } },
+          }}
+        >
+          <Stack gap="md">
+            <Card variant="outlined" style={{ width: 280 }}>
+              <Text tone="muted">Outlined, custom theme override</Text>
+            </Card>
+            <Card variant="elevated" style={{ width: 280 }}>
+              <Text tone="muted">Elevated, custom theme override</Text>
+            </Card>
+          </Stack>
+        </ZelaqProvider>
       </Stack>
     </ZelaqProvider>
   )

@@ -147,6 +147,16 @@ export const opacity = {
     pressed: 0.85,
 } as const
 
+export const shadow = {
+    elevated: {
+        color: 'rgba(15, 23, 42, 0.12)',
+        offsetX: 0,
+        offsetY: 2,
+        blurRadius: 8,
+        elevation: 3,
+    },
+} as const
+
 export const lightTheme: Theme = {
     colors,
     space,
@@ -154,6 +164,7 @@ export const lightTheme: Theme = {
     typography,
     sizes,
     opacity,
+    shadow,
 }
 
 export const darkTheme: Theme = {
@@ -163,6 +174,7 @@ export const darkTheme: Theme = {
     typography,
     sizes,
     opacity,
+    shadow,
 }
 
 /** Alias for lightTheme — default param for resolvers called without an explicit theme. */

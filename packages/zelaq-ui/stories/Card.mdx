@@ -1,0 +1,35 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CardStories from './Card.stories';
+
+<Meta of={CardStories} />
+
+# Card
+
+<Canvas of={CardStories.Subtle} />
+
+<Controls of={CardStories.Subtle} />
+
+A theme-aware surface container — background, border, radius, and padding all come from the
+existing theme tokens (`colors.secondaryBackground`/`secondaryBorder`, `radii.md`, `space.base`),
+same tokens `Button` and `IconButton` already use. No Card-specific values are hardcoded.
+
+## Variants
+
+- **`subtle`** (default) — filled surface, no border, no shadow.
+- **`outlined`** — filled surface plus a `secondaryBorder`-colored border, no shadow.
+- **`elevated`** — filled surface, no border, drop shadow from `theme.shadow.elevated` (the
+  library's first elevation token — web uses `box-shadow`, native uses `shadowColor`/
+  `shadowOffset`/`shadowOpacity`/`shadowRadius` plus Android's `elevation`).
+
+<Canvas of={CardStories.Outlined} />
+<Canvas of={CardStories.Elevated} />
+
+## Composition
+
+`Card` has no layout opinion of its own — pair it with `Stack` for internal spacing.
+
+<Canvas of={CardStories.WithButton} />
+
+## All variants
+
+<Canvas of={CardStories.AllVariants} />
