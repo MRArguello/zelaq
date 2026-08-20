@@ -2,6 +2,7 @@ packages/zelaq-ui/node_modules/
 apps/ZelaqNativePlayground/node_modules/
 apps/ZelaqWebPlayground/node_modules/
 packages/zelaq-ui/lib/
+packages/zelaq-ui/storybook-static/
 *.log
 .DS_Store
 node_modules
