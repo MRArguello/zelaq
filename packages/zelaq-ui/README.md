@@ -46,6 +46,40 @@ rest of that object.
 `'system'` follows the OS/browser color scheme and updates live if it changes (`matchMedia` on
 web, `useColorScheme` on React Native).
 
+## Customizing components
+
+Two separate mechanisms, for two different needs — don't reach for the wrong one:
+
+- **`ZelaqProvider`'s `theme` override** (see above) is for *systemic* changes — things meant to
+  shift together, like a brand recolor or dark mode. It's token-scoped, not component-scoped:
+  `colors.secondaryBorder`, for example, is shared by `Card`'s outlined variant, `Button`'s
+  secondary variant, and `Input`'s default border — overriding it changes all of them at once,
+  everywhere the override's subtree reaches. There's no way to target just one component type
+  through the theme.
+- **The `style` prop** every component accepts is for a *one-off* look on a single instance —
+  `<Card style={{ borderColor: 'red' }}>` changes only that `Card`, nothing else.
+
+If you want a one-off look reused in multiple places, wrap the component instead of repeating the
+`style` prop — this is the intended pattern, not a workaround:
+
+```tsx
+// your own file, outside zelaq-ui
+import { Card, type CardProps } from 'zelaq-ui';
+
+export function SpecialCard({ children, ...props }: CardProps) {
+  return (
+    <Card style={{ borderColor: 'red', borderWidth: 2 }} {...props}>
+      {children}
+    </Card>
+  );
+}
+```
+
+For a version that works on both platforms, remember `style` is typed as `CSSProperties` on web
+and `StyleProp<ViewStyle>` on native — either give `SpecialCard` its own `.native.tsx` sibling (the
+same pattern this library uses internally), or stick to properties valid in both shapes (plain
+color strings, numbers).
+
 ## Icons
 
 `zelaq-ui` doesn't bundle or depend on an icon library — icon props across components accept any
