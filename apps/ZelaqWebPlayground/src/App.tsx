@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Text, ZelaqProvider } from 'zelaq-ui'
+import { Button, Stack, Text, ZelaqProvider } from 'zelaq-ui'
 import type { ThemeMode } from 'zelaq-ui'
 
 function App() {
@@ -24,6 +24,33 @@ function App() {
       <Text variant="bodySmall" tone="muted">Supporting text</Text>
       <Text variant="hero4" tone="danger" align="center">Validation message</Text>
       <Text variant="body" tone="success">Saved successfully</Text>
+
+      <Stack gap="lg">
+        <Text variant="heading2">Zelaq UI</Text>
+        <Text tone="muted">A themeable cross-platform component library.</Text>
+        <Button>Continue</Button>
+      </Stack>
+
+      <Stack gap="sm" style={{ background: '#f3f4f6', padding: 8 }}>
+        <Text variant="bodySmall">gap=&quot;sm&quot;</Text>
+      </Stack>
+      <Stack gap="xl" style={{ background: '#f3f4f6', padding: 8 }}>
+        <Text variant="bodySmall">gap=&quot;xl&quot;</Text>
+      </Stack>
+
+      <Stack gap="md" align="center" style={{ background: '#f3f4f6', padding: 8 }}>
+        <Text variant="bodySmall">Centered</Text>
+        <Button>Short</Button>
+      </Stack>
+
+      <Stack
+        gap="md"
+        justify="between"
+        style={{ height: 120, background: '#f3f4f6', padding: 8 }}
+      >
+        <Text variant="bodySmall">Top</Text>
+        <Text variant="bodySmall">Bottom</Text>
+      </Stack>
     </ZelaqProvider>
   )
 }

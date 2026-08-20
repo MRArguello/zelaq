@@ -1,7 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView, View } from 'react-native'
 import { Search, Settings, Trash2 } from 'lucide-react-native'
-import { Button, IconButton, Text } from 'zelaq-ui'
+import { Button, IconButton, Stack, Text } from 'zelaq-ui'
 import { useThemeModeToggle } from './_layout'
 
 export default function App() {
@@ -49,6 +49,33 @@ export default function App() {
                 <Text variant="bodySmall" tone="muted">Supporting text</Text>
                 <Text variant="hero4" tone="danger" align="center">Validation message</Text>
                 <Text variant="body" tone="success">Saved successfully</Text>
+
+                <Stack gap="lg">
+                    <Text variant="heading2">Zelaq UI</Text>
+                    <Text tone="muted">A themeable cross-platform component library.</Text>
+                    <Button>Continue</Button>
+                </Stack>
+
+                <Stack gap="sm" style={{ backgroundColor: '#f3f4f6', padding: 8 }}>
+                    <Text variant="bodySmall">gap=&quot;sm&quot;</Text>
+                </Stack>
+                <Stack gap="xl" style={{ backgroundColor: '#f3f4f6', padding: 8 }}>
+                    <Text variant="bodySmall">gap=&quot;xl&quot;</Text>
+                </Stack>
+
+                <Stack gap="md" align="center" style={{ backgroundColor: '#f3f4f6', padding: 8 }}>
+                    <Text variant="bodySmall">Centered</Text>
+                    <Button>Short</Button>
+                </Stack>
+
+                <Stack
+                    gap="md"
+                    justify="between"
+                    style={{ height: 120, backgroundColor: '#f3f4f6', padding: 8 }}
+                >
+                    <Text variant="bodySmall">Top</Text>
+                    <Text variant="bodySmall">Bottom</Text>
+                </Stack>
             </ScrollView>
         </SafeAreaView>
     )

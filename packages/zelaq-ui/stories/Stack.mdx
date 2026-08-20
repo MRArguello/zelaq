@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as StackStories from './Stack.stories';
+
+<Meta of={StackStories} />
+
+# Stack
+
+<Canvas of={StackStories.Basic} />
+
+<Controls />
+
+A theme-aware vertical layout primitive — flexbox column with `gap` resolved from the theme's
+spacing tokens, plus `align`/`justify` for cross-axis alignment and main-axis distribution. No
+hardcoded spacing; `gap` always maps to a real `theme.space` key.
+
+## Gap values
+
+`gap` accepts any key of the theme's spacing scale (`sm`, `md`, `2md`, `base`, `lg`, `xl`, `2xl`,
+`3xl`, `4xl`) — defaults to `base`.
+
+<Canvas of={StackStories.GapValues} />
+
+## Alignment and justification
+
+<Canvas of={StackStories.CenterAligned} />
+<Canvas of={StackStories.SpaceBetween} />
