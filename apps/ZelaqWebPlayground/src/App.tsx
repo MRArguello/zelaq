@@ -1,10 +1,14 @@
 import { useState } from 'react'
-import { Button, Card, Input, Stack, Text, ZelaqProvider } from 'zelaq-ui'
+import { Button, Card, Dialog, Input, Stack, Text, ZelaqProvider } from 'zelaq-ui'
 import type { ThemeMode } from 'zelaq-ui'
 
 function App() {
   const [mode, setMode] = useState<ThemeMode>('light')
   const [email, setEmail] = useState('')
+  const [responsiveOpen, setResponsiveOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [sheetOpen, setSheetOpen] = useState(false)
+  const [themedOpen, setThemedOpen] = useState(false)
 
   return (
     <ZelaqProvider mode={mode}>
@@ -124,6 +128,71 @@ function App() {
           theme={{ colors: { primary: '#6366f1', secondaryBorder: '#a5b4fc' } }}
         >
           <Input label="Custom theme override" placeholder="Focus me to see the border" />
+        </ZelaqProvider>
+      </Stack>
+
+      <Stack gap="md" style={{ width: 280 }}>
+        <Text variant="heading2">Zelaq UI</Text>
+
+        <Button onPress={() => setResponsiveOpen(true)}>Open responsive dialog</Button>
+        <Button onPress={() => setDialogOpen(true)}>Open centered dialog</Button>
+        <Button onPress={() => setSheetOpen(true)}>Open bottom sheet</Button>
+        <Button onPress={() => setThemedOpen(true)}>Open themed dialog</Button>
+
+        <Dialog
+          open={responsiveOpen}
+          title="Responsive presentation"
+          onClose={() => setResponsiveOpen(false)}
+          presentation="responsive"
+        >
+          <Stack gap="md">
+            <Text>This becomes a sheet on mobile and a dialog on desktop web — resize the window to see it switch.</Text>
+            <Button onPress={() => setResponsiveOpen(false)}>Close</Button>
+          </Stack>
+        </Dialog>
+
+        <Dialog
+          open={dialogOpen}
+          title="Edit profile"
+          onClose={() => setDialogOpen(false)}
+          presentation="dialog"
+        >
+          <Stack gap="md">
+            <Input label="Name" placeholder="Ada Lovelace" />
+            <Button onPress={() => setDialogOpen(false)}>Save</Button>
+          </Stack>
+        </Dialog>
+
+        <Dialog
+          open={sheetOpen}
+          title="Filters"
+          onClose={() => setSheetOpen(false)}
+          presentation="sheet"
+        >
+          <Stack gap="md">
+            <Text tone="muted">Choose how results are filtered.</Text>
+            <Button onPress={() => setSheetOpen(false)}>Apply</Button>
+          </Stack>
+        </Dialog>
+
+        {/* Theme override: confirms Dialog's surface/backdrop/close-button re-resolve, not just Card's/Input's. */}
+        <ZelaqProvider
+          mode={mode}
+          theme={{
+            colors: { secondaryBackground: '#eef2ff', backdrop: 'rgba(99, 102, 241, 0.4)' },
+          }}
+        >
+          <Dialog
+            open={themedOpen}
+            title="Custom theme override"
+            onClose={() => setThemedOpen(false)}
+            presentation="dialog"
+          >
+            <Stack gap="md">
+              <Text tone="muted">Surface and backdrop colors come from the overridden theme.</Text>
+              <Button onPress={() => setThemedOpen(false)}>Close</Button>
+            </Stack>
+          </Dialog>
         </ZelaqProvider>
       </Stack>
     </ZelaqProvider>

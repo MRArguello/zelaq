@@ -16,5 +16,8 @@ export type { CardProps } from './components/Card'
 export { Input } from './components/Input'
 export type { InputProps } from './components/Input'
 
+export { Dialog } from './components/Dialog'
+export type { DialogProps } from './components/Dialog'
+
 export { ZelaqProvider, useTheme } from './theme'
 export type { Theme, ThemeOverride, ThemeMode, ZelaqProviderProps } from './theme'

@@ -1,0 +1,59 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as DialogStories from './Dialog.stories';
+
+<Meta of={DialogStories} />
+
+# Dialog
+
+<Canvas of={DialogStories.Responsive} />
+
+<Controls of={DialogStories.Responsive} />
+
+One semantic component, three presentation modes — surface, backdrop, radius, spacing, and
+elevation all come from existing tokens (`colors.secondaryBackground`, `radii.md`, `space.base`/
+`md`, `shadow.elevated`), plus one new token, `colors.backdrop` (a translucent scrim that stays
+dark in both light and dark mode, unlike the colors that invert between them — nothing existing
+captured that). The close button reuses `IconButton`'s own secondary-variant token resolver
+directly, not the `IconButton` component itself — its `icon` prop is required, and Dialog can't
+assume you have an icon library installed.
+
+## Presentation modes
+
+- **`responsive`** (default) — bottom sheet under 768px width, centered dialog above it, on web.
+  Always renders as a bottom sheet on React Native (no viewport concept there).
+- **`dialog`** — centered, at every width, on every platform.
+- **`sheet`** — bottom-aligned, at every width, on every platform.
+
+<Canvas of={DialogStories.ForcedDialog} />
+<Canvas of={DialogStories.ForcedSheet} />
+
+## Backdrop dismissal
+
+`closeOnBackdropPress` (default `true`) controls whether tapping outside the surface calls
+`onClose`. The close button and Escape (web) / Android back (native) always work regardless.
+
+<Canvas of={DialogStories.BackdropDismissDisabled} />
+
+## Opening and closing
+
+`open`/`onClose` are fully controlled — Dialog holds no state of its own.
+
+<Canvas of={DialogStories.Interactive} />
+
+## Accessibility notes — read before relying on this for complex flows
+
+- Web: `role="dialog"`, `aria-modal="true"`, and `aria-labelledby` (when `title` is set) are all
+  applied. Escape closes it. Focus moves into the dialog surface on open.
+- **Focus is not trapped** — Tab can still move focus outside the dialog into background content
+  on web, since no focus-management utility exists in this library yet. Full trapping (cycling Tab
+  within the dialog) and focus restoration (returning focus to whatever triggered the dialog, on
+  close) are **not implemented**. Build your own if a flow needs full compliance.
+- If you omit `title`, the dialog has no accessible name — provide one through your own means in
+  that case.
+- Native: `onRequestClose` handles the Android back button. `accessibilityViewIsModal` is set on
+  the surface for iOS VoiceOver. Safe-area insets are **not** handled — this library doesn't
+  depend on `react-native-safe-area-context`, so a sheet's content near the bottom edge may sit
+  under a device's home indicator; wrap `children` in your own safe-area-aware view if that matters
+  for your layout.
+- No open/close animation exists on web (renders/unmounts instantly). Native gets a free
+  slide/fade transition from `Modal`'s own `animationType` prop.

@@ -11,6 +11,8 @@ export interface ColorTokens {
     textInverse: string
     textDanger: string
     textSuccess: string
+    /** Modal/sheet scrim — stays dark in both modes, unlike text/surface colors which invert. */
+    backdrop: string
 }
 
 export interface SpaceTokens {

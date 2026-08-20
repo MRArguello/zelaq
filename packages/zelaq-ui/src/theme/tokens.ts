@@ -15,6 +15,8 @@ export const colors = {
     textInverse: '#ffffff',
     textDanger: '#dc2626',
     textSuccess: '#15803d',
+    // Same slate-900 family as shadow.elevated's color — kept identical across modes, doesn't invert.
+    backdrop: 'rgba(15, 23, 42, 0.5)',
 } as const
 
 export const darkColors = {
@@ -32,6 +34,7 @@ export const darkColors = {
     textInverse: '#111827',
     textDanger: '#f87171',
     textSuccess: '#4ade80',
+    backdrop: 'rgba(15, 23, 42, 0.5)',
 } as const
 
 export const space = {
