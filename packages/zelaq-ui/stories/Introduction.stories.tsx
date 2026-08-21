@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { lightPalette, darkPalette } from '../src/theme/palette';
 
-// Not a component — palette.ts is internal (never exported from the package), so this exists
-// purely to make the raw shades behind the semantic ColorTokens inspectable in Storybook. Title
-// is 'Introduction' (not 'Foundations/Palette') and forced first via preview.tsx's storySort,
-// so this is the landing page for library consumers.
-
 const meta = {
   title: 'Introduction',
   parameters: {
@@ -49,13 +44,16 @@ function PaletteGrid({ palette, textColor }: { palette: Record<string, string>; 
 
 export const Light: Story = {
   name: 'Light palette',
-  render: () => <PaletteGrid palette={lightPalette} textColor={lightPalette.ink900} />,
+  render: () =>
+    <div style={{ background: lightPalette.mineral100, padding: 24, borderRadius: 1 }}>
+      <PaletteGrid palette={lightPalette} textColor={lightPalette.ink900} />
+    </div>,
 };
 
 export const Dark: Story = {
   name: 'Dark palette',
   render: () => (
-    <div style={{ background: darkPalette.mineral900, padding: 24, borderRadius: 8 }}>
+    <div style={{ background: darkPalette.mineral900, padding: 24, borderRadius: 1 }}>
       <PaletteGrid palette={darkPalette} textColor={darkPalette.mineral100} />
     </div>
   ),

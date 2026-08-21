@@ -1,5 +1,26 @@
+import { useEffect, useState } from 'react'
+import type { PropsWithChildren } from 'react'
 import type { Preview } from '@storybook/react-vite'
+import { withThemeByDataAttribute } from '@storybook/addon-themes'
+import { DocsContainer as BaseDocsContainer } from '@storybook/addon-docs/blocks'
+import type { DocsContainerProps } from '@storybook/addon-docs/blocks'
+import { themes } from 'storybook/theming'
 import { ZelaqProvider } from '../src'
+import type { ThemeMode } from '../src'
+
+function readDocsTheme() {
+  return document.documentElement.getAttribute('data-theme') === 'dark' ? themes.dark : themes.light
+}
+
+function CustomDocsContainer(props: PropsWithChildren<DocsContainerProps>) {
+  const [theme, setTheme] = useState(readDocsTheme)
+  useEffect(() => {
+    const observer = new MutationObserver(() => setTheme(readDocsTheme()))
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    return () => observer.disconnect()
+  }, [])
+  return <BaseDocsContainer {...props} theme={theme} />
+}
 
 const preview: Preview = {
   parameters: {
@@ -11,23 +32,27 @@ const preview: Preview = {
     },
 
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
       test: 'error'
     },
 
-    options: {
-      // 'Introduction' is the landing page — keep it first regardless of alphabetical order.
-      storySort: {
+    options: {storySort: {
         order: ['Introduction', 'Components'],
       },
     },
+
+    docs: {
+      container: CustomDocsContainer,
+    },
   },
   decorators: [
-    (Story) => (
-      <ZelaqProvider>
-        <Story />
+    withThemeByDataAttribute({
+      themes: { light: 'light', dark: 'dark', system: 'system' },
+      defaultTheme: 'light',
+      attributeName: 'data-theme',
+    }),
+    (Story, context) => (
+      <ZelaqProvider mode={context.globals.theme as ThemeMode}>
+          <Story />
       </ZelaqProvider>
     ),
   ],
