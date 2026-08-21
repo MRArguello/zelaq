@@ -5,8 +5,16 @@ import { withThemeByDataAttribute } from '@storybook/addon-themes'
 import { DocsContainer as BaseDocsContainer } from '@storybook/addon-docs/blocks'
 import type { DocsContainerProps } from '@storybook/addon-docs/blocks'
 import { themes } from 'storybook/theming'
-import { ZelaqProvider } from '../src'
+import { ZelaqProvider, useTheme } from '../src'
 import type { ThemeMode } from '../src'
+
+function SyncCanvasBackground({ children }: { children: React.ReactNode }) {
+  const theme = useTheme()
+  useEffect(() => {
+    document.body.style.backgroundColor = theme.colors.background
+  }, [theme.colors.background])
+  return <>{children}</>
+}
 
 function readDocsTheme() {
   return document.documentElement.getAttribute('data-theme') === 'dark' ? themes.dark : themes.light
@@ -26,8 +34,8 @@ const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
 
@@ -35,7 +43,8 @@ const preview: Preview = {
       test: 'error'
     },
 
-    options: {storySort: {
+    options: {
+      storySort: {
         order: ['Introduction', 'Components'],
       },
     },
@@ -52,7 +61,9 @@ const preview: Preview = {
     }),
     (Story, context) => (
       <ZelaqProvider mode={context.globals.theme as ThemeMode}>
+        <SyncCanvasBackground>
           <Story />
+        </SyncCanvasBackground>
       </ZelaqProvider>
     ),
   ],
