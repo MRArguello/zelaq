@@ -1,4 +1,7 @@
-<img src="./assets/wordmark.png" alt="Zelaq" width="240" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/wordmark-white.png" />
+  <img src="./assets/wordmark.png" alt="Zelaq" width="240" />
+</picture>
 
 # zelaq-ui
 
