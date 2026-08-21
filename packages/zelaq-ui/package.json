@@ -1,6 +1,6 @@
 {
     "name": "zelaq-ui",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "description": "Cross-platform UI kit for React and React Native",
     "keywords": [
         "react",
