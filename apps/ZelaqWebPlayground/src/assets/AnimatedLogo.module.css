@@ -1,0 +1,11 @@
+.path {
+    fill: #115E59;
+    stroke: #115E59;
+}
+
+@media (prefers-color-scheme: light) {
+    .path {
+        fill: #7ACCC4;
+        stroke: #7ACCC4;
+    }
+}
