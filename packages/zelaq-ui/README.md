@@ -4,9 +4,9 @@
 
 Cross-platform component library for React and React Native.
 
-Component-level docs (props, usage, accessibility behavior) live in Storybook, not here — see the
+Component-level docs (props, usage, accessibility behavior) live in Storybook — see the
 deployed version at [zelaq-ui.netlify.app](https://zelaq-ui.netlify.app), or run `pnpm dev:web`
-for the local copy and see each component's Docs tab. This README covers what applies across the
+on your local and see each component's Docs tab. This README covers what applies across the
 whole library.
 
 ## Installation
@@ -53,7 +53,7 @@ contrast for any color you replace.
 
 ## Customizing components
 
-Two separate mechanisms, for two different needs — don't reach for the wrong one:
+Two ways to customize the theme:
 
 - **`ZelaqProvider`'s `theme` override** (see above) is for *systemic* changes — things meant to
   shift together, like a brand recolor or dark mode. It's token-scoped, not component-scoped:
@@ -65,7 +65,7 @@ Two separate mechanisms, for two different needs — don't reach for the wrong o
   `<Card style={{ borderColor: 'red' }}>` changes only that `Card`, nothing else.
 
 If you want a one-off look reused in multiple places, wrap the component instead of repeating the
-`style` prop — this is the intended pattern, not a workaround:
+`style` prop:
 
 ```tsx
 // your own file, outside zelaq-ui
@@ -102,10 +102,7 @@ npm install lucide-react-native react-native-svg
 ```
 
 Use `lucide-react` in web code and `lucide-react-native` in React Native code — they're different
-packages with the same icon set; don't cross-import one into the other. `react-native-svg` is a
-native module `lucide-react-native` renders through, so it needs the Expo/RN install path above
-(not a plain `npm install`) to get a build correctly linked for your app. How each component uses
-icons is documented on that component's Storybook page.
+packages with the same icon set. `react-native-svg` is a native module `lucide-react-native` renders through, so it needs the Expo/RN install path above (not a plain `npm install`) to get a build correctly linked for your app. How each component uses icons is documented on that component's Storybook page.
 
 ## Typography
 
@@ -115,9 +112,7 @@ theme.typography.heading1   // { fontFamily, fontSize: 40, fontWeight: '700', li
 theme.typography.fontFamily.sans // 'Satoshi'
 ```
 
-One family (`Satoshi`) across the kit, weights `400`/`500`/`700` only (no Semibold, so `500`
-stands in for the button label). Full variant list and exact values: `Text`'s Storybook page.
-Override `typography` via `ZelaqProvider`'s `theme` prop to use a different font.
+One family (`Satoshi`) across the kit, weights `400`/`500`/`700` are used. Full variant list and exact values: `Text`'s Storybook page. Override `typography` via `ZelaqProvider`'s `theme` prop to use a different font.
 
 `fontSize`/`lineHeight` are px-equivalent numbers; on web, `Text`/`Button` render them as `rem` so
 they scale with browser/OS font-size settings (`allowFontScaling` gives native the same behavior).
@@ -126,7 +121,7 @@ they scale with browser/OS font-size settings (`allowFontScaling` gives native t
 
 [Satoshi](https://www.fontshare.com/fonts/satoshi) ([ITF Free Font License](https://www.fontshare.com/licenses/itf-ffl))
 isn't bundled by `zelaq-ui` — loading it is the consuming app's responsibility. Missing font falls
-back to the platform default sans-serif rather than failing.
+back to the platform default sans-serif.
 
 - **Web**: load via Fontshare's hosted CSS — see `.storybook/preview-head.html` or
   `apps/ZelaqWebPlayground/index.html` for a working example.

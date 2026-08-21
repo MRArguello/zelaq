@@ -1,7 +1,6 @@
 # Zelaq Web Playground
 
-Web playground for developing and testing [`zelaq-ui`](../../packages/zelaq-ui). Not a
-standalone app — its only purpose is exercising the library's components on web.
+Web playground for developing and testing [`zelaq-ui`](../../packages/zelaq-ui). 
 
 ## Running
 
