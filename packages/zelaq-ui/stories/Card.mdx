@@ -5,21 +5,23 @@ import * as CardStories from './Card.stories';
 
 # Card
 
+A theme-aware surface container for grouping related content. Use `subtle`/`outlined` for content
+flush with its surroundings, `elevated` when it needs to visually float above them.
+
 <Canvas of={CardStories.Subtle} />
 
 <Controls of={CardStories.Subtle} />
 
-A theme-aware surface container — background, border, radius, and padding all come from the
-existing theme tokens (`colors.secondaryBackground`/`secondaryBorder`, `radii.md`, `space.base`),
-same tokens `Button` and `IconButton` already use. No Card-specific values are hardcoded.
+## Tokens
+
+- `colors.surface` — subtle, outlined: background
+- `colors.surfaceRaised` — elevated: background
+- `colors.border` — outlined: border
+- `shadow.elevated` — elevated: drop shadow
+- `radii.xs` — all: corner radius
+- `space.base` — all: padding
 
 ## Variants
-
-- **`subtle`** (default) — filled surface, no border, no shadow.
-- **`outlined`** — filled surface plus a `secondaryBorder`-colored border, no shadow.
-- **`elevated`** — filled surface, no border, drop shadow from `theme.shadow.elevated` (the
-  library's first elevation token — web uses `box-shadow`, native uses `shadowColor`/
-  `shadowOffset`/`shadowOpacity`/`shadowRadius` plus Android's `elevation`).
 
 <Canvas of={CardStories.Outlined} />
 <Canvas of={CardStories.Elevated} />

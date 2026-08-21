@@ -5,12 +5,21 @@ import * as TextStories from './Text.stories';
 
 # Text
 
+A theme-aware text primitive for all typography in the library — headings, body copy, hero text.
+Prefer it over raw platform text elements so type and color always stay theme-driven.
+
 <Canvas of={TextStories.Body} />
 
 <Controls of={TextStories.Body} />
 
-`variant` maps to a typography token, `tone` maps to a semantic text color — both theme-aware and
-mode-aware like everything else. `align` sets text alignment.
+## Tokens
+
+- `typography.<variant>` — from `variant` prop: font family, size, weight, line-height
+- `colors.textDefault` — `tone="default"`: text color
+- `colors.textMuted` — `tone="muted"`: text color
+- `colors.textInverse` — `tone="inverse"`: text color
+- `colors.textDanger` — `tone="danger"`: text color
+- `colors.textSuccess` — `tone="success"`: text color
 
 ## Heading levels
 

@@ -10,11 +10,11 @@ export function getDialogTokens(theme: Theme = defaultTheme) {
     return {
         backdropColor: colors.backdrop,
         surface: {
-            backgroundColor: colors.secondaryBackground,
+            backgroundColor: colors.surfaceRaised,
             padding: space.base,
             gap: space.md,
         },
-        radius: radii.md,
+        radius: radii.xs,
         shadow: shadow.elevated,
         closeButton: getIconButtonTokens('secondary', false, false, theme),
     }

@@ -1,40 +1,55 @@
 import type { Theme } from './types'
+import { darkPalette, lightPalette } from './palette'
 
+// "Ink + mineral teal" — verified against WCAG contrast minimums (4.5:1 text, 3:1 UI
+// boundaries) for every pair components actually render. Values come from palette.ts;
+// this layer is what assigns them meaning.
 export const colors = {
-    primary: '#111827',
-    primaryPressed: '#1f2937',
-    primaryDisabled: '#9ca3af',
-    secondaryBackground: '#ffffff',
-    // #d1d5db (gray-300) was 1.47:1 against white — fails WCAG 1.4.11's 3:1 minimum for UI
-    // component boundaries. #6b7280 (gray-500) clears it at 4.83:1.
-    secondaryBorder: '#6b7280',
-    secondaryText: '#111827',
-    textOnPrimary: '#ffffff',
-    textDefault: '#111827',
-    textMuted: '#6b7280',
-    textInverse: '#ffffff',
-    textDanger: '#dc2626',
-    textSuccess: '#15803d',
-    // Same slate-900 family as shadow.elevated's color — kept identical across modes, doesn't invert.
-    backdrop: 'rgba(15, 23, 42, 0.5)',
+    primary: lightPalette.teal600,
+    primaryPressed: lightPalette.teal700,
+    primaryDisabled: lightPalette.teal300,
+    secondaryBackground: lightPalette.mineral75,
+    secondaryBorder: lightPalette.mineral500,
+    secondaryText: lightPalette.ink900,
+    textOnPrimary: lightPalette.mineral50,
+    textDefault: lightPalette.ink900,
+    textMuted: lightPalette.mineral700,
+    textInverse: lightPalette.mineral50,
+    textDanger: lightPalette.red600,
+    textSuccess: lightPalette.green600,
+    background: lightPalette.mineral100,
+    surface: lightPalette.mineral25,
+    surfaceRaised: lightPalette.mineral0,
+    fieldBackground: lightPalette.mineral0,
+    border: lightPalette.mineral200,
+    borderFocused: lightPalette.teal600,
+    fieldDisabledBackground: lightPalette.mineral300,
+    fieldDisabledText: lightPalette.ink700,
+    backdrop: lightPalette.inkScrim,
 } as const
 
 export const darkColors = {
-    primary: '#e5e7eb',
-    primaryPressed: '#d1d5db',
-    primaryDisabled: '#4b5563',
-    secondaryBackground: '#1f2937',
-    // #374151 (gray-700) was 1.42:1 against the dark surface — fails WCAG 1.4.11's 3:1 minimum.
-    // #9ca3af (gray-400) clears it at 5.78:1.
-    secondaryBorder: '#9ca3af',
-    secondaryText: '#f9fafb',
-    textOnPrimary: '#111827',
-    textDefault: '#f9fafb',
-    textMuted: '#9ca3af',
-    textInverse: '#111827',
-    textDanger: '#f87171',
-    textSuccess: '#4ade80',
-    backdrop: 'rgba(15, 23, 42, 0.5)',
+    primary: darkPalette.teal400,
+    primaryPressed: darkPalette.teal300,
+    primaryDisabled: darkPalette.teal800,
+    secondaryBackground: darkPalette.mineral600,
+    secondaryBorder: darkPalette.mineral400,
+    secondaryText: darkPalette.mineral100,
+    textOnPrimary: darkPalette.ink900,
+    textDefault: darkPalette.mineral100,
+    textMuted: darkPalette.mineral300,
+    textInverse: darkPalette.ink900,
+    textDanger: darkPalette.red300,
+    textSuccess: darkPalette.green300,
+    background: darkPalette.mineral900,
+    surface: darkPalette.mineral800,
+    surfaceRaised: darkPalette.mineral700,
+    fieldBackground: darkPalette.mineral700,
+    border: darkPalette.mineral450,
+    borderFocused: darkPalette.teal400,
+    fieldDisabledBackground: darkPalette.mineral500,
+    fieldDisabledText: darkPalette.mineral250,
+    backdrop: darkPalette.inkScrim,
 } as const
 
 export const space = {
@@ -50,6 +65,7 @@ export const space = {
 } as const
 
 export const radii = {
+    xs:4,
     sm: 8,
     md: 10,
     pill: 999,

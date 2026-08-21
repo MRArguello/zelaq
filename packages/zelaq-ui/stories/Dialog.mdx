@@ -5,17 +5,25 @@ import * as DialogStories from './Dialog.stories';
 
 # Dialog
 
+A modal overlay for tasks or confirmations that need the user's full attention. Presentation
+adapts automatically between a centered dialog and a bottom sheet depending on viewport and
+platform — reach for `dialog`/`sheet` only when you need to force one regardless of viewport.
+
 <Canvas of={DialogStories.Responsive} />
 
 <Controls of={DialogStories.Responsive} />
 
-One semantic component, three presentation modes — surface, backdrop, radius, spacing, and
-elevation all come from existing tokens (`colors.secondaryBackground`, `radii.md`, `space.base`/
-`md`, `shadow.elevated`), plus one new token, `colors.backdrop` (a translucent scrim that stays
-dark in both light and dark mode, unlike the colors that invert between them — nothing existing
-captured that). The close button reuses `IconButton`'s own secondary-variant token resolver
-directly, not the `IconButton` component itself — its `icon` prop is required, and Dialog can't
-assume you have an icon library installed.
+## Tokens
+
+- `colors.surfaceRaised` — surface background
+- `colors.backdrop` — scrim (stays dark in both modes)
+- `shadow.elevated` — drop shadow
+- `radii.xs` — corner radius
+- `space.base` — surface padding
+- `space.md` — surface internal gap
+
+Close button reuses `IconButton`'s secondary-variant token resolver directly, not the component
+itself.
 
 ## Presentation modes
 

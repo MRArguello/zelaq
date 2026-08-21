@@ -61,7 +61,7 @@ export const Inverse: Story = {
     children: 'Text on a dark surface',
   },
   render: (args) => (
-    <div style={{ background: '#111827', padding: 16, borderRadius: 8 }}>
+    <div style={{ background: '#173B3A', padding: 16, borderRadius: 8 }}>
       <Text {...args} />
     </div>
   ),

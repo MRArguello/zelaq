@@ -8,10 +8,10 @@ export function getCardTokens(variant: CardVariant, theme: Theme = defaultTheme)
 
     return {
         container: {
-            backgroundColor: colors.secondaryBackground,
-            borderRadius: radii.md,
+            backgroundColor: variant === 'elevated' ? colors.surfaceRaised : colors.surface,
+            borderRadius: radii.xs,
             borderWidth: 1,
-            borderColor: variant === 'outlined' ? colors.secondaryBorder : 'transparent',
+            borderColor: variant === 'outlined' ? colors.border : 'transparent',
             padding: space.base,
         },
         shadow: variant === 'elevated' ? shadow.elevated : null,

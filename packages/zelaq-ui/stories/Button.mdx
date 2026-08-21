@@ -5,9 +5,26 @@ import * as ButtonStories from './Button.stories';
 
 # Button
 
+A theme-aware pressable button. Use `primary` for the main action in a given context, `secondary`
+for everything else.
+
 <Canvas of={ButtonStories.Primary} />
 
 <Controls of={ButtonStories.Primary} />
+
+## Tokens
+
+- `colors.primary` — primary: background
+- `colors.primaryDisabled` — primary: background (disabled)
+- `colors.textOnPrimary` — primary: label
+- `colors.secondaryBackground` — secondary: background
+- `colors.secondaryBorder` — secondary: border
+- `colors.secondaryText` — secondary: label
+- `opacity.disabled` — secondary: disabled dimming
+- `radii.xs` — both: corner radius
+- `space.base` — both: horizontal padding
+- `space.md` — both: vertical padding, icon gap
+- `sizes.touchMin` — both: minimum tap target
 
 ## Icons
 

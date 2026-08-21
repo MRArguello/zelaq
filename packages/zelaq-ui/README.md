@@ -47,6 +47,10 @@ rest of that object.
 `'system'` follows the OS/browser color scheme and updates live if it changes (`matchMedia` on
 web, `useColorScheme` on React Native).
 
+The default color tokens (light and dark) are verified against WCAG contrast minimums (4.5:1
+text, 3:1 UI boundaries). Overriding them via `theme` opts out of that guarantee — recheck
+contrast for any color you replace.
+
 ## Customizing components
 
 Two separate mechanisms, for two different needs — don't reach for the wrong one:

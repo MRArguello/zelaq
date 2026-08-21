@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView, View } from 'react-native'
 import { Search, Settings, Trash2 } from 'lucide-react-native'
-import { Button, Card, Dialog, IconButton, Input, Stack, Text, ZelaqProvider } from 'zelaq-ui'
+import { Button, Card, Dialog, IconButton, Input, Stack, Text, useTheme, ZelaqProvider } from 'zelaq-ui'
 import { useThemeModeToggle } from './_layout'
 
 export default function App() {
     const { mode, toggleMode } = useThemeModeToggle()
+    const theme = useTheme()
     const [email, setEmail] = useState('')
     const [responsiveOpen, setResponsiveOpen] = useState(false)
     const [dialogOpen, setDialogOpen] = useState(false)
@@ -14,7 +15,7 @@ export default function App() {
     const [themedOpen, setThemedOpen] = useState(false)
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
             <ScrollView contentContainerStyle={{ padding: 24, gap: 16 }}>
                 <Button variant="secondary" onPress={toggleMode}>
                     Switch to {mode === 'dark' ? 'light' : 'dark'} mode
@@ -112,7 +113,7 @@ export default function App() {
                     <ZelaqProvider
                         mode={mode}
                         theme={{
-                            colors: { secondaryBackground: '#eef2ff', secondaryBorder: '#6366f1' },
+                            colors: { surface: '#eef2ff', surfaceRaised: '#eef2ff', border: '#6366f1' },
                             shadow: { elevated: { color: 'rgba(99, 102, 241, 0.35)', blurRadius: 16 } },
                         }}
                     >
@@ -151,7 +152,7 @@ export default function App() {
                     {/* Theme override: confirms Input's border/focus/error colors re-resolve, not just Card's. */}
                     <ZelaqProvider
                         mode={mode}
-                        theme={{ colors: { primary: '#6366f1', secondaryBorder: '#a5b4fc' } }}
+                        theme={{ colors: { borderFocused: '#6366f1', secondaryBorder: '#a5b4fc' } }}
                     >
                         <Input label="Custom theme override" placeholder="Focus me to see the border" />
                     </ZelaqProvider>
@@ -205,7 +206,7 @@ export default function App() {
                     <ZelaqProvider
                         mode={mode}
                         theme={{
-                            colors: { secondaryBackground: '#eef2ff', backdrop: 'rgba(99, 102, 241, 0.4)' },
+                            colors: { surfaceRaised: '#eef2ff', backdrop: 'rgba(99, 102, 241, 0.4)' },
                         }}
                     >
                         <Dialog

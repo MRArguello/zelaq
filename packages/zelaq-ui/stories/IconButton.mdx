@@ -5,18 +5,34 @@ import * as IconButtonStories from './IconButton.stories';
 
 # IconButton
 
-An icon with no visible text label needs an explicit accessible name — `accessibilityLabel` is
-required, not optional, so this can't be skipped by accident.
+A theme-aware icon-only pressable, sharing `Button`'s `primary`/`secondary` variants and color
+tokens. Use it for compact actions where a visible label isn't needed — `accessibilityLabel` is
+required, since there's no text to fall back on for assistive tech.
 
 <Canvas of={IconButtonStories.Default} />
 
 <Controls of={IconButtonStories.Default} />
 
+## Tokens
+
+- `colors.primary` — primary: background
+- `colors.primaryDisabled` — primary: background (disabled)
+- `colors.primaryPressed` — primary: background (selected)
+- `colors.textOnPrimary` — primary: icon color
+- `colors.secondaryBackground` — secondary: background
+- `colors.primaryPressed` — secondary: background (selected)
+- `colors.secondaryBorder` — secondary: border
+- `colors.secondaryText` — secondary: icon color
+- `colors.textOnPrimary` — secondary: icon color (selected)
+- `opacity.disabled` — both: disabled dimming
+- `radii.xs` — both: corner radius
+- `sizes.touchMin` — both: width / height
+
 ## States
 
-`variant` (`primary`/`secondary`, same as `Button`), `disabled`, `loading` (spinner in place of
-the icon, implies disabled, sets `aria-busy`/`accessibilityState.busy`), and `selected`
-(toggled/active, exposed as `aria-pressed`/`accessibilityState.selected`).
+`disabled`, `loading` (spinner in place of the icon, implies disabled, sets
+`aria-busy`/`accessibilityState.busy`), and `selected` (toggled/active, exposed as
+`aria-pressed`/`accessibilityState.selected`).
 
 <Canvas of={IconButtonStories.Loading} />
 <Canvas of={IconButtonStories.Selected} />

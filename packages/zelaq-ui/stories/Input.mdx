@@ -5,18 +5,30 @@ import * as InputStories from './Input.stories';
 
 # Input
 
+A theme-aware text field for single-line user input. Pair it with `Text`-rendered labels and
+helper/error copy rather than styling your own.
+
 <Canvas of={InputStories.Default} />
 
 <Controls of={InputStories.Default} />
 
-A theme-aware text field — surface, border, radius, and padding come from the same tokens
-`Card`/`Button` already use (`colors.secondaryBackground`/`secondaryBorder`, `radii.md`,
-`space.base`). No dedicated focus/disabled/error color tokens exist or were added: focus reuses
-`colors.primary` (the brand color, same as `Button`'s primary variant), error reuses
-`colors.textDanger` (same as `Text tone="danger"`), and disabled reuses `opacity.disabled` over the
-same surface colors — the exact same pattern `Button`'s secondary variant already uses for its own
-disabled state. Label, helper text, and error text are rendered with the existing `Text`
-component, not a second typography system.
+## Tokens
+
+- `colors.fieldBackground` — default: background
+- `colors.fieldDisabledBackground` — disabled: background
+- `colors.secondaryBorder` — default: border
+- `colors.borderFocused` — focused: border
+- `colors.textDanger` — error: border, message color
+- `colors.textDefault` — default: text
+- `colors.fieldDisabledText` — disabled: text
+- `colors.textMuted` — placeholder
+- `radii.xs` — corner radius
+- `space.base` — horizontal padding
+- `space['2md']` — vertical padding
+- `space.sm` — gap (label / field / helper)
+
+Disabled state uses its own dedicated tokens rather than dimming the normal ones via opacity —
+opacity alone wasn't distinct enough between default and disabled.
 
 ## Helper and error text
 

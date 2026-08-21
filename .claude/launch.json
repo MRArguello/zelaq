@@ -4,8 +4,14 @@
     {
       "name": "storybook",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "ZelaqWebPlayground", "storybook"],
+      "runtimeArgs": ["--filter", "zelaq-ui", "storybook"],
       "port": 6006
+    },
+    {
+      "name": "web-playground",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@zelaq/web-playground", "dev"],
+      "port": 5173
     }
   ]
 }

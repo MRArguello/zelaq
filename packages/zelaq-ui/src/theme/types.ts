@@ -2,8 +2,11 @@ export interface ColorTokens {
     primary: string
     primaryPressed: string
     primaryDisabled: string
+    /** Button/IconButton "secondary" variant background only — not a general neutral-surface slot. */
     secondaryBackground: string
+    /** Button/IconButton "secondary" variant border only — not a general neutral-surface slot. */
     secondaryBorder: string
+    /** Button/IconButton "secondary" variant text/icon color only. */
     secondaryText: string
     textOnPrimary: string
     textDefault: string
@@ -11,6 +14,27 @@ export interface ColorTokens {
     textInverse: string
     textDanger: string
     textSuccess: string
+    /** Page-level background — distinct from the component-surface tokens below. */
+    background: string
+    /** Default component surface, one step above background. Card's subtle/outlined variants. */
+    surface: string
+    /** Elevated surface — one step above surface. Shadow-based elevation specifically; not a
+     *  generic "brighter surface" slot — see fieldBackground for that. Card's elevated variant
+     *  and Dialog, which is always elevated. */
+    surfaceRaised: string
+    /** Form-field surface (Input). Deliberately separate from surfaceRaised — a field being
+     *  visually brighter than its surroundings isn't the same concept as a Card being physically
+     *  raised, even though they want a similar value today. */
+    fieldBackground: string
+    /** General-purpose divider/boundary. Input's disabled-state border; Card's outlined variant. */
+    border: string
+    /** Same value as primary in both themes today — kept as its own semantic slot so focus color
+     *  can diverge from brand color later. Input's focused-state border. */
+    borderFocused: string
+    /** Input's disabled surface. */
+    fieldDisabledBackground: string
+    /** Input's disabled text. */
+    fieldDisabledText: string
     /** Modal/sheet scrim — stays dark in both modes, unlike text/surface colors which invert. */
     backdrop: string
 }
@@ -28,6 +52,7 @@ export interface SpaceTokens {
 }
 
 export interface RadiiTokens {
+    xs: number
     sm: number
     md: number
     pill: number

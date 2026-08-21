@@ -72,9 +72,9 @@ export const GapValues: Story = {
             gap=&quot;{gap}&quot;
           </Text>
           <Stack gap={gap} style={{ background: '#f3f4f6', padding: 8, borderRadius: 8 }}>
-            <div style={{ width: 60, height: 20, background: '#9ca3af' }} />
-            <div style={{ width: 60, height: 20, background: '#9ca3af' }} />
-            <div style={{ width: 60, height: 20, background: '#9ca3af' }} />
+            <div style={{ width: 60, height: 20, background: '#8FAEAA' }} />
+            <div style={{ width: 60, height: 20, background: '#8FAEAA' }} />
+            <div style={{ width: 60, height: 20, background: '#8FAEAA' }} />
           </Stack>
         </div>
       ))}

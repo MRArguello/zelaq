@@ -15,7 +15,7 @@ export function getIconButtonTokens(
             container: {
                 width: sizes.touchMin,
                 height: sizes.touchMin,
-                borderRadius: radii.md,
+                borderRadius: radii.xs,
                 backgroundColor: selected ? colors.primaryPressed : colors.secondaryBackground,
                 borderColor: colors.secondaryBorder,
                 borderWidth: 1,
@@ -29,7 +29,7 @@ export function getIconButtonTokens(
         container: {
             width: sizes.touchMin,
             height: sizes.touchMin,
-            borderRadius: radii.md,
+            borderRadius: radii.xs,
             backgroundColor: disabled ? colors.primaryDisabled : selected ? colors.primaryPressed : colors.primary,
             borderColor: 'transparent',
             borderWidth: 1,

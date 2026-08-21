@@ -5,18 +5,18 @@ import * as StackStories from './Stack.stories';
 
 # Stack
 
+A theme-aware vertical layout primitive — a flexbox column for consistent spacing between
+children. Prefer it over ad-hoc margins whenever you're stacking elements.
+
 <Canvas of={StackStories.Basic} />
 
 <Controls of={StackStories.Basic} />
 
-A theme-aware vertical layout primitive — flexbox column with `gap` resolved from the theme's
-spacing tokens, plus `align`/`justify` for cross-axis alignment and main-axis distribution. No
-hardcoded spacing; `gap` always maps to a real `theme.space` key.
+## Tokens
+
+- `space.sm`/`md`/`2md`/`base`/`lg`/`xl`/`2xl`/`3xl`/`4xl` — `gap` prop, defaults to `base`
 
 ## Gap values
-
-`gap` accepts any key of the theme's spacing scale (`sm`, `md`, `2md`, `base`, `lg`, `xl`, `2xl`,
-`3xl`, `4xl`) — defaults to `base`.
 
 <Canvas of={StackStories.GapValues} />
 
