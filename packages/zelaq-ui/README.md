@@ -110,54 +110,30 @@ icons is documented on that component's Storybook page.
 ## Typography
 
 ```ts
+theme.typography.body       // { fontFamily, fontSize: 16, fontWeight: '400', lineHeight: 24 }
+theme.typography.heading1   // { fontFamily, fontSize: 40, fontWeight: '700', lineHeight: 50 }
 theme.typography.fontFamily.sans // 'Satoshi'
-theme.typography.bodyXxs         // { fontFamily, fontSize: 10, fontWeight: '400', lineHeight: 16 }
-theme.typography.bodyXs          // { fontFamily, fontSize: 12, fontWeight: '400', lineHeight: 18 }
-theme.typography.bodySmall       // { fontFamily, fontSize: 14, fontWeight: '400', lineHeight: 20 }
-theme.typography.body            // { fontFamily, fontSize: 16, fontWeight: '400', lineHeight: 24 }
-theme.typography.subheading      // { fontFamily, fontSize: 24, fontWeight: '700', lineHeight: 32 }
-theme.typography.heading4        // { fontFamily, fontSize: 20, fontWeight: '700', lineHeight: 25 }
-theme.typography.heading3        // { fontFamily, fontSize: 24, fontWeight: '700', lineHeight: 30 }
-theme.typography.heading2        // { fontFamily, fontSize: 32, fontWeight: '700', lineHeight: 40 }
-theme.typography.heading1        // { fontFamily, fontSize: 40, fontWeight: '700', lineHeight: 50 }
-theme.typography.hero4           // { fontFamily, fontSize: 64, fontWeight: '700', lineHeight: 70 }
-theme.typography.hero3           // { fontFamily, fontSize: 76, fontWeight: '700', lineHeight: 83 }
-theme.typography.hero2           // { fontFamily, fontSize: 96, fontWeight: '700', lineHeight: 105 }
-theme.typography.hero1           // { fontFamily, fontSize: 120, fontWeight: '700', lineHeight: 132 }
-theme.typography.button          // { fontFamily, fontSize: 16, fontWeight: '500', lineHeight: 20 }
 ```
 
-One family (`Satoshi`) across the kit — `fontFamily` on each style, plus the raw name at
-`typography.fontFamily.sans` for anything that needs just the family. Weights used: `400`
-(Regular) for body variants, `700` (Bold) for subheading/heading/hero variants, `500` (Medium) for
-the button label — Satoshi has no Semibold/`600` weight, so `500` stands in for it there. Override
-`typography` via `ZelaqProvider`'s `theme` prop to use a different font entirely.
+One family (`Satoshi`) across the kit, weights `400`/`500`/`700` only (no Semibold, so `500`
+stands in for the button label). Full variant list and exact values: `Text`'s Storybook page.
+Override `typography` via `ZelaqProvider`'s `theme` prop to use a different font.
 
-`fontSize`/`lineHeight` are stored as px-equivalent numbers (native consumes them directly). On
-web, `Text` and `Button` format them as `rem` rather than `px`, so they scale with the browser's
-or OS's font-size/zoom setting instead of staying visually fixed — the same accessibility behavior
-native gets for free via `allowFontScaling`.
+`fontSize`/`lineHeight` are px-equivalent numbers; on web, `Text`/`Button` render them as `rem` so
+they scale with browser/OS font-size settings (`allowFontScaling` gives native the same behavior).
 
 ### Font loading
 
-[Satoshi](https://www.fontshare.com/fonts/satoshi) is provided by Fontshare / Indian Type
-Foundry, under the [ITF Free Font License](https://www.fontshare.com/licenses/itf-ffl), which
-permits embedding it in mobile and desktop applications for permitted uses. **The `zelaq-ui` npm
-package does not include or redistribute Satoshi font files** — loading it is the consuming
-app's responsibility. If it isn't loaded, components fall back to the platform default sans-serif
-rather than failing.
+[Satoshi](https://www.fontshare.com/fonts/satoshi) ([ITF Free Font License](https://www.fontshare.com/licenses/itf-ffl))
+isn't bundled by `zelaq-ui` — loading it is the consuming app's responsibility. Missing font falls
+back to the platform default sans-serif rather than failing.
 
-- **Web**: Storybook and the playground both load Satoshi via Fontshare's hosted web font CSS/API
-  — see `.storybook/preview-head.html` and `apps/ZelaqWebPlayground/index.html`.
-- **React Native**: obtain the font files directly from Fontshare and load them with
-  `expo-font`'s `useFonts` (or the bare-RN equivalent) — see `apps/ZelaqNativePlayground/README.md`.
-  Review the current license and confirm the exact filenames/weights against what you actually
-  download before shipping. Static weight rendering can differ on Android — you may need to
-  register a separate font family per weight rather than relying on `fontWeight` alone.
+- **Web**: load via Fontshare's hosted CSS — see `.storybook/preview-head.html` or
+  `apps/ZelaqWebPlayground/index.html` for a working example.
+- **React Native**: see `apps/ZelaqNativePlayground/README.md` for the full setup (font files,
+  `expo-font`, Android weight caveats).
 
 ## API
 
-- **`ZelaqProvider`** — provides theme context to its subtree. `theme` is a deep partial override;
-  `mode` (`'light' | 'dark' | 'system'`, default `'light'`) picks the base palette.
-- **`useTheme()`** — hook returning the theme in effect (base palette for the resolved mode,
-  merged with any `ZelaqProvider` override).
+- **`ZelaqProvider`** — theme context provider. See Usage above for `theme`/`mode`.
+- **`useTheme()`** — hook returning the theme in effect.

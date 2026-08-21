@@ -33,10 +33,9 @@ To set it up:
 
 1. Download Satoshi directly from [fontshare.com/fonts/satoshi](https://www.fontshare.com/fonts/satoshi)
    and review the current license before shipping.
-2. Place the files you actually downloaded in `assets/fonts/`, and configure the app using the
-   exact filenames and weights present in that download — don't assume names or weights not
-   confirmed by the download itself. `zelaq-ui`'s theme currently uses weights `400`/`500`/`700`.
-   This repo is public — consider `.gitignore`-ing the font files rather than committing them.
+2. Place the downloaded files in `assets/fonts/` and configure the app with their actual
+   filenames/weights — don't assume names you haven't confirmed. `zelaq-ui`'s theme uses weights
+   `400`/`500`/`700`. This repo is public — consider `.gitignore`-ing the font files.
 3. Load them in `app/_layout.tsx` with `expo-font`'s `useFonts`, gating the first render behind
    them so nothing paints with the wrong font momentarily:
 

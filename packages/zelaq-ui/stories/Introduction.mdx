@@ -1,0 +1,20 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as IntroductionStories from './Introduction.stories';
+
+<Meta of={IntroductionStories} />
+
+# zelaq-ui
+
+Cross-platform component library for React and React Native. Theme-aware, light/dark mode,
+WCAG-verified default colors, no bundled icon or font dependencies. Browse components in the
+sidebar — each has live examples, props, and the exact tokens it consumes.
+
+## Palette
+
+The raw shades behind every semantic color token (`theme.colors.*`) — `palette.ts` isn't exported
+from `zelaq-ui`, so this page is the only place to see them directly. Grouped by family: `teal`
+(brand), `ink` (near-black text/scrim), `mineral` (neutrals — surfaces, borders, muted text),
+`red`/`green` (danger/success). Lower numbers are lighter, higher are darker, within each family.
+
+<Canvas of={IntroductionStories.Light} />
+<Canvas of={IntroductionStories.Dark} />

@@ -15,7 +15,14 @@ const preview: Preview = {
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: 'error'
-    }
+    },
+
+    options: {
+      // 'Introduction' is the landing page — keep it first regardless of alphabetical order.
+      storySort: {
+        order: ['Introduction', 'Components'],
+      },
+    },
   },
   decorators: [
     (Story) => (
