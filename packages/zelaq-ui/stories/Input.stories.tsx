@@ -60,6 +60,14 @@ export const Controlled: Story = {
   },
 };
 
+export const Multiline: Story = {
+  args: {
+    label: 'Description',
+    placeholder: 'What are you building?',
+    multiline: true,
+  },
+};
+
 export const AllStates: Story = {
   name: 'All states',
   render: () => (

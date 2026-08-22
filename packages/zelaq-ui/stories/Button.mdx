@@ -63,3 +63,12 @@ native hint concept, so it's rendered as a visually-hidden element linked via `a
 — the label and the hint stay two separate screen-reader announcements.
 
 <Canvas of={ButtonStories.WithAccessibilityHint} />
+
+## Extra props
+
+Any other native `<button>` (web) / `Pressable` (native) prop is accepted and forwarded — `name`,
+`form`, `onKeyDown`, `hitSlop`, etc. Reserved and not overridable this way: `style`, `disabled`,
+`type` (fixed to `"button"`, so it never accidentally submits a form), and the press handlers
+(`onMouseDown`/`onMouseUp`/`onMouseLeave` on web, `onPressIn`/`onPressOut` on native) that drive the
+pressed-state animation — use `onPress` for interaction. Passed-in `aria-*`/`accessibility*` props
+also can't override the ones `Button` computes from `accessibilityLabel`/`accessibilityHint`.

@@ -27,3 +27,8 @@ anchor's `onClick` doesn't prevent following `href` unless you call `preventDefa
 ## Inline within body text
 
 <Canvas of={LinkStories.InBodyText} />
+
+## Extra props
+
+Other native `<a>` (web) / `Text` (native) props are forwarded — `target`, `rel`, `numberOfLines`,
+etc. `href` and `style` aren't overridable this way; use `onPress` rather than `onClick`.

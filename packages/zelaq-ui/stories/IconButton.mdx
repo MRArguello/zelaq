@@ -44,3 +44,9 @@ convey the result. Especially relevant for destructive icon-only actions, where 
 label alone may not fully convey the consequence:
 
 <Canvas of={IconButtonStories.WithAccessibilityHint} />
+
+## Extra props
+
+Same as `Button`: any other native `<button>`/`Pressable` prop is forwarded. `style`, `disabled`,
+`type` (fixed to `"button"`), and the internal press handlers (`onMouseDown`/`onMouseUp`/
+`onMouseLeave` web, `onPressIn`/`onPressOut` native) aren't overridable — use `onPress`.

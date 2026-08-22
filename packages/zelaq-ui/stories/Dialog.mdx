@@ -65,3 +65,10 @@ itself.
   for your layout.
 - No open/close animation exists on web (renders/unmounts instantly). Native gets a free
   slide/fade transition from `Modal`'s own `animationType` prop.
+
+## Extra props
+
+Other attributes on the surface element (web `<div role="dialog">` / native surface `Pressable`)
+are forwarded — e.g. `onScroll`, `data-*`. `role`, `id`, `className`, and `style` aren't
+overridable this way, and passed-in `aria-*` props can't replace the ones Dialog computes
+(`aria-modal`, `aria-labelledby`).

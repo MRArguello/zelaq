@@ -50,6 +50,13 @@ to match it internally).
 
 <Canvas of={InputStories.Controlled} />
 
+## Multiline
+
+`multiline` renders a real `<textarea>` on web (resizable, `min-height` of ~4 lines) and switches
+`TextInput` into its own multiline mode on native — same tokens, no separate component.
+
+<Canvas of={InputStories.Multiline} />
+
 ## All states
 
 <Canvas of={InputStories.AllStates} />
@@ -60,3 +67,11 @@ Web can't theme the `::placeholder` pseudo-element through inline styles (this l
 stylesheet/CSS-in-JS layer), so placeholder text uses the browser's native styling. Native uses
 `placeholderTextColor` from `colors.textMuted` directly, since `TextInput` exposes it as a real
 prop.
+
+## Extra props
+
+Any other native `<input>`/`<textarea>` (web) or `TextInput` (native) prop is forwarded — `name`,
+`autoComplete`, `maxLength`, `inputMode` on web; `keyboardType`, `autoCapitalize` on native, etc.
+`onFocus`/`onBlur` are passed the real event object. Not overridable: `style`, `id` (web — tied to
+the field's label), and `value`/`onChange` (use `onChangeText`, which already gets the plain
+string on both platforms).
