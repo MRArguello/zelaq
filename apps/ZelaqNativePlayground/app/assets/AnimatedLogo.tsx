@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { Animated, Easing } from "react-native";
 import Svg, { G, Path } from "react-native-svg";
 
+const ASPECT_RATIO = 251.60909 / 142.491
+
 export default function AnimatedLogo({
     height = 50,
     width,
@@ -23,10 +25,15 @@ export default function AnimatedLogo({
     }, [opacity]);
 
     return (
-        <Animated.View style={{ opacity }}>
+        <Animated.View
+            style={{ opacity }}
+            accessible
+            accessibilityRole="image"
+            accessibilityLabel="Zelaq"
+        >
             <Svg
                 viewBox="0 0 251.60909 142.491"
-                width={width}
+                width={width ?? height * ASPECT_RATIO}
                 height={height}
             >
                 <G transform="translate(265.48324,220.48604)">

@@ -1,25 +1,14 @@
 import { useState } from 'react'
-import { useWindowDimensions } from 'react-native'
 import { Box, Card, Dialog, Input, Stack, Text, useTheme, Button } from 'zelaq-ui'
 import validateForm, { validateField, type FormErrors, type FormState } from './FormValidation'
+import { useIsCompactLayout } from '../hooks/useIsCompactLayout'
 
 const EMPTY_FORM: FormState = { name: '', description: '' }
-
-// Matches the web playground's breakpoint. "Expanded" = landscape and tablet-or-bigger, the only
-// case wide enough for a centered card without it looking lost against the background.
-const EXPANDED_MIN_WIDTH = 768
-
-function useIsCompactLayout() {
-    const { width, height } = useWindowDimensions()
-    return !(width >= EXPANDED_MIN_WIDTH && width > height)
-}
 
 export default function Form() {
     const theme = useTheme()
     const { space } = theme
     const isCompact = useIsCompactLayout()
-    // PlaygroundBackground fills the screen either way — on a compact layout the card just
-    // takes it over edge-to-edge instead of floating as a fixed-size box.
     const cardStyle = isCompact
         ? { width: '100%' as const, padding: space.xl, borderRadius: 0 }
         : { alignSelf: 'center' as const, padding: space.xl, minWidth: 400, minHeight: 400 }
