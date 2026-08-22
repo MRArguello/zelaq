@@ -30,13 +30,15 @@ function BackgroundImage({ theme }: { theme: Theme }) {
 
     return (<div style={BackgroundStyles} aria-hidden="true">
         <picture>
+            {/* cdn.imgipsum.com never resolves — confirmed dead, not just blocked from one
+                environment. picsum.photos/id/66 is a real, verified-reachable mountain-valley photo. */}
             <source
                 media="(max-width: 767px)"
-                srcSet="https://cdn.imgipsum.com/one/400/900/webp/landscapes/15"
+                srcSet="https://picsum.photos/id/190/400/900"
             />
 
             <img
-                src="https://cdn.imgipsum.com/one/1200/800/webp/landscapes/15"
+                src="https://picsum.photos/id/190/1200/800"
                 alt=""
                 style={backgroundImageStyles}
             />

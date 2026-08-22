@@ -16,10 +16,13 @@ export default function PlaygroundBackground({
 }) {
     const { width } = useWindowDimensions();
 
+    // cdn.imgipsum.com never resolves — confirmed dead, not just blocked from one environment.
+    // ImageBackground silently falls back to its plain backgroundColor when the source fails,
+    // which is what "just a plain color" on mobile actually was.
     const imageUri =
         width < 768
-            ? "https://cdn.imgipsum.com/one/400/900/webp/landscapes/15"
-            : "https://cdn.imgipsum.com/one/1200/800/webp/landscapes/15";
+            ? "https://picsum.photos/id/190/400/900"
+            : "https://picsum.photos/id/190/1200/800";
 
     return (
         <ImageBackground
