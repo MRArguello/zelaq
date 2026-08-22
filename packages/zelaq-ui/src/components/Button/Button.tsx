@@ -8,11 +8,15 @@ import { withFontFallback } from '../../internal/withFontFallback'
 import { toRem } from '../../internal/toRem'
 import { useMotionEnabled } from '../../internal/useMotionEnabled'
 
-type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
-    onPress?: React.MouseEventHandler<HTMLButtonElement>
-    style?: CSSProperties
-    textStyle?: CSSProperties
-}
+type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> &
+    Omit<
+        React.ButtonHTMLAttributes<HTMLButtonElement>,
+        'style' | 'onClick' | 'disabled' | 'type' | 'children' | 'onMouseDown' | 'onMouseUp' | 'onMouseLeave'
+    > & {
+        onPress?: React.MouseEventHandler<HTMLButtonElement>
+        style?: CSSProperties
+        textStyle?: CSSProperties
+    }
 
 function decorate(icon: React.ReactElement | undefined) {
     if (!icon) return null
@@ -33,6 +37,7 @@ export function Button({
     startIcon,
     endIcon,
     animated = true,
+    ...rest
 }: WebButtonProps) {
     const [pressed, setPressed] = React.useState(false)
     const theme = useTheme()
@@ -73,6 +78,7 @@ export function Button({
 
     return (
         <button
+            {...rest}
             type="button"
             disabled={disabled}
             onClick={onPress}

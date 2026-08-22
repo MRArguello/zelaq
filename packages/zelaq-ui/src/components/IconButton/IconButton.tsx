@@ -6,10 +6,14 @@ import { getIconButtonTokens } from './IconButton.theme'
 import { srOnlyStyle } from '../../internal/srOnlyStyle'
 import { useMotionEnabled } from '../../internal/useMotionEnabled'
 
-type WebIconButtonProps = Omit<IconButtonProps, 'style' | 'onPress'> & {
-    onPress?: React.MouseEventHandler<HTMLButtonElement>
-    style?: CSSProperties
-}
+type WebIconButtonProps = Omit<IconButtonProps, 'style' | 'onPress'> &
+    Omit<
+        React.ButtonHTMLAttributes<HTMLButtonElement>,
+        'style' | 'onClick' | 'disabled' | 'type' | 'children' | 'onMouseDown' | 'onMouseUp' | 'onMouseLeave'
+    > & {
+        onPress?: React.MouseEventHandler<HTMLButtonElement>
+        style?: CSSProperties
+    }
 
 export function IconButton({
     icon,
@@ -23,6 +27,7 @@ export function IconButton({
     accessibilityLabel,
     accessibilityHint,
     animated = true,
+    ...rest
 }: WebIconButtonProps) {
     const [pressed, setPressed] = React.useState(false)
     const theme = useTheme()
@@ -59,6 +64,7 @@ export function IconButton({
 
     return (
         <button
+            {...rest}
             type="button"
             disabled={isDisabled}
             onClick={onPress}
