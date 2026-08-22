@@ -97,6 +97,21 @@ export const BackdropDismissDisabled: Story = {
   },
 };
 
+export const NoAnimation: Story = {
+  name: 'Enter/exit animation disabled',
+  render: (args) => <DialogDemo {...args} triggerLabel="Open dialog (no animation)" />,
+  args: {
+    title: 'Instant open/close',
+    presentation: 'dialog',
+    animated: false,
+    children: (
+      <Stack gap="md">
+        <Text>Opens and closes immediately — no fade/scale transition. Use the × or Escape to close.</Text>
+      </Stack>
+    ),
+  },
+};
+
 export const Interactive: Story = {
   render: (args) => {
     const [open, setOpen] = React.useState(false);

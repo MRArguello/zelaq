@@ -12,4 +12,6 @@ export type DialogProps = {
     closeOnBackdropPress?: boolean
     style?: StyleProp<ViewStyle>
     testID?: string
+    /** False disables the enter/exit transition regardless of ZelaqProvider's reduceMotion. Default true. */
+    animated?: boolean
 }

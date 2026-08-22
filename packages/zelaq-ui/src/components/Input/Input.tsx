@@ -5,6 +5,7 @@ import { useTheme } from '../../theme'
 import { getInputTokens } from './Input.theme'
 import { toRem } from '../../internal/toRem'
 import { withFontFallback } from '../../internal/withFontFallback'
+import { useMotionEnabled } from '../../internal/useMotionEnabled'
 import { Text } from '../Text'
 
 type WebInputProps = Omit<InputProps, 'style'> & {
@@ -23,6 +24,7 @@ export function Input({
     readOnly = false,
     style,
     testID,
+    animated = true,
 }: WebInputProps) {
     const [focused, setFocused] = React.useState(false)
     const theme = useTheme()
@@ -31,6 +33,7 @@ export function Input({
     const inputId = React.useId()
     const helperId = React.useId()
     const helperOrError = errorMessage ?? helperText
+    const motionEnabled = useMotionEnabled(animated)
 
     const inputStyle: CSSProperties = {
         width: '100%',
@@ -47,6 +50,7 @@ export function Input({
         lineHeight: toRem(tokens.text.lineHeight),
         // Border color already signals focus; avoid a second, uncoordinated ring on top of it.
         outline: 'none',
+        transition: motionEnabled ? `border-color ${theme.motion.duration.normal}ms ease` : undefined,
     }
 
     const containerStyle: CSSProperties = {

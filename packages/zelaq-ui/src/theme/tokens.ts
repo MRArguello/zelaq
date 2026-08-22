@@ -180,6 +180,18 @@ export const shadow = {
     },
 } as const
 
+// Same across both themes — motion timing isn't a light/dark concern.
+export const motion = {
+    duration: {
+        instant: 0,
+        fast: 120,
+        normal: 200,
+    },
+    scale: {
+        pressed: 0.98,
+    },
+} as const
+
 export const lightTheme: Theme = {
     colors,
     space,
@@ -188,6 +200,7 @@ export const lightTheme: Theme = {
     sizes,
     opacity,
     shadow,
+    motion,
 }
 
 export const darkTheme: Theme = {
@@ -198,6 +211,7 @@ export const darkTheme: Theme = {
     sizes,
     opacity,
     shadow,
+    motion,
 }
 
 /** Alias for lightTheme — default param for resolvers called without an explicit theme. */

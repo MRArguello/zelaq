@@ -6,7 +6,7 @@ import { Button, Card, Dialog, IconButton, Input, Stack, Text, useTheme, ZelaqPr
 import { useThemeModeToggle } from './_layout'
 
 export default function App() {
-    const { mode, toggleMode } = useThemeModeToggle()
+    const { mode, toggleMode, reduceMotion, toggleReduceMotion } = useThemeModeToggle()
     const theme = useTheme()
     const [email, setEmail] = useState('')
     const [responsiveOpen, setResponsiveOpen] = useState(false)
@@ -19,6 +19,9 @@ export default function App() {
             <ScrollView contentContainerStyle={{ padding: 24, gap: 16 }}>
                 <Button variant="secondary" onPress={toggleMode}>
                     Switch to {mode === 'dark' ? 'light' : 'dark'} mode
+                </Button>
+                <Button variant="secondary" onPress={toggleReduceMotion}>
+                    Motion: {reduceMotion}
                 </Button>
                 <Button onPress={() => console.log('native button pressed')}>
                     Native button

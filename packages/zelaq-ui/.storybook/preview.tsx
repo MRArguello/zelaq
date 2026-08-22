@@ -6,7 +6,7 @@ import { DocsContainer as BaseDocsContainer } from '@storybook/addon-docs/blocks
 import type { DocsContainerProps } from '@storybook/addon-docs/blocks'
 import { themes } from 'storybook/theming'
 import { ZelaqProvider, useTheme } from '../src'
-import type { ThemeMode } from '../src'
+import type { ThemeMode, ReduceMotionMode } from '../src'
 
 function SyncCanvasBackground({ children }: { children: React.ReactNode }) {
   const theme = useTheme()
@@ -31,6 +31,24 @@ function CustomDocsContainer(props: PropsWithChildren<DocsContainerProps>) {
 }
 
 const preview: Preview = {
+  globalTypes: {
+    reduceMotion: {
+      description: 'Reduced motion for zelaq-ui components',
+      toolbar: {
+        title: 'Motion',
+        icon: 'stopalt',
+        items: [
+          { value: 'system', title: 'System' },
+          { value: 'always', title: 'Reduced' },
+          { value: 'never', title: 'Full motion' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+  initialGlobals: {
+    reduceMotion: 'system',
+  },
   parameters: {
     controls: {
       matchers: {
@@ -60,7 +78,10 @@ const preview: Preview = {
       attributeName: 'data-theme',
     }),
     (Story, context) => (
-      <ZelaqProvider mode={context.globals.theme as ThemeMode}>
+      <ZelaqProvider
+        mode={context.globals.theme as ThemeMode}
+        reduceMotion={context.globals.reduceMotion as ReduceMotionMode}
+      >
         <SyncCanvasBackground>
           <Story />
         </SyncCanvasBackground>

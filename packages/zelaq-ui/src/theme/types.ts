@@ -110,6 +110,21 @@ export interface OpacityTokens {
     pressed: number
 }
 
+export interface MotionTokens {
+    duration: {
+        /** No transition — used when motion is disabled. */
+        instant: number
+        /** Press feedback (Button/IconButton scale). */
+        fast: number
+        /** Focus transitions, Dialog/sheet enter-exit. */
+        normal: number
+    }
+    scale: {
+        /** Button/IconButton pressed-state scale. */
+        pressed: number
+    }
+}
+
 export interface Theme {
     colors: ColorTokens
     space: SpaceTokens
@@ -118,6 +133,7 @@ export interface Theme {
     sizes: SizeTokens
     opacity: OpacityTokens
     shadow: ShadowTokens
+    motion: MotionTokens
 }
 
 type DeepPartial<T> = {
@@ -127,3 +143,10 @@ type DeepPartial<T> = {
 export type ThemeOverride = DeepPartial<Theme>
 
 export type ThemeMode = 'light' | 'dark' | 'system'
+
+/**
+ * 'system' follows the platform's reduced-motion accessibility preference. 'always' disables
+ * component-driven motion outright. 'never' keeps it on even if the platform prefers reduced
+ * motion — an explicit override, not the default.
+ */
+export type ReduceMotionMode = 'system' | 'always' | 'never'

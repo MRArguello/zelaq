@@ -12,4 +12,6 @@ export type InputProps = {
     readOnly?: boolean
     style?: StyleProp<ViewStyle>
     testID?: string
+    /** False disables the focus border-color transition regardless of ZelaqProvider's reduceMotion. Default true. */
+    animated?: boolean
 }
