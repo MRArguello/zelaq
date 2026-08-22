@@ -1,0 +1,21 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as BoxStories from './Box.stories';
+
+<Meta of={BoxStories} />
+
+# Box
+
+A plain layout container — the escape hatch for whatever `Stack`'s flex-column opinion doesn't
+fit. Renders a bare `<div>`/`View` with a `style` prop, nothing else.
+
+<Canvas of={BoxStories.Default} />
+
+<Controls of={BoxStories.Default} />
+
+## Tokens
+
+No token-driven styling of its own — `style` is entirely consumer-controlled.
+
+## With content
+
+<Canvas of={BoxStories.WithContent} />

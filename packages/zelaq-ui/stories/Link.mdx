@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as LinkStories from './Link.stories';
+
+<Meta of={LinkStories} />
+
+# Link
+
+An anchor — a real `<a href>` on web, a pressable `Text` on native that opens `href` via
+`Linking.openURL`. Use it for actual navigation; use `Button` for actions that aren't a URL.
+
+<Canvas of={LinkStories.Default} />
+
+<Controls of={LinkStories.Default} />
+
+## Tokens
+
+- `colors.primary` — text color
+- `typography.body` — font family, size, weight, line-height
+
+`onPress` is additive, not a replacement — it fires alongside navigation, the same way a real
+anchor's `onClick` doesn't prevent following `href` unless you call `preventDefault`.
+
+## With onPress
+
+<Canvas of={LinkStories.WithOnPress} />
+
+## Inline within body text
+
+<Canvas of={LinkStories.InBodyText} />
