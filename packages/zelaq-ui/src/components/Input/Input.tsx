@@ -8,9 +8,20 @@ import { withFontFallback } from '../../internal/withFontFallback'
 import { useMotionEnabled } from '../../internal/useMotionEnabled'
 import { Text } from '../Text'
 
-type WebInputProps = Omit<InputProps, 'style'> & {
-    style?: CSSProperties
-}
+// The textarea branch reuses this same attribute set — pattern/accept/min/max/etc. don't apply
+// to a textarea, but spreading a typed variable (not an object literal) onto it isn't flagged by
+// TS excess-property checks, and browsers ignore unrecognized attributes on either element.
+type WebInputProps = Omit<InputProps, 'style'> &
+    Omit<
+        React.InputHTMLAttributes<HTMLInputElement>,
+        'value' | 'defaultValue' | 'placeholder' | 'disabled' | 'readOnly' | 'onChange' | 'style' | 'id'
+    > & {
+        style?: CSSProperties
+    }
+
+// Roughly 4 lines at the body line-height — enough to signal "multi-line" without the field
+// dominating the layout by default.
+const TEXTAREA_MIN_HEIGHT = 96
 
 export function Input({
     label,
@@ -22,9 +33,13 @@ export function Input({
     onChangeText,
     disabled = false,
     readOnly = false,
+    multiline = false,
     style,
     testID,
     animated = true,
+    onBlur,
+    onFocus,
+    ...rest
 }: WebInputProps) {
     const [focused, setFocused] = React.useState(false)
     const theme = useTheme()
@@ -51,6 +66,7 @@ export function Input({
         // Border color already signals focus; avoid a second, uncoordinated ring on top of it.
         outline: 'none',
         transition: motionEnabled ? `border-color ${theme.motion.duration.normal}ms ease` : undefined,
+        ...(multiline ? { minHeight: TEXTAREA_MIN_HEIGHT, resize: 'vertical' as const } : null),
     }
 
     const containerStyle: CSSProperties = {
@@ -68,20 +84,51 @@ export function Input({
                     </Text>
                 </label>
             ) : null}
-            <input
-                id={inputId}
-                placeholder={placeholder}
-                value={value}
-                defaultValue={defaultValue}
-                disabled={disabled}
-                readOnly={readOnly}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => onChangeText?.(event.target.value)}
-                onFocus={() => setFocused(true)}
-                onBlur={() => setFocused(false)}
-                aria-invalid={hasError || undefined}
-                aria-describedby={helperOrError ? helperId : undefined}
-                style={inputStyle}
-            />
+            {multiline ? (
+                <textarea
+                    {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+                    id={inputId}
+                    placeholder={placeholder}
+                    value={value}
+                    defaultValue={defaultValue}
+                    disabled={disabled}
+                    readOnly={readOnly}
+                    onChange={(event: ChangeEvent<HTMLTextAreaElement>) => onChangeText?.(event.target.value)}
+                    onFocus={(event) => {
+                        setFocused(true)
+                        onFocus?.(event as unknown as React.FocusEvent<HTMLInputElement>)
+                    }}
+                    onBlur={(event) => {
+                        setFocused(false)
+                        onBlur?.(event as unknown as React.FocusEvent<HTMLInputElement>)
+                    }}
+                    aria-invalid={hasError || undefined}
+                    aria-describedby={helperOrError ? helperId : undefined}
+                    style={inputStyle}
+                />
+            ) : (
+                <input
+                    {...rest}
+                    id={inputId}
+                    placeholder={placeholder}
+                    value={value}
+                    defaultValue={defaultValue}
+                    disabled={disabled}
+                    readOnly={readOnly}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => onChangeText?.(event.target.value)}
+                    onFocus={(event) => {
+                        setFocused(true)
+                        onFocus?.(event)
+                    }}
+                    onBlur={(event) => {
+                        setFocused(false)
+                        onBlur?.(event)
+                    }}
+                    aria-invalid={hasError || undefined}
+                    aria-describedby={helperOrError ? helperId : undefined}
+                    style={inputStyle}
+                />
+            )}
             {helperOrError ? (
                 <div id={helperId}>
                     <Text variant="bodyXs" tone={hasError ? 'danger' : 'muted'}>

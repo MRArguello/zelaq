@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Animated, TextInput, View } from 'react-native'
+import type { TextInputProps } from 'react-native'
 import type { InputProps } from './Input.types'
 import { useTheme } from '../../theme'
 import { getInputTokens } from './Input.theme'
@@ -7,6 +8,23 @@ import { useMotionEnabled } from '../../internal/useMotionEnabled'
 import { Text } from '../Text'
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
+
+type NativeInputProps = InputProps &
+    Omit<
+        TextInputProps,
+        | 'value'
+        | 'defaultValue'
+        | 'placeholder'
+        | 'editable'
+        | 'readOnly'
+        | 'onChangeText'
+        | 'style'
+        | 'testID'
+        | 'multiline'
+    >
+
+// Roughly 4 lines at the body line-height — matches the web textarea's default.
+const MULTILINE_MIN_HEIGHT = 96
 
 export function Input({
     label,
@@ -18,10 +36,14 @@ export function Input({
     onChangeText,
     disabled = false,
     readOnly = false,
+    multiline = false,
     style,
     testID,
     animated = true,
-}: InputProps) {
+    onBlur,
+    onFocus,
+    ...rest
+}: NativeInputProps) {
     const [focused, setFocused] = React.useState(false)
     const theme = useTheme()
     const hasError = Boolean(errorMessage)
@@ -48,9 +70,9 @@ export function Input({
 
     const borderColor = canAnimateBorder
         ? focusAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [theme.colors.secondaryBorder, theme.colors.borderFocused],
-          })
+            inputRange: [0, 1],
+            outputRange: [theme.colors.secondaryBorder, theme.colors.borderFocused],
+        })
         : tokens.container.borderColor
 
     return (
@@ -63,13 +85,26 @@ export function Input({
                 placeholderTextColor={tokens.placeholderColor}
                 editable={!disabled}
                 readOnly={readOnly}
+                multiline={multiline}
                 onChangeText={onChangeText}
-                onFocus={() => setFocused(true)}
-                onBlur={() => setFocused(false)}
+                onFocus={(event) => {
+                    setFocused(true)
+                    onFocus?.(event)
+                }}
+                onBlur={(event) => {
+                    setFocused(false)
+                    onBlur?.(event)
+                }}
                 accessibilityLabel={label}
                 accessibilityState={{ disabled }}
                 accessibilityHint={helperOrError}
-                style={[tokens.container, tokens.text, { borderColor }]}
+                style={[
+                    tokens.container,
+                    tokens.text,
+                    { borderColor },
+                    multiline ? { minHeight: MULTILINE_MIN_HEIGHT, textAlignVertical: 'top' } : null,
+                ]}
+                {...rest}
             />
             {helperOrError ? (
                 <Text variant="bodyXs" tone={hasError ? 'danger' : 'muted'}>

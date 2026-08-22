@@ -10,6 +10,8 @@ export type InputProps = {
     onChangeText?: (value: string) => void
     disabled?: boolean
     readOnly?: boolean
+    /** Renders a growable multi-line field (textarea on web) instead of a single-line input. Default false. */
+    multiline?: boolean
     style?: StyleProp<ViewStyle>
     testID?: string
     /** False disables the focus border-color transition regardless of ZelaqProvider's reduceMotion. Default true. */
