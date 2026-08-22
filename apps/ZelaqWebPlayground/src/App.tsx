@@ -1,59 +1,82 @@
-import { useState } from 'react'
-import { Button, Card, Dialog, IconButton, Input, Stack, Text, useTheme, ZelaqProvider } from 'zelaq-ui'
+import { useState, type CSSProperties } from 'react'
+import { Card, IconButton, Stack, Text, useTheme, ZelaqProvider } from 'zelaq-ui'
 import type { Theme, ThemeMode } from 'zelaq-ui'
 import { AnimatedLogo } from './assets/AnimatedLogo'
 
-// Follows the app's own mode toggle, not the OS/browser color-scheme preference — index.css used
-// to drive this via prefers-color-scheme, which fought with this state whenever they disagreed.
-function PlaygroundBackground({ children }: { children: React.ReactNode }) {
-  const theme = useTheme()
+function BackgroundImage({ theme }: { theme: Theme }) {
+  const { colors } = theme;
+
+  const BackgroundStyles: CSSProperties = {
+    position: "fixed",
+    inset: 0,
+    zIndex: -1,
+    background: colors.backdrop
+  }
+
+  const backgroundImageStyles: CSSProperties = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition: "center",
+    opacity: 0.55
+  }
+
+  const backgroundOverlayStyles: CSSProperties = {
+    position: "absolute",
+    inset: 0,
+    background: `linear-gradient(
+      "90deg",
+    ${colors.backdrop} 0%,
+    ${colors.backdrop} 45%,
+    ${colors.backdrop} 100%
+    )`
+  }
+
+  return (<div style={BackgroundStyles} aria-hidden="true">
+    <picture>
+      <source
+        media="(max-width: 767px)"
+        srcSet="https://cdn.imgipsum.com/one/400/900/webp/landscapes/15"
+      />
+
+      <img
+        src="https://cdn.imgipsum.com/one/1200/800/webp/landscapes/15"
+        alt=""
+        style={backgroundImageStyles}
+      />
+    </picture>
+
+    <div style={backgroundOverlayStyles} />
+  </div>)
+}
+
+function PlaygroundBackground({ children, theme }: { children: React.ReactNode; theme: Theme }) {
   return (
     <div
       style={{
-        backgroundColor: theme.colors.background,
         height: '100vh',
         width: '100%',
         minWidth: '100vw',
         boxSizing: 'border-box',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         overflow: 'hidden'
 
       }}
     >
+      <BackgroundImage theme={theme} />
       {children}
     </div>
   )
 }
 
-function Sidebar({ theme, setMode, mode }: { theme: Theme; setMode: React.Dispatch<React.SetStateAction<ThemeMode>>, mode: ThemeMode }) {
+function Footer({ theme, setMode, mode }: { theme: Theme; setMode: React.Dispatch<React.SetStateAction<ThemeMode>>, mode: ThemeMode }) {
+  const { space } = theme
   return (
-    <Stack gap="xl" align="center" style={{ width: 280, padding: theme.space.lg, boxShadow: `0 0 8px ${theme.colors.backdrop}` }}>
-      <Stack>
-        <AnimatedLogo height={70} />
-        <Text variant="body">Universal interface system</Text>
-      </Stack>
-      <Text variant="heading2">UI Lab</Text>
-      <Stack gap='sm'>
-        <Text variant='heading4' style={{ marginTop: theme.space.lg }}>Foundations</Text>
-        <a href="#colors" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Colors</Text></a>
-        <a href="#typography" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Typography</Text></a>
-        <a href="#spacing" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Spacing</Text></a>
-        <a href="#themes" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Themes</Text></a>
+    <Stack gap="xl" align="center" style={{ width: '100%', padding: space.sm }}>
 
-        <Text variant='heading4' style={{ marginTop: theme.space.lg }}>Components</Text>
-        <a href="#button" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Button</Text></a>
-        <a href="#text" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Text</Text></a>
-        <a href="#stack" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Stack</Text></a>
-        <a href="#card" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Card</Text></a>
-        <a href="#input" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Input</Text></a>
-        <a href="#iconbutton" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>IconButton</Text></a>
-        <a href="#dialog" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Dialog</Text></a>
-
-        <Text variant='heading4' style={{ marginTop: theme.space.lg }}>Themes</Text>
-        <a href="#project-setup" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Project setup</Text></a>
-        <a href="#delete-confirmation" style={{ textDecoration: 'underline', color: theme.colors.primary }}><Text variant='body'>Delete confirmation</Text></a>
-      </Stack>
       <Stack gap="sm" align='center' style={{ marginTop: 'auto' }}>
         <IconButton
           variant="secondary"
@@ -67,28 +90,22 @@ function Sidebar({ theme, setMode, mode }: { theme: Theme; setMode: React.Dispat
     </Stack>)
 }
 
-function Content({ children, theme }: { children: React.ReactNode; theme: Theme }) {
-  return <Stack style={{ padding: theme.space['3xl'], overflow: 'scroll', width: '100%' }}>{children}</Stack>
-}
-
 function App() {
   const [mode, setMode] = useState<ThemeMode>('dark')
   const theme = useTheme();
+  const { space } = theme;
 
   return (
     <ZelaqProvider mode={mode}>
-      <PlaygroundBackground>
-        <Sidebar theme={theme} setMode={setMode} mode={mode} />
-        <Content theme={theme}>
-
-          <div id="theme">
-            <Text variant="heading2">THEMES</Text>
-            <Text>
-              A small, themeable interface system for React and React Native.
-              Explore how one token system changes the same components across platforms.
-            </Text>
-          </div>
-        </Content>
+      <PlaygroundBackground theme={theme}>
+        <Stack style={{ padding: space.xl }}>
+          <AnimatedLogo height={70} />
+          <Text variant="body">Universal interface system</Text>
+        </Stack>
+        <Card variant="elevated" style={{ margin: `0 auto`, minWidth: 400, minHeight: 400 }}>
+          Content
+        </Card>
+        <Footer theme={theme} setMode={setMode} mode={mode} />
       </PlaygroundBackground>
     </ZelaqProvider>
   )
