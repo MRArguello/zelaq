@@ -1,6 +1,14 @@
 import styles from './AnimatedLogo.module.css'
 
-export const AnimatedLogo = ({ height = 50, width }: { height?: number; width?: number }) => {
+export const AnimatedLogo = ({
+    height = 50,
+    width,
+    color = '#115E59',
+}: {
+    height?: number
+    width?: number
+    color?: string
+}) => {
     return (
         <svg
             viewBox="0 0 251.60909 142.491"
@@ -9,6 +17,7 @@ export const AnimatedLogo = ({ height = 50, width }: { height?: number; width?: 
             aria-label="Zelaq"
             height={height}
             width={width}
+            style={{ '--logo-color': color } as React.CSSProperties}
         >
             <g transform="translate(265.48324,220.48604)">
                 <g transform="matrix(15.943913,0,0,15.943913,-1495.7888,-1946.3601)">

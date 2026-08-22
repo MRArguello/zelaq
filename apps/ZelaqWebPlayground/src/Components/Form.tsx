@@ -1,23 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Box, Card, Dialog, Input, Stack, Text, useTheme, Button } from 'zelaq-ui'
 import { validateField, validateForm, type FormErrors, type FormState } from './FormValidation'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 const EMPTY_FORM: FormState = { name: '', description: '' }
-
-const MOBILE_QUERY = '(max-width: 767px)'
-
-function useIsMobile() {
-    const [isMobile, setIsMobile] = useState(() => window.matchMedia(MOBILE_QUERY).matches)
-
-    useEffect(() => {
-        const query = window.matchMedia(MOBILE_QUERY)
-        const listener = () => setIsMobile(query.matches)
-        query.addEventListener('change', listener)
-        return () => query.removeEventListener('change', listener)
-    }, [])
-
-    return isMobile
-}
 
 export function Form() {
     const theme = useTheme()

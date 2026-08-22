@@ -21,17 +21,16 @@ function BackgroundImage({ theme }: { theme: Theme }) {
         position: "absolute",
         inset: 0,
         background: `linear-gradient(
-      "90deg",
-    ${theme.colors.backdrop} 0%,
-    ${theme.colors.backdrop} 45%,
-    ${theme.colors.backdrop} 100%
-    )`
+            180deg,
+            ${theme.colors.backdrop} 0%,
+            transparent 30%,
+            transparent 70%,
+            ${theme.colors.backdrop} 100%
+        )`
     }
 
     return (<div style={BackgroundStyles} aria-hidden="true">
         <picture>
-            {/* cdn.imgipsum.com never resolves — confirmed dead, not just blocked from one
-                environment. picsum.photos/id/66 is a real, verified-reachable mountain-valley photo. */}
             <source
                 media="(max-width: 767px)"
                 srcSet="https://picsum.photos/id/190/400/900"
