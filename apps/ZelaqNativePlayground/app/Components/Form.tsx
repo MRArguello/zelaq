@@ -104,7 +104,7 @@ export default function Form() {
                         onChangeText={(value) =>
                             updateField('description', value)
                         }
-                        // multiline
+                        multiline
                         placeholder="What are you building?"
                         errorMessage={errors.description}
                         onBlur={() => handleBlur('description')}

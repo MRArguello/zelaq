@@ -88,8 +88,8 @@ export function Form() {
                     </Text>
                 </Stack>
 
-                <Stack gap="md" 
-                        style={{ marginTop: space['xl'] }}>
+                <Stack gap="md"
+                    style={{ marginTop: space['xl'] }}>
                     <Input
                         label="Workspace name"
                         value={form.name}
@@ -104,7 +104,7 @@ export function Form() {
                         onChangeText={(value) =>
                             updateField('description', value)
                         }
-                        // multiline
+                        multiline
                         placeholder="What are you building?"
                         errorMessage={errors.description}
                         onBlur={() => handleBlur('description')}
