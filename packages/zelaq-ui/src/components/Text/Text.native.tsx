@@ -1,8 +1,12 @@
 import * as React from 'react'
 import { Text as RNText } from 'react-native'
+import type { TextProps as RNTextProps } from 'react-native'
 import type { TextProps } from './Text.types'
 import { useTheme } from '../../theme'
 import { getTextTokens } from './Text.theme'
+
+type NativeTextProps = TextProps &
+    Omit<RNTextProps, 'style' | 'children' | 'testID' | 'accessibilityLabel'>
 
 export function Text({
     children,
@@ -12,7 +16,8 @@ export function Text({
     style,
     testID,
     accessibilityLabel,
-}: TextProps) {
+    ...rest
+}: NativeTextProps) {
     const theme = useTheme()
     const tokens = getTextTokens(variant, tone, align, theme)
 
@@ -32,6 +37,7 @@ export function Text({
                 },
                 style,
             ]}
+            {...rest}
         >
             {children}
         </RNText>

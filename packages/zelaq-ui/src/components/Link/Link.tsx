@@ -6,12 +6,13 @@ import { getLinkTokens } from './Link.theme'
 import { withFontFallback } from '../../internal/withFontFallback'
 import { toRem } from '../../internal/toRem'
 
-type WebLinkProps = Omit<LinkProps, 'style' | 'onPress'> & {
-    onPress?: React.MouseEventHandler<HTMLAnchorElement>
-    style?: CSSProperties
-}
+type WebLinkProps = Omit<LinkProps, 'style' | 'onPress'> &
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'style' | 'onClick' | 'children'> & {
+        onPress?: React.MouseEventHandler<HTMLAnchorElement>
+        style?: CSSProperties
+    }
 
-export function Link({ href, children, onPress, style, testID, accessibilityLabel }: WebLinkProps) {
+export function Link({ href, children, onPress, style, testID, accessibilityLabel, ...rest }: WebLinkProps) {
     const theme = useTheme()
     const tokens = getLinkTokens(theme)
 
@@ -26,6 +27,7 @@ export function Link({ href, children, onPress, style, testID, accessibilityLabe
 
     return (
         <a
+            {...rest}
             href={href}
             onClick={onPress}
             data-testid={testID}

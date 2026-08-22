@@ -1,11 +1,15 @@
 import * as React from 'react'
 import { Animated, Modal, Pressable, ScrollView, Text as RNText, useWindowDimensions, View } from 'react-native'
+import type { PressableProps } from 'react-native'
 import type { DialogProps } from './Dialog.types'
 import { useTheme } from '../../theme'
 import { getDialogTokens } from './Dialog.theme'
 import { useMotionEnabled } from '../../internal/useMotionEnabled'
 import { useDialogVisibility } from '../../internal/useDialogVisibility'
 import { Text } from '../Text'
+
+type NativeDialogProps = DialogProps &
+    Omit<PressableProps, 'onPress' | 'style' | 'accessible' | 'accessibilityViewIsModal' | 'children'>
 
 const DIALOG_MAX_WIDTH = 480
 const DIALOG_MIN_WIDTH = 280
@@ -30,7 +34,8 @@ export function Dialog({
     style,
     testID,
     animated = true,
-}: DialogProps) {
+    ...rest
+}: NativeDialogProps) {
     const theme = useTheme()
     const tokens = getDialogTokens(theme)
     const isDialog = presentation === 'dialog'
@@ -103,6 +108,7 @@ export function Dialog({
                             },
                             style,
                         ]}
+                        {...rest}
                     >
                         {/* Padding/gap live here, not on the Pressable above, so they scroll with
                             the content instead of pinning outside the scrollable region. */}

@@ -10,9 +10,10 @@ import { useMotionEnabled } from '../../internal/useMotionEnabled'
 import { useDialogVisibility } from '../../internal/useDialogVisibility'
 import { Text } from '../Text'
 
-type WebDialogProps = Omit<DialogProps, 'style'> & {
-    style?: CSSProperties
-}
+type WebDialogProps = Omit<DialogProps, 'style'> &
+    Omit<React.HTMLAttributes<HTMLDivElement>, 'style' | 'children' | 'role' | 'id' | 'className'> & {
+        style?: CSSProperties
+    }
 
 const MOBILE_BREAKPOINT = 768
 const DIALOG_MAX_WIDTH = 480
@@ -33,6 +34,7 @@ export function Dialog({
     style,
     testID,
     animated = true,
+    ...rest
 }: WebDialogProps) {
     const theme = useTheme()
     const tokens = getDialogTokens(theme)
@@ -180,6 +182,7 @@ export function Dialog({
                 }}
             >
                 <div
+                    {...rest}
                     ref={surfaceRef}
                     role="dialog"
                     aria-modal="true"

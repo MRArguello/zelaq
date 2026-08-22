@@ -4,9 +4,10 @@ import type { StackProps } from './Stack.types'
 import { useTheme } from '../../theme'
 import { toRem } from '../../internal/toRem'
 
-type WebStackProps = Omit<StackProps, 'style'> & {
-    style?: CSSProperties
-}
+type WebStackProps = Omit<StackProps, 'style'> &
+    Omit<React.HTMLAttributes<HTMLDivElement>, 'style' | 'children'> & {
+        style?: CSSProperties
+    }
 
 const alignItemsMap: Record<NonNullable<StackProps['align']>, CSSProperties['alignItems']> = {
     start: 'flex-start',
@@ -29,6 +30,7 @@ export function Stack({
     justify = 'start',
     style,
     testID,
+    ...rest
 }: WebStackProps) {
     const theme = useTheme()
 
@@ -41,7 +43,7 @@ export function Stack({
     }
 
     return (
-        <div data-testid={testID} style={{ ...stackStyle, ...style }}>
+        <div data-testid={testID} style={{ ...stackStyle, ...style }} {...rest}>
             {children}
         </div>
     )

@@ -1,10 +1,13 @@
 import * as React from 'react'
 import { View } from 'react-native'
+import type { ViewProps } from 'react-native'
 import type { CardProps } from './Card.types'
 import { useTheme } from '../../theme'
 import { getCardTokens } from './Card.theme'
 
-export function Card({ children, variant = 'subtle', style, testID }: CardProps) {
+type NativeCardProps = CardProps & Omit<ViewProps, 'style' | 'children' | 'testID'>
+
+export function Card({ children, variant = 'subtle', style, testID, ...rest }: NativeCardProps) {
     const theme = useTheme()
     const tokens = getCardTokens(variant, theme)
 
@@ -24,6 +27,7 @@ export function Card({ children, variant = 'subtle', style, testID }: CardProps)
                     : null,
                 style,
             ]}
+            {...rest}
         >
             {children}
         </View>

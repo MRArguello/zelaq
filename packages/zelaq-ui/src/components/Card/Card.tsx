@@ -5,11 +5,12 @@ import { useTheme } from '../../theme'
 import { getCardTokens } from './Card.theme'
 import { toRem } from '../../internal/toRem'
 
-type WebCardProps = Omit<CardProps, 'style'> & {
-    style?: CSSProperties
-}
+type WebCardProps = Omit<CardProps, 'style'> &
+    Omit<React.HTMLAttributes<HTMLDivElement>, 'style' | 'children'> & {
+        style?: CSSProperties
+    }
 
-export function Card({ children, variant = 'subtle', style, testID }: WebCardProps) {
+export function Card({ children, variant = 'subtle', style, testID, ...rest }: WebCardProps) {
     const theme = useTheme()
     const tokens = getCardTokens(variant, theme)
 
@@ -24,7 +25,7 @@ export function Card({ children, variant = 'subtle', style, testID }: WebCardPro
     }
 
     return (
-        <div data-testid={testID} style={{ ...cardStyle, ...style }}>
+        <div data-testid={testID} style={{ ...cardStyle, ...style }} {...rest}>
             {children}
         </div>
     )

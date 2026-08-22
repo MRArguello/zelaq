@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { View } from 'react-native'
+import type { ViewProps } from 'react-native'
 import type { StackProps } from './Stack.types'
 import { useTheme } from '../../theme'
+
+type NativeStackProps = StackProps & Omit<ViewProps, 'style' | 'children' | 'testID'>
 
 const alignItemsMap: Record<NonNullable<StackProps['align']>, 'flex-start' | 'center' | 'flex-end' | 'stretch'> = {
     start: 'flex-start',
@@ -27,7 +30,8 @@ export function Stack({
     justify = 'start',
     style,
     testID,
-}: StackProps) {
+    ...rest
+}: NativeStackProps) {
     const theme = useTheme()
 
     return (
@@ -42,6 +46,7 @@ export function Stack({
                 },
                 style,
             ]}
+            {...rest}
         >
             {children}
         </View>

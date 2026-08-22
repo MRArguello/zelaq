@@ -8,11 +8,12 @@ import { toRem } from '../../internal/toRem'
 
 type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
 
-type WebTextProps = Omit<TextProps, 'style'> & {
-    style?: CSSProperties
-    /** Overrides the element rendered per variant (see defaultElementByVariant below). */
-    as?: TextElement
-}
+type WebTextProps = Omit<TextProps, 'style'> &
+    Omit<React.HTMLAttributes<HTMLElement>, 'style' | 'children'> & {
+        style?: CSSProperties
+        /** Overrides the element rendered per variant (see defaultElementByVariant below). */
+        as?: TextElement
+    }
 
 const defaultElementByVariant: Record<NonNullable<TextProps['variant']>, TextElement> = {
     bodyXxs: 'span',
@@ -39,6 +40,7 @@ export function Text({
     style,
     testID,
     accessibilityLabel,
+    ...rest
 }: WebTextProps) {
     const theme = useTheme()
     const tokens = getTextTokens(variant, tone, align, theme)
@@ -55,7 +57,7 @@ export function Text({
     }
 
     return (
-        <Element data-testid={testID} style={{ ...textStyle, ...style }} aria-label={accessibilityLabel}>
+        <Element {...rest} data-testid={testID} style={{ ...textStyle, ...style }} aria-label={accessibilityLabel}>
             {children}
         </Element>
     )

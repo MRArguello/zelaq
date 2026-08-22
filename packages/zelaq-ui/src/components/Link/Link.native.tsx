@@ -1,10 +1,14 @@
 import * as React from 'react'
 import { Text, Linking } from 'react-native'
+import type { TextProps as RNTextProps } from 'react-native'
 import type { LinkProps } from './Link.types'
 import { useTheme } from '../../theme'
 import { getLinkTokens } from './Link.theme'
 
-export function Link({ href, children, onPress, style, testID, accessibilityLabel }: LinkProps) {
+type NativeLinkProps = LinkProps &
+    Omit<RNTextProps, 'style' | 'onPress' | 'children' | 'testID' | 'accessibilityLabel' | 'accessibilityRole'>
+
+export function Link({ href, children, onPress, style, testID, accessibilityLabel, ...rest }: NativeLinkProps) {
     const theme = useTheme()
     const tokens = getLinkTokens(theme)
 
@@ -30,6 +34,7 @@ export function Link({ href, children, onPress, style, testID, accessibilityLabe
                 },
                 style,
             ]}
+            {...rest}
         >
             {children}
         </Text>
