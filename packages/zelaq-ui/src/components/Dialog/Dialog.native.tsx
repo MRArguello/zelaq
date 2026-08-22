@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Animated, Modal, Pressable, Text as RNText, View } from 'react-native'
+import { Animated, Modal, Pressable, ScrollView, Text as RNText, useWindowDimensions, View } from 'react-native'
 import type { DialogProps } from './Dialog.types'
 import { useTheme } from '../../theme'
 import { getDialogTokens } from './Dialog.theme'
@@ -8,9 +8,14 @@ import { useDialogVisibility } from '../../internal/useDialogVisibility'
 import { Text } from '../Text'
 
 const DIALOG_MAX_WIDTH = 480
-// Fixed rather than measured off the surface's actual height — RN transforms don't support
-// percentages, and measuring via onLayout adds a frame of jank for a "subtle" motion that
-// doesn't need a full off-screen slide to read as a sheet coming up.
+const DIALOG_MIN_WIDTH = 280
+const DIALOG_MIN_HEIGHT = 180
+// Total vertical margin the surface is capped against — RN has no vh/calc(), so this is
+// subtracted from useWindowDimensions() instead. Without a cap, content taller than the screen
+// had no way to be reached (no scroll region existed on the surface at all).
+const DIALOG_VIEWPORT_MARGIN = 64
+// Fixed, not measured off the surface — RN transforms don't support percentages, and onLayout
+// measurement would add a frame of jank for what's meant to be a subtle offset.
 const SHEET_ENTER_OFFSET = 40
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
@@ -29,15 +34,12 @@ export function Dialog({
     const theme = useTheme()
     const tokens = getDialogTokens(theme)
     const isDialog = presentation === 'dialog'
+    const { height: windowHeight } = useWindowDimensions()
     const motionEnabled = useMotionEnabled(animated)
     const exitDuration = motionEnabled ? theme.motion.duration.normal : 0
-    // Modal's `visible` stays true through the exit transition — matches the web lifecycle, and
-    // is what actually lets the fade/scale-or-translateY below play instead of RN just hiding
-    // the native modal instantly.
+    // Stays true through the exit transition, so Modal's `visible` doesn't cut it instantly.
     const shouldRender = useDialogVisibility(open, exitDuration)
-    // useState, not useRef — react-hooks/refs flags reading `.current` during render, and this
-    // value only needs to be created once and stay stable, which a lazy useState initializer
-    // gives us without being a ref.
+    // useState, not useRef — react-hooks/refs flags reading `.current` during render.
     const [progress] = React.useState(() => new Animated.Value(open ? 1 : 0))
 
     React.useEffect(() => {
@@ -71,8 +73,12 @@ export function Dialog({
                     opacity: progress,
                 }}
             >
-                {/* Absorbs taps so they don't bubble to the backdrop's dismiss handler above. */}
-                <Animated.View style={{ opacity: progress, transform: surfaceTransform }}>
+                {/* Absorbs taps so they don't bubble to the backdrop's dismiss handler above.
+                    alignSelf: 'stretch' (sheet only) — otherwise this wrapper shrink-wraps, and
+                    the Pressable's width: '100%' below has no definite width to resolve against. */}
+                <Animated.View
+                    style={{ alignSelf: isDialog ? undefined : 'stretch', opacity: progress, transform: surfaceTransform }}
+                >
                     <Pressable
                         accessible={false}
                         onPress={() => {}}
@@ -80,10 +86,11 @@ export function Dialog({
                         style={[
                             {
                                 backgroundColor: tokens.surface.backgroundColor,
-                                padding: tokens.surface.padding,
-                                gap: tokens.surface.gap,
                                 width: isDialog ? undefined : '100%',
                                 maxWidth: isDialog ? DIALOG_MAX_WIDTH : undefined,
+                                minWidth: isDialog ? DIALOG_MIN_WIDTH : undefined,
+                                minHeight: isDialog ? DIALOG_MIN_HEIGHT : undefined,
+                                maxHeight: windowHeight - DIALOG_VIEWPORT_MARGIN,
                                 borderTopLeftRadius: tokens.radius,
                                 borderTopRightRadius: tokens.radius,
                                 borderBottomLeftRadius: isDialog ? tokens.radius : 0,
@@ -97,29 +104,33 @@ export function Dialog({
                             style,
                         ]}
                     >
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            {title ? <Text variant="heading4">{title}</Text> : <View />}
-                            <Pressable
-                                onPress={onClose}
-                                accessibilityRole="button"
-                                accessibilityLabel="Close"
-                                style={{
-                                    width: tokens.closeButton.container.width,
-                                    height: tokens.closeButton.container.height,
-                                    borderRadius: tokens.closeButton.container.borderRadius,
-                                    backgroundColor: tokens.closeButton.container.backgroundColor,
-                                    borderWidth: tokens.closeButton.container.borderWidth,
-                                    borderColor: tokens.closeButton.container.borderColor,
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <RNText style={{ color: tokens.closeButton.iconColor, fontSize: 18, lineHeight: 18 }}>
-                                    ×
-                                </RNText>
-                            </Pressable>
-                        </View>
-                        {children}
+                        {/* Padding/gap live here, not on the Pressable above, so they scroll with
+                            the content instead of pinning outside the scrollable region. */}
+                        <ScrollView contentContainerStyle={{ padding: tokens.surface.padding, gap: tokens.surface.gap }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                {title ? <Text variant="heading4">{title}</Text> : <View />}
+                                <Pressable
+                                    onPress={onClose}
+                                    accessibilityRole="button"
+                                    accessibilityLabel="Close"
+                                    style={{
+                                        width: tokens.closeButton.container.width,
+                                        height: tokens.closeButton.container.height,
+                                        borderRadius: tokens.closeButton.container.borderRadius,
+                                        backgroundColor: tokens.closeButton.container.backgroundColor,
+                                        borderWidth: tokens.closeButton.container.borderWidth,
+                                        borderColor: tokens.closeButton.container.borderColor,
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    <RNText style={{ color: tokens.closeButton.iconColor, fontSize: 18, lineHeight: 18 }}>
+                                        ×
+                                    </RNText>
+                                </Pressable>
+                            </View>
+                            {children}
+                        </ScrollView>
                     </Pressable>
                 </Animated.View>
             </AnimatedPressable>

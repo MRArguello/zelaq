@@ -28,8 +28,7 @@ export function Input({
     const tokens = getInputTokens({ focused, disabled, error: hasError }, theme)
     const helperOrError = errorMessage ?? helperText
     const motionEnabled = useMotionEnabled(animated)
-    // Only the default<->focused transition animates — disabled/error already pick a fixed
-    // color from getInputTokens and aren't interaction-driven the way focus is.
+    // Only default<->focused animates — disabled/error aren't interaction-driven like focus is.
     const canAnimateBorder = motionEnabled && !disabled && !hasError
     // useState, not useRef — react-hooks/refs flags reading `.current` during render.
     const [focusAnim] = React.useState(() => new Animated.Value(focused ? 1 : 0))

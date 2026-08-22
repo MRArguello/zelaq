@@ -112,6 +112,23 @@ export const NoAnimation: Story = {
   },
 };
 
+export const LongContent: Story = {
+  name: 'Long content (centered)',
+  render: (args) => <DialogDemo {...args} triggerLabel="Open dialog with long content" />,
+  args: {
+    title: 'Terms of service',
+    presentation: 'dialog',
+    children: (
+      <Stack gap="md">
+        {Array.from({ length: 20 }, (_, i) => (
+          <Text key={i}>Paragraph {i + 1} — long enough content to exceed the viewport height.</Text>
+        ))}
+        <Button>Accept</Button>
+      </Stack>
+    ),
+  },
+};
+
 export const Interactive: Story = {
   render: (args) => {
     const [open, setOpen] = React.useState(false);

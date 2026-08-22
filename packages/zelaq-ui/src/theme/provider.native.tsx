@@ -5,8 +5,7 @@ import { mergeTheme } from './mergeTheme'
 import type { Theme, ThemeOverride, ThemeMode, ReduceMotionMode } from './types'
 
 const ThemeContext = React.createContext<Theme>(lightTheme)
-// Separate from ThemeContext — reduced-motion is a resolved boolean, not a design token, and
-// keeping it out of Theme means ThemeOverride never has to model it.
+// Separate context — it's a resolved boolean, not a design token ThemeOverride should model.
 const MotionContext = React.createContext<boolean>(false)
 
 function useSystemReduceMotion(enabled: boolean): boolean {

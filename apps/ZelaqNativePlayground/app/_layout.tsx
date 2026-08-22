@@ -24,7 +24,6 @@ export function useThemeModeToggle() {
 export default function RootLayout() {
   const [mode, setMode] = useState<ThemeMode>("light");
   const toggleMode = () => setMode((current) => (current === "dark" ? "light" : "dark"));
-  // Cycles system -> always (reduced) -> never (full motion) -> system.
   const [reduceMotion, setReduceMotion] = useState<ReduceMotionMode>("system");
   const toggleReduceMotion = () =>
     setReduceMotion((current) => (current === "system" ? "always" : current === "always" ? "never" : "system"))

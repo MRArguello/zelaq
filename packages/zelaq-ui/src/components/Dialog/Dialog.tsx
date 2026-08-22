@@ -16,6 +16,12 @@ type WebDialogProps = Omit<DialogProps, 'style'> & {
 
 const MOBILE_BREAKPOINT = 768
 const DIALOG_MAX_WIDTH = 480
+const DIALOG_MIN_WIDTH = 280
+const DIALOG_MIN_HEIGHT = 180
+// Total vertical viewport margin the surface is capped against — without this, content taller
+// than the viewport has no way to be reached: body scroll is locked while open (below) and the
+// surface itself had no scroll region.
+const DIALOG_VIEWPORT_MARGIN = 64
 
 export function Dialog({
     open,
@@ -35,9 +41,8 @@ export function Dialog({
     const surfaceRef = React.useRef<HTMLDivElement>(null)
     const motionEnabled = useMotionEnabled(animated)
     const exitDuration = motionEnabled ? theme.motion.duration.normal : 0
-    // Keeps the dialog mounted through its exit transition instead of unmounting the instant
-    // `open` goes false — `open` itself still drives close/dismiss wiring below, so nothing that
-    // reacts to `open` (Escape, backdrop click, onClose) risks firing twice during the exit.
+    // Stays true through the exit transition instead of unmounting the instant `open` goes
+    // false — close/dismiss wiring below still keys off `open`, not this, so nothing fires twice.
     const shouldRender = useDialogVisibility(open, exitDuration)
     const [enteredState, setEnteredState] = React.useState(open)
     const entered = motionEnabled ? enteredState : open
@@ -45,10 +50,8 @@ export function Dialog({
     React.useEffect(() => {
         if (!motionEnabled) return
         if (open) {
-            // Double rAF, not single — a single frame races the browser's paint: if the "closed"
-            // starting style and the flip to "open" both land before the next paint, the browser
-            // has nothing to transition *from* and just jumps straight to the end state. This
-            // guarantees a real paint of the closed position first.
+            // Double rAF, not single — one frame can race the paint, landing the closed and open
+            // styles together with nothing to visibly transition from.
             let innerId = 0
             const outerId = requestAnimationFrame(() => {
                 innerId = requestAnimationFrame(() => setEnteredState(true))
@@ -111,10 +114,8 @@ export function Dialog({
         transition: motionEnabled ? `opacity ${theme.motion.duration.normal}ms ease` : undefined,
     }
 
-    // For 'responsive', opacity/transform are also left unset and driven by the injected
-    // [data-entered] class rules below, same reasoning as the other responsive-only properties —
-    // the entrance shape (translateY for the sheet-like mobile layout, scale for the dialog-like
-    // desktop layout) has to switch at the same breakpoint the rest of the layout does.
+    // Same reasoning for 'responsive': opacity/transform driven by [data-entered] below instead,
+    // since the entrance shape (translateY vs scale) switches at the same breakpoint as layout.
     const surfaceStyle: CSSProperties = {
         backgroundColor: tokens.surface.backgroundColor,
         padding: toRem(tokens.surface.padding),
@@ -125,6 +126,10 @@ export function Dialog({
         borderRadius: isResponsive ? undefined : isSheet ? `${tokens.radius}px ${tokens.radius}px 0 0` : `${tokens.radius}px`,
         width: isResponsive ? undefined : isSheet ? '100%' : 'auto',
         maxWidth: isResponsive ? undefined : isSheet ? undefined : toRem(DIALOG_MAX_WIDTH),
+        minWidth: isResponsive ? undefined : isSheet ? undefined : toRem(DIALOG_MIN_WIDTH),
+        minHeight: isResponsive ? undefined : isSheet ? undefined : toRem(DIALOG_MIN_HEIGHT),
+        maxHeight: `calc(100vh - ${DIALOG_VIEWPORT_MARGIN}px)`,
+        overflowY: 'auto',
         boxSizing: 'border-box',
         opacity: isResponsive ? undefined : entered ? 1 : 0,
         transform: isResponsive ? undefined : entered ? 'none' : isSheet ? 'translateY(100%)' : 'scale(0.96)',
@@ -153,6 +158,8 @@ export function Dialog({
                             border-radius: ${tokens.radius}px;
                             width: auto;
                             max-width: ${toRem(DIALOG_MAX_WIDTH)};
+                            min-width: ${toRem(DIALOG_MIN_WIDTH)};
+                            min-height: ${toRem(DIALOG_MIN_HEIGHT)};
                             opacity: 0;
                             transform: scale(0.96);
                         }

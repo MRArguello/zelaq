@@ -6,8 +6,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'link'
 export function getButtonTokens(variant: ButtonVariant, disabled: boolean, theme: Theme = defaultTheme) {
     const { colors, space, radii, typography, sizes, opacity } = theme
 
-    // Same touchMin/padding container as the other variants regardless of the "looks like a
-    // link" visual treatment — a text-styled button still needs the same real tap target.
+    // Same touchMin/padding as the other variants — link still needs a real tap target.
     const baseContainer = {
         minHeight: sizes.touchMin,
         minWidth: sizes.touchMin,
