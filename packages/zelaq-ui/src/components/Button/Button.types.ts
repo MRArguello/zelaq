@@ -19,4 +19,6 @@ export type ButtonProps = {
     accessibilityHint?: string
     /** False hides a purely decorative button from assistive tech. Default true. */
     accessible?: boolean
+    /** False disables pressed-state motion regardless of ZelaqProvider's reduceMotion. Default true. */
+    animated?: boolean
 }

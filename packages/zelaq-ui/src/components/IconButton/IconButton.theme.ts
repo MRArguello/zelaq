@@ -1,9 +1,13 @@
 import { defaultTheme } from '../../theme/tokens'
 import type { Theme } from '../../theme/types'
-import type { ButtonVariant } from '../Button/Button.theme'
+
+// Deliberately not Button's ButtonVariant — IconButton has no "looks like a link" treatment
+// (there's no text to underline), so it shouldn't silently accept 'link' and fall through to
+// primary styling.
+export type IconButtonVariant = 'primary' | 'secondary'
 
 export function getIconButtonTokens(
-    variant: ButtonVariant,
+    variant: IconButtonVariant,
     disabled: boolean,
     selected: boolean,
     theme: Theme = defaultTheme,

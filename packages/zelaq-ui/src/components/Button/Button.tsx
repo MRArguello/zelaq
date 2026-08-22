@@ -6,6 +6,7 @@ import { getButtonTokens } from './Button.theme'
 import { srOnlyStyle } from '../../internal/srOnlyStyle'
 import { withFontFallback } from '../../internal/withFontFallback'
 import { toRem } from '../../internal/toRem'
+import { useMotionEnabled } from '../../internal/useMotionEnabled'
 
 type WebButtonProps = Omit<ButtonProps, 'style' | 'textStyle' | 'onPress'> & {
     onPress?: React.MouseEventHandler<HTMLButtonElement>
@@ -31,11 +32,14 @@ export function Button({
     accessible = true,
     startIcon,
     endIcon,
+    animated = true,
 }: WebButtonProps) {
     const [pressed, setPressed] = React.useState(false)
     const theme = useTheme()
     const tokens = getButtonTokens(variant, disabled, theme)
     const hintId = React.useId()
+    const motionEnabled = useMotionEnabled(animated)
+    const isPressed = pressed && !disabled
 
     const containerStyle: CSSProperties = {
         minHeight: tokens.container.minHeight,
@@ -44,7 +48,11 @@ export function Button({
         borderRadius: tokens.container.borderRadius,
         background: tokens.container.backgroundColor,
         border: `${tokens.container.borderWidth}px solid ${tokens.container.borderColor}`,
-        opacity: pressed && !disabled ? theme.opacity.pressed : tokens.container.opacity,
+        opacity: isPressed ? theme.opacity.pressed : tokens.container.opacity,
+        transform: motionEnabled && isPressed ? `scale(${theme.motion.scale.pressed})` : undefined,
+        transition: motionEnabled
+            ? `opacity ${theme.motion.duration.fast}ms ease, transform ${theme.motion.duration.fast}ms ease`
+            : undefined,
         cursor: disabled ? 'not-allowed' : 'pointer',
         display: 'inline-flex',
         alignItems: 'center',
@@ -60,6 +68,7 @@ export function Button({
         fontSize: toRem(tokens.label.fontSize),
         fontWeight: tokens.label.fontWeight,
         lineHeight: toRem(tokens.label.lineHeight),
+        textDecorationLine: tokens.label.textDecorationLine,
     }
 
     return (

@@ -4,6 +4,7 @@ import type { IconButtonProps } from './IconButton.types'
 import { useTheme } from '../../theme'
 import { getIconButtonTokens } from './IconButton.theme'
 import { srOnlyStyle } from '../../internal/srOnlyStyle'
+import { useMotionEnabled } from '../../internal/useMotionEnabled'
 
 type WebIconButtonProps = Omit<IconButtonProps, 'style' | 'onPress'> & {
     onPress?: React.MouseEventHandler<HTMLButtonElement>
@@ -21,12 +22,15 @@ export function IconButton({
     testID,
     accessibilityLabel,
     accessibilityHint,
+    animated = true,
 }: WebIconButtonProps) {
     const [pressed, setPressed] = React.useState(false)
     const theme = useTheme()
     const isDisabled = disabled || loading
     const tokens = getIconButtonTokens(variant, isDisabled, selected, theme)
     const hintId = React.useId()
+    const motionEnabled = useMotionEnabled(animated)
+    const isPressed = pressed && !isDisabled
 
     const containerStyle: CSSProperties = {
         width: tokens.container.width,
@@ -35,7 +39,11 @@ export function IconButton({
         borderRadius: tokens.container.borderRadius,
         background: tokens.container.backgroundColor,
         border: `${tokens.container.borderWidth}px solid ${tokens.container.borderColor}`,
-        opacity: pressed && !isDisabled ? theme.opacity.pressed : tokens.container.opacity,
+        opacity: isPressed ? theme.opacity.pressed : tokens.container.opacity,
+        transform: motionEnabled && isPressed ? `scale(${theme.motion.scale.pressed})` : undefined,
+        transition: motionEnabled
+            ? `opacity ${theme.motion.duration.fast}ms ease, transform ${theme.motion.duration.fast}ms ease`
+            : undefined,
         cursor: isDisabled ? 'not-allowed' : 'pointer',
         display: 'inline-flex',
         alignItems: 'center',

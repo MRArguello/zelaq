@@ -6,7 +6,8 @@ import * as ButtonStories from './Button.stories';
 # Button
 
 A pressable button. Use `primary` for the main action in a given context, `secondary` for
-everything else.
+everything else, `link` when it should read as an inline link but still behave like a button
+(same tap target, no navigation) — for actual navigation, use `Link` instead.
 
 <Canvas of={ButtonStories.Primary} />
 
@@ -20,11 +21,17 @@ everything else.
 - `colors.secondaryBackground` — secondary: background
 - `colors.secondaryBorder` — secondary: border
 - `colors.secondaryText` — secondary: label
-- `opacity.disabled` — secondary: disabled dimming
-- `radii.xs` — both: corner radius
-- `space.base` — both: horizontal padding
-- `space.md` — both: vertical padding, icon gap
-- `sizes.touchMin` — both: minimum tap target
+- `colors.primary` — link: label
+- `opacity.disabled` — all: disabled dimming
+- `radii.xs` — all: corner radius
+- `space.base` — all: horizontal padding
+- `space.md` — all: vertical padding, icon gap
+- `sizes.touchMin` — all: minimum tap target
+
+## Variants
+
+<Canvas of={ButtonStories.Secondary} />
+<Canvas of={ButtonStories.Link} />
 
 ## Icons
 

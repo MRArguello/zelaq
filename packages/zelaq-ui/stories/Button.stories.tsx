@@ -33,6 +33,14 @@ export const Secondary: Story = {
   },
 };
 
+export const Link: Story = {
+  name: 'Link-styled',
+  args: {
+    variant: 'link',
+    children: 'View documentation',
+  },
+};
+
 export const Disabled: Story = {
   args: {
     disabled: true,
@@ -62,5 +70,13 @@ export const WithAccessibilityHint: Story = {
     variant: 'secondary',
     accessibilityHint: 'Permanently deletes your account and all associated data',
     children: 'Delete Account',
+  },
+};
+
+export const NoAnimation: Story = {
+  name: 'Pressed feedback disabled',
+  args: {
+    animated: false,
+    children: 'Button',
   },
 };

@@ -1,10 +1,10 @@
 import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native'
-import type { ButtonVariant } from '../Button/Button.theme'
+import type { IconButtonVariant } from './IconButton.theme'
 
 export type IconButtonProps = {
     /** Always treated as decorative — the accessible name comes from accessibilityLabel. */
     icon: React.ReactElement
-    variant?: ButtonVariant
+    variant?: IconButtonVariant
     disabled?: boolean
     /** Implies disabled. */
     loading?: boolean
@@ -16,4 +16,6 @@ export type IconButtonProps = {
     accessibilityLabel: string
     /** Supplemental description for when the label alone doesn't convey the result (e.g. destructive actions). */
     accessibilityHint?: string
+    /** False disables pressed-state motion regardless of ZelaqProvider's reduceMotion. Default true. */
+    animated?: boolean
 }
