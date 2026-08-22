@@ -1,0 +1,64 @@
+import { useEffect, useRef } from "react";
+import { Animated, Easing } from "react-native";
+import Svg, { G, Path } from "react-native-svg";
+
+export default function AnimatedLogo({
+    height = 50,
+    width,
+    color = "#115E59",
+}: {
+    height?: number;
+    width?: number;
+    color?: string;
+}) {
+    const opacity = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        Animated.timing(opacity, {
+            toValue: 1,
+            duration: 800,
+            easing: Easing.out(Easing.ease),
+            useNativeDriver: true,
+        }).start();
+    }, [opacity]);
+
+    return (
+        <Animated.View style={{ opacity }}>
+            <Svg
+                viewBox="0 0 251.60909 142.491"
+                width={width}
+                height={height}
+            >
+                <G transform="translate(265.48324,220.48604)">
+                    <G transform="matrix(15.943913,0,0,15.943913,-1495.7888,-1946.3601)">
+
+                        <Path
+                            d="m 77.361686,108.28634 v 0.74621 h 1.431954 l -1.575098,6.11383 v 0.7767 h 2.468584 v -0.74672 h -1.539958 l 1.575098,-6.20428 v -0.68574 z"
+                            fill={color}
+                        />
+
+                        <Path
+                            d="m 80.319465,108.28635 v 7.63674 h 2.299602 v -0.74672 h -1.401465 v -6.14382 h 1.384411 v -0.74621 z"
+                            fill={color}
+                        />
+
+                        <Path
+                            d="m 83.197918,108.28634 v 7.63674 h 2.307869 v -0.74207 h -1.409733 v -6.89467 z"
+                            fill={color}
+                        />
+
+                        <Path
+                            d="m 87.014002,108.28546 -1.158586,7.63674 h 0.854728 c 0.515522,-3.76892 0.386669,-2.80664 0.854682,-6.22236 h 0.01292 c 1.642346,11.07056 -0.387411,-2.78525 0.932676,6.22236 h 0.84646 l -1.262972,-7.63674 z"
+                            fill={color}
+                        />
+
+                        <Path
+                            d="m 91.390346,108.24388 c -0.468597,0 -0.825902,0.12683 -1.07177,0.38138 -0.312398,0.32396 -0.468705,0.92023 -0.468705,1.788 v 3.36672 c 0,0.79257 0.106861,1.36235 0.320911,1.70946 0.216943,0.34711 0.562739,0.5366 1.037146,0.56844 l 0.997872,1.08469 0.44235,-0.4036 -0.668176,-0.77204 c 0.240083,-0.0897 0.425355,-0.23999 0.555521,-0.45114 0.222728,-0.36447 0.334347,-0.94324 0.334347,-1.73581 v -3.36672 c 0,-0.55248 -0.05669,-0.99544 -0.169499,-1.32808 -0.190909,-0.56116 -0.62735,-0.8413 -1.309997,-0.8413 z"
+                            fill={color}
+                        />   
+                    </G>
+                </G>
+            </Svg>
+        </Animated.View>
+    );
+}
