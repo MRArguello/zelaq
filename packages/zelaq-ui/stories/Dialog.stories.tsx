@@ -1,8 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { expect, fn, screen, userEvent, waitFor, waitForElementToBeRemoved, within } from 'storybook/test';
 import { Dialog, Stack, Text, Button, Input } from '../src';
-import type { DialogProps } from '../src';
 
 const meta = {
   title: 'Components/Dialog',
@@ -10,10 +9,8 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-  args: { onClose: fn() },
+  args: { onClose: fn(), open: false, children: null },
   argTypes: {
-    // Always a composed Stack/Text/Button tree in these stories — see Card/Stack for why this is
-    // disabled rather than left as a broken/misleading control.
     children: { control: false },
   },
 } satisfies Meta<typeof Dialog>;
@@ -21,12 +18,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Dialog portals to document.body, and every Canvas on an MDX docs page shares one preview
-// document rather than getting its own isolated iframe — so a story with a static open: true
-// arg doesn't just show inside its own Canvas, it stacks on top of every other open: true story
-// on the same page. Each demo below opens itself via a trigger button instead, so nothing is
-// open until a user actually asks for it, on that specific canvas.
-function DialogDemo({ triggerLabel, ...args }: DialogProps & { triggerLabel: string }) {
+type DialogStoryProps = Omit<React.ComponentProps<typeof Dialog>, 'open' | 'onClose'>
+function DialogDemo({ triggerLabel, ...args }: DialogStoryProps & { triggerLabel: string }) {
   const [open, setOpen] = React.useState(false);
   return (
     <Stack gap="md" style={{ padding: 24 }}>
@@ -47,6 +40,17 @@ export const Responsive: Story = {
         <Button>Delete</Button>
       </Stack>
     ),
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Open responsive dialog' }));
+
+    const dialog = await screen.findByRole('dialog', { name: 'Delete project' });
+    // Focus moves into the surface on open — see Dialog.tsx's minimal focus-management effect.
+    await waitFor(() => expect(document.activeElement).toBe(dialog));
+
+    await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+    await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
   },
 };
 
@@ -94,6 +98,18 @@ export const BackdropDismissDisabled: Story = {
         <Button>Acknowledge</Button>
       </Stack>
     ),
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Open dialog' }));
+    await screen.findByRole('dialog', { name: 'Confirm required' });
+
+    await userEvent.click(screen.getByRole('presentation'));
+    // closeOnBackdropPress: false — the backdrop click above must not have closed it.
+    await expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+    await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
   },
 };
 
@@ -147,5 +163,13 @@ export const Interactive: Story = {
   args: {
     title: 'Interactive example',
     presentation: 'responsive',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Open dialog' }));
+    await screen.findByRole('dialog', { name: 'Interactive example' });
+
+    await userEvent.keyboard('{Escape}');
+    await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
   },
 };
