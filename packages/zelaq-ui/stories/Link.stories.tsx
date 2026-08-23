@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import { Link, Stack, Text } from '../src';
 
 const meta = {
@@ -18,6 +18,12 @@ export const Default: Story = {
     href: 'https://storybook.js.org',
     children: 'View documentation',
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.getByRole('link', { name: 'View documentation' });
+    await expect(link.tagName).toBe('A');
+    await expect(link).toHaveAttribute('href', 'https://storybook.js.org');
+  },
 };
 
 export const WithOnPress: Story = {
@@ -26,6 +32,13 @@ export const WithOnPress: Story = {
     href: 'https://storybook.js.org',
     children: 'Track this click',
     onPress: fn(),
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.getByRole('link', { name: 'Track this click' });
+    link.addEventListener('click', (event) => event.preventDefault());
+    await userEvent.click(link);
+    await expect(args.onPress).toHaveBeenCalledOnce();
   },
 };
 
