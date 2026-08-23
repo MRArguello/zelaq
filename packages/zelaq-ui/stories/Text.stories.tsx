@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Text } from '../src';
 
 const meta = {
@@ -23,6 +24,10 @@ export const Heading: Story = {
   args: {
     variant: 'heading2',
     children: 'Section heading',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('Section heading').tagName).toBe('H2');
   },
 };
 
@@ -85,6 +90,12 @@ export const Alignment: Story = {
       </Text>
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(getComputedStyle(canvas.getByText('Left')).textAlign).toBe('left');
+    await expect(getComputedStyle(canvas.getByText('Center')).textAlign).toBe('center');
+    await expect(getComputedStyle(canvas.getByText('Right')).textAlign).toBe('right');
+  },
 };
 
 export const HeadingLevels: Story = {
@@ -103,6 +114,10 @@ export const HeadingLevels: Story = {
       <Text {...args} as="h6" />
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const headings = canvasElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    await expect(Array.from(headings).map((el) => el.tagName)).toEqual(['H1', 'H2', 'H3', 'H4', 'H5', 'H6']);
+  },
 };
 
 export const AllVariants: Story = {

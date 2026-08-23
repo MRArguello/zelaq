@@ -19,9 +19,6 @@ const MOBILE_BREAKPOINT = 768
 const DIALOG_MAX_WIDTH = 480
 const DIALOG_MIN_WIDTH = 280
 const DIALOG_MIN_HEIGHT = 180
-// Total vertical viewport margin the surface is capped against — without this, content taller
-// than the viewport has no way to be reached: body scroll is locked while open (below) and the
-// surface itself had no scroll region.
 const DIALOG_VIEWPORT_MARGIN = 64
 
 export function Dialog({
@@ -84,22 +81,15 @@ export function Dialog({
         }
     }, [shouldRender])
 
-    // Minimal focus handling: move focus into the dialog on open. Does not trap Tab within it
-    // or restore focus to the trigger element on close — no focus-management utility exists in
-    // this library yet, and a full trap/restore implementation is out of scope here.
     React.useEffect(() => {
         if (open) surfaceRef.current?.focus()
-    }, [open])
+    }, [open, shouldRender])
 
     if (!shouldRender) return null
 
     const isSheet = presentation === 'sheet'
     const isResponsive = presentation === 'responsive'
 
-    // For 'responsive', alignItems/borderRadius/width/maxWidth are left unset here entirely and
-    // controlled by the injected media-query class below instead — inline styles always beat
-    // class-based CSS regardless of specificity or @media, so setting both would make the class
-    // inert at every viewport.
     const motionTransition = motionEnabled
         ? `opacity ${theme.motion.duration.normal}ms ease, transform ${theme.motion.duration.normal}ms ease`
         : undefined
@@ -116,8 +106,6 @@ export function Dialog({
         transition: motionEnabled ? `opacity ${theme.motion.duration.normal}ms ease` : undefined,
     }
 
-    // Same reasoning for 'responsive': opacity/transform driven by [data-entered] below instead,
-    // since the entrance shape (translateY vs scale) switches at the same breakpoint as layout.
     const surfaceStyle: CSSProperties = {
         backgroundColor: tokens.surface.backgroundColor,
         padding: toRem(tokens.surface.padding),

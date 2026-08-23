@@ -14,12 +14,7 @@ type NativeDialogProps = DialogProps &
 const DIALOG_MAX_WIDTH = 480
 const DIALOG_MIN_WIDTH = 280
 const DIALOG_MIN_HEIGHT = 180
-// Total vertical margin the surface is capped against — RN has no vh/calc(), so this is
-// subtracted from useWindowDimensions() instead. Without a cap, content taller than the screen
-// had no way to be reached (no scroll region existed on the surface at all).
 const DIALOG_VIEWPORT_MARGIN = 64
-// Fixed, not measured off the surface — RN transforms don't support percentages, and onLayout
-// measurement would add a frame of jank for what's meant to be a subtle offset.
 const SHEET_ENTER_OFFSET = 40
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
@@ -42,9 +37,7 @@ export function Dialog({
     const { height: windowHeight } = useWindowDimensions()
     const motionEnabled = useMotionEnabled(animated)
     const exitDuration = motionEnabled ? theme.motion.duration.normal : 0
-    // Stays true through the exit transition, so Modal's `visible` doesn't cut it instantly.
     const shouldRender = useDialogVisibility(open, exitDuration)
-    // useState, not useRef — react-hooks/refs flags reading `.current` during render.
     const [progress] = React.useState(() => new Animated.Value(open ? 1 : 0))
 
     React.useEffect(() => {
@@ -69,6 +62,7 @@ export function Dialog({
         <Modal visible={shouldRender} transparent animationType="none" onRequestClose={onClose} testID={testID}>
             <AnimatedPressable
                 accessible={false}
+                testID={testID ? `${testID}-backdrop` : undefined}
                 onPress={closeOnBackdropPress ? onClose : undefined}
                 style={{
                     flex: 1,
@@ -78,9 +72,6 @@ export function Dialog({
                     opacity: progress,
                 }}
             >
-                {/* Absorbs taps so they don't bubble to the backdrop's dismiss handler above.
-                    alignSelf: 'stretch' (sheet only) — otherwise this wrapper shrink-wraps, and
-                    the Pressable's width: '100%' below has no definite width to resolve against. */}
                 <Animated.View
                     style={{ alignSelf: isDialog ? undefined : 'stretch', opacity: progress, transform: surfaceTransform }}
                 >
@@ -88,6 +79,7 @@ export function Dialog({
                         accessible={false}
                         onPress={() => {}}
                         accessibilityViewIsModal
+                        testID={testID ? `${testID}-surface` : undefined}
                         style={[
                             {
                                 backgroundColor: tokens.surface.backgroundColor,
@@ -110,8 +102,6 @@ export function Dialog({
                         ]}
                         {...rest}
                     >
-                        {/* Padding/gap live here, not on the Pressable above, so they scroll with
-                            the content instead of pinning outside the scrollable region. */}
                         <ScrollView contentContainerStyle={{ padding: tokens.surface.padding, gap: tokens.surface.gap }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                                 {title ? <Text variant="heading4">{title}</Text> : <View />}

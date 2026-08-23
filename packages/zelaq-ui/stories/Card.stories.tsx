@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Card, Stack, Text, Button } from '../src';
 
 const meta = {
@@ -8,8 +9,6 @@ const meta = {
     layout: 'centered',
   },
   argTypes: {
-    // Always a composed Stack/Text tree in these stories — docgen shows it as a plain string,
-    // but editing it as text would just replace the composition, not demonstrate anything.
     children: { control: false },
   },
 } satisfies Meta<typeof Card>;
@@ -38,6 +37,13 @@ export const Outlined: Story = {
     style: { width: 280 },
     children: statusContent,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const card = canvas.getByText('Project status').parentElement!.parentElement!;
+    await expect(card).toHaveStyle({ boxShadow: 'none' });
+    const borderColor = getComputedStyle(card).borderColor;
+    await expect(borderColor).not.toBe('rgba(0, 0, 0, 0)');
+  },
 };
 
 export const Elevated: Story = {
@@ -45,6 +51,11 @@ export const Elevated: Story = {
     variant: 'elevated',
     style: { width: 280 },
     children: statusContent,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const card = canvas.getByText('Project status').parentElement!.parentElement!;
+    await expect(getComputedStyle(card).boxShadow).not.toBe('none');
   },
 };
 
@@ -65,6 +76,9 @@ export const WithButton: Story = {
 
 export const AllVariants: Story = {
   name: 'All variants',
+  args: {
+    children: statusContent,
+  },
   render: () => (
     <Stack gap="lg">
       <Card variant="subtle" style={{ width: 280 }}>

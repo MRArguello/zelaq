@@ -135,3 +135,20 @@ back to the platform default sans-serif.
 
 - **`ZelaqProvider`** — theme context provider. See Usage above for `theme`/`mode`.
 - **`useTheme()`** — hook returning the theme in effect.
+
+## Testing
+
+Web components are tested as Storybook stories (`play` functions), run headless via
+`@storybook/addon-vitest` + Vitest/Playwright. Pure functions (theme resolvers, `mergeTheme`) run
+as plain Vitest unit tests. Native components are tested separately with Jest +
+`@testing-library/react-native`.
+
+```bash
+pnpm test           # web: story interaction tests + unit tests (vitest)
+pnpm test:coverage  # same, with coverage
+pnpm test:native    # native: jest + @testing-library/react-native
+```
+
+A native component's test file sits next to it as `Component.native.test.tsx`; a web/shared one
+as `Component.test.ts(x)` or, for a story's `play` function, directly in that component's
+`.stories.tsx` file under `stories/`.

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 import { Stack, Button, Text } from '../src';
 
 const meta = {
@@ -8,8 +9,6 @@ const meta = {
     layout: 'centered',
   },
   argTypes: {
-    // Always a composed Text/Button tree in these stories — docgen shows it as a plain string,
-    // but editing it as text would just replace the composition, not demonstrate anything.
     children: { control: false },
   },
 } satisfies Meta<typeof Stack>;
@@ -28,6 +27,13 @@ export const Basic: Story = {
       </>
     ),
   },
+  play: async ({ canvasElement }) => {
+    const stack = canvasElement.querySelector('div')!;
+    const style = getComputedStyle(stack);
+    await expect(style.display).toBe('flex');
+    await expect(style.flexDirection).toBe('column');
+    await expect(style.gap).not.toBe('0px');
+  },
 };
 
 export const CenterAligned: Story = {
@@ -43,6 +49,10 @@ export const CenterAligned: Story = {
         <Button>A longer button label</Button>
       </>
     ),
+  },
+  play: async ({ canvasElement }) => {
+    const stack = canvasElement.querySelector('div')!;
+    await expect(getComputedStyle(stack).alignItems).toBe('center');
   },
 };
 
@@ -60,10 +70,17 @@ export const SpaceBetween: Story = {
       </>
     ),
   },
+  play: async ({ canvasElement }) => {
+    const stack = canvasElement.querySelector('div')!;
+    await expect(getComputedStyle(stack).justifyContent).toBe('space-between');
+  },
 };
 
 export const GapValues: Story = {
   name: 'Gap values',
+  args: {
+    children: null,
+  },
   render: () => (
     <div style={{ display: 'flex', gap: 32 }}>
       {(['sm', 'md', 'base', 'lg', 'xl'] as const).map((gap) => (
