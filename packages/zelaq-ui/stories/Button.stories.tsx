@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { expect, fireEvent, fn, userEvent, waitFor, within } from 'storybook/test';
 import { Search, Plus } from 'lucide-react';
 import { Button } from '../src';
 
@@ -11,7 +11,6 @@ const meta = {
   },
   args: { onPress: fn() },
   argTypes: {
-    // ReactElement props — no safe way to offer a control without a JSON editor that can crash the story.
     startIcon: { control: false },
     endIcon: { control: false },
   },
@@ -23,6 +22,19 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: 'Button',
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Button' });
+
+    await userEvent.click(button);
+    await expect(args.onPress).toHaveBeenCalledOnce();
+
+    const restingOpacity = getComputedStyle(button).opacity;
+    await fireEvent.mouseDown(button);
+    await waitFor(() => expect(getComputedStyle(button).opacity).not.toBe(restingOpacity));
+    await fireEvent.mouseUp(button);
+    await waitFor(() => expect(getComputedStyle(button).opacity).toBe(restingOpacity));
   },
 };
 
@@ -45,6 +57,13 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     children: 'Button',
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Button' });
+    await expect(button).toBeDisabled();
+    await userEvent.click(button);
+    await expect(args.onPress).not.toHaveBeenCalled();
   },
 };
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { expect, fireEvent, fn, userEvent, waitFor, within } from 'storybook/test';
 import { Settings, Trash2, X, ChevronDown, Check, Menu, AlertCircle } from 'lucide-react';
 import { IconButton } from '../src';
 
@@ -24,6 +24,19 @@ export const Default: Story = {
     icon: <Settings size={18} />,
     accessibilityLabel: 'Open settings',
   },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Open settings' });
+
+    await userEvent.click(button);
+    await expect(args.onPress).toHaveBeenCalledOnce();
+
+    const restingOpacity = getComputedStyle(button).opacity;
+    await fireEvent.mouseDown(button);
+    await waitFor(() => expect(getComputedStyle(button).opacity).not.toBe(restingOpacity));
+    await fireEvent.mouseUp(button);
+    await waitFor(() => expect(getComputedStyle(button).opacity).toBe(restingOpacity));
+  },
 };
 
 export const Secondary: Story = {
@@ -40,6 +53,11 @@ export const Selected: Story = {
     accessibilityLabel: 'Toggle filter',
     selected: true,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Toggle filter' });
+    await expect(button).toHaveAttribute('aria-pressed', 'true');
+  },
 };
 
 export const Disabled: Story = {
@@ -48,6 +66,13 @@ export const Disabled: Story = {
     accessibilityLabel: 'Close',
     disabled: true,
   },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Close' });
+    await expect(button).toBeDisabled();
+    await userEvent.click(button);
+    await expect(args.onPress).not.toHaveBeenCalled();
+  },
 };
 
 export const Loading: Story = {
@@ -55,6 +80,14 @@ export const Loading: Story = {
     icon: <ChevronDown size={18} />,
     accessibilityLabel: 'Load more',
     loading: true,
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Load more' });
+    await expect(button).toHaveAttribute('aria-busy', 'true');
+    await expect(button).toBeDisabled();
+    await userEvent.click(button);
+    await expect(args.onPress).not.toHaveBeenCalled();
   },
 };
 
