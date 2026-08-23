@@ -56,7 +56,10 @@
         "lint": "eslint .",
         "prepack": "pnpm clean && pnpm build",
         "storybook": "storybook dev -p 6006",
-        "build-storybook": "storybook build"
+        "build-storybook": "storybook build",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage"
     },
     "peerDependencies": {
         "react": ">=19.0.0",
