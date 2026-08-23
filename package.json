@@ -5,7 +5,9 @@
     "scripts": {
         "build:ui": "pnpm --filter zelaq-ui build",
         "dev:web": "pnpm --filter @zelaq/web-playground dev",
-        "dev:native": "pnpm --filter @zelaq/native-playground start"
+        "dev:native": "pnpm --filter @zelaq/native-playground start",
+        "prepare": "husky",
+        "precommit": "pnpm -r --if-present run typecheck && pnpm -r --if-present run lint && pnpm -r --if-present run test && pnpm -r --if-present run test:native"
     },
     "pnpm": {
         "overrides": {
@@ -15,5 +17,8 @@
         "patchedDependencies": {
             "storybook@10.3.3": "patches/storybook@10.3.3.patch"
         }
+    },
+    "devDependencies": {
+        "husky": "^9.1.7"
     }
 }
