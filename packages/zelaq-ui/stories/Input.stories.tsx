@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { Input, Stack } from '../src';
 
 const meta = {
@@ -20,6 +20,12 @@ export const Default: Story = {
     label: 'Name',
     placeholder: 'Ada Lovelace',
   },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText('Name');
+    await userEvent.type(input, 'Ada');
+    await expect(args.onChangeText).toHaveBeenLastCalledWith('Ada');
+  },
 };
 
 export const WithHelperText: Story = {
@@ -28,6 +34,13 @@ export const WithHelperText: Story = {
     label: 'Email address',
     placeholder: 'you@example.com',
     helperText: 'Use your work email.',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText('Email address');
+    const describedById = input.getAttribute('aria-describedby');
+    await expect(describedById).toBeTruthy();
+    await expect(document.getElementById(describedById!)).toHaveTextContent('Use your work email.');
   },
 };
 
@@ -38,6 +51,12 @@ export const ErrorState: Story = {
     value: 'not-an-email',
     errorMessage: 'Enter a valid email address.',
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText('Invalid email');
+    await expect(input).toHaveAttribute('aria-invalid', 'true');
+    await expect(canvas.getByText('Enter a valid email address.')).toBeInTheDocument();
+  },
 };
 
 export const DisabledState: Story = {
@@ -46,6 +65,10 @@ export const DisabledState: Story = {
     label: 'Disabled field',
     value: 'Unavailable',
     disabled: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByLabelText('Disabled field')).toBeDisabled();
   },
 };
 
@@ -58,6 +81,12 @@ export const Controlled: Story = {
     label: 'Controlled value',
     placeholder: 'Type something…',
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText('Controlled value') as HTMLInputElement;
+    await userEvent.type(input, 'Hello');
+    await waitFor(() => expect(input.value).toBe('Hello'));
+  },
 };
 
 export const Multiline: Story = {
@@ -65,6 +94,13 @@ export const Multiline: Story = {
     label: 'Description',
     placeholder: 'What are you building?',
     multiline: true,
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const textarea = canvas.getByLabelText('Description');
+    await expect(textarea.tagName).toBe('TEXTAREA');
+    await userEvent.type(textarea, 'A design system');
+    await expect(args.onChangeText).toHaveBeenLastCalledWith('A design system');
   },
 };
 
