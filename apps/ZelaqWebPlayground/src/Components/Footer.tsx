@@ -53,6 +53,6 @@ export function Footer({
                     Animations: {REDUCE_MOTION_BUTTON_LABEL[reduceMotion]}
                 </Button>
             </Box>
-            <Text style={{ color: ON_IMAGE_TEXT_COLOR }}>v0.3.0 · <Link style={{ color: ON_IMAGE_TEXT_COLOR }} href="https://github.com/MRArguello/zelaq" target="_blank" rel="noopener noreferrer">@zelaq/ui</Link></Text>
+            <Text style={{ color: ON_IMAGE_TEXT_COLOR }}>v0.4.0 ·<Link style={{ color: ON_IMAGE_TEXT_COLOR }} href="https://github.com/MRArguello/zelaq" target="_blank" rel="noopener noreferrer">@zelaq/ui</Link></Text>
         </Stack>)
 }
