@@ -201,6 +201,7 @@ export const lightTheme: Theme = {
     opacity,
     shadow,
     motion,
+    custom: {},
 }
 
 export const darkTheme: Theme = {
@@ -212,6 +213,7 @@ export const darkTheme: Theme = {
     opacity,
     shadow,
     motion,
+    custom: {},
 }
 
 /** Alias for lightTheme — default param for resolvers called without an explicit theme. */

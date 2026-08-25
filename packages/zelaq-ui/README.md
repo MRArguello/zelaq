@@ -88,6 +88,34 @@ and `StyleProp<ViewStyle>` on native — either give `SpecialCard` its own `.nat
 same pattern this library uses internally), or stick to properties valid in both shapes (plain
 color strings, numbers).
 
+### Adding your own tokens
+
+If you're building your own components on top of `zelaq-ui`'s primitives, you don't have to
+maintain a second theme for them — `useTheme()` can carry your app's tokens too. Add them under
+`theme.custom` by augmenting `ZelaqCustomTokens` in your own app:
+
+```ts
+// your own file, outside zelaq-ui
+declare module 'zelaq-ui' {
+  interface ZelaqCustomTokens {
+    brandAccent: string;
+  }
+}
+```
+
+```tsx
+<ZelaqProvider theme={{ custom: { brandAccent: '#7c3aed' } }}>
+```
+
+```tsx
+const theme = useTheme();
+theme.custom.brandAccent; // typed, no cast needed
+```
+
+`custom` is additive, not a takeover: it's a namespace of its own, separate from `colors`/`space`/
+etc., so a token you add here can never collide with — or override — a built-in one, even if this
+library adds a token of the same name later.
+
 ## Icons
 
 `zelaq-ui` doesn't bundle or depend on an icon library — icon props across components accept any

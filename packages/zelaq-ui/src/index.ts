@@ -26,4 +26,12 @@ export { Dialog } from './components/Dialog'
 export type { DialogProps } from './components/Dialog'
 
 export { ZelaqProvider, useTheme, useReduceMotion } from './theme'
-export type { Theme, ThemeOverride, ThemeMode, ReduceMotionMode, MotionTokens, ZelaqProviderProps } from './theme'
+export type {
+    Theme,
+    ThemeOverride,
+    ThemeMode,
+    ReduceMotionMode,
+    MotionTokens,
+    ZelaqCustomTokens,
+    ZelaqProviderProps,
+} from './theme'

@@ -24,4 +24,12 @@ describe('mergeTheme', () => {
         expect(merged.colors.textSuccess).toBe(lightTheme.colors.textSuccess)
         expect(merged.space).toEqual(lightTheme.space)
     })
+
+    it('adds consumer-defined custom tokens without touching built-in categories', () => {
+        // "custom" isn't typed with real keys until a consumer augments ZelaqCustomTokens, so an
+        // arbitrary key is exercised here via a cast rather than a legitimate override shape.
+        const merged = mergeTheme(lightTheme, { custom: { brandAccent: '#ff00ff' } } as never)
+        expect((merged.custom as Record<string, unknown>).brandAccent).toBe('#ff00ff')
+        expect(merged.colors).toEqual(lightTheme.colors)
+    })
 })
