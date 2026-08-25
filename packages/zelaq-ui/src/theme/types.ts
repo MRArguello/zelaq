@@ -125,6 +125,14 @@ export interface MotionTokens {
     }
 }
 
+/**
+ * Extension point for consumer-defined tokens, augmented via declare module — see README's
+ * "Adding your own tokens". Kept separate from colors/space/etc. so a custom token can never
+ * collide with one this library adds later.
+ */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- augmented via declare module, not filled in here
+export interface ZelaqCustomTokens {}
+
 export interface Theme {
     colors: ColorTokens
     space: SpaceTokens
@@ -134,6 +142,7 @@ export interface Theme {
     opacity: OpacityTokens
     shadow: ShadowTokens
     motion: MotionTokens
+    custom: ZelaqCustomTokens
 }
 
 type DeepPartial<T> = {

@@ -55,7 +55,7 @@ export default function Footer({
                 </Button>
             </Box>
             <Text style={{ color: ON_IMAGE_TEXT_COLOR }}>
-                v0.4.0 ·<Link style={{ color: ON_IMAGE_TEXT_COLOR }} href="https://github.com/MRArguello/zelaq">@zelaq/ui</Link>
+                v0.5.0 ·<Link style={{ color: ON_IMAGE_TEXT_COLOR }} href="https://github.com/MRArguello/zelaq">@zelaq/ui</Link>
             </Text>
         </Stack>)
 }
