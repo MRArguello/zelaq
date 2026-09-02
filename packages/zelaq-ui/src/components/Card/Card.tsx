@@ -5,14 +5,19 @@ import { useTheme } from '../../theme'
 import { getCardTokens } from './Card.theme'
 import { toRem } from '../../internal/toRem'
 
+type CardElement = 'div' | 'section' | 'article' | 'header' | 'footer' | 'nav' | 'main' | 'aside'
+
 type WebCardProps = Omit<CardProps, 'style'> &
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'style' | 'children'> & {
+    Omit<React.HTMLAttributes<HTMLElement>, 'style' | 'children'> & {
         style?: CSSProperties
+        /** Overrides the HTML element rendered (defaults to 'div'). */
+        as?: CardElement
     }
 
-export function Card({ children, variant = 'subtle', style, testID, ...rest }: WebCardProps) {
+export function Card({ children, variant = 'subtle', as, style, testID, ...rest }: WebCardProps) {
     const theme = useTheme()
     const tokens = getCardTokens(variant, theme)
+    const Element = as ?? 'div'
 
     const cardStyle: CSSProperties = {
         backgroundColor: tokens.container.backgroundColor,
@@ -25,8 +30,8 @@ export function Card({ children, variant = 'subtle', style, testID, ...rest }: W
     }
 
     return (
-        <div data-testid={testID} style={{ ...cardStyle, ...style }} {...rest}>
+        <Element data-testid={testID} style={{ ...cardStyle, ...style }} {...rest}>
             {children}
-        </div>
+        </Element>
     )
 }

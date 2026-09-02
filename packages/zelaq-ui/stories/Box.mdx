@@ -6,7 +6,7 @@ import * as BoxStories from './Box.stories';
 # Box
 
 A plain layout container — the escape hatch for whatever `Stack`'s flex-column opinion doesn't
-fit. Renders a bare `<div>`/`View` with a `style` prop, nothing else.
+fit. Renders a `<div>`/`View` with a `style` prop by default, nothing else.
 
 <Canvas of={BoxStories.Default} />
 
@@ -15,6 +15,14 @@ fit. Renders a bare `<div>`/`View` with a `style` prop, nothing else.
 ## Tokens
 
 No token-driven styling of its own — `style` is entirely consumer-controlled.
+
+## Semantic element
+
+Renders `<div>` by default. Override with `as` for real document structure — `section`,
+`article`, `header`, `footer`, `nav`, `main`, `aside`. Web-only; native always renders RN's
+`View`, which has no element/semantic-level concept.
+
+<Canvas of={BoxStories.SemanticElement} />
 
 ## With content
 

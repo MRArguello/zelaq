@@ -4,9 +4,13 @@ import type { StackProps } from './Stack.types'
 import { useTheme } from '../../theme'
 import { toRem } from '../../internal/toRem'
 
+type StackElement = 'div' | 'section' | 'article' | 'header' | 'footer' | 'nav' | 'main' | 'aside'
+
 type WebStackProps = Omit<StackProps, 'style'> &
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'style' | 'children'> & {
+    Omit<React.HTMLAttributes<HTMLElement>, 'style' | 'children'> & {
         style?: CSSProperties
+        /** Overrides the HTML element rendered (defaults to 'div'). */
+        as?: StackElement
     }
 
 const alignItemsMap: Record<NonNullable<StackProps['align']>, CSSProperties['alignItems']> = {
@@ -28,11 +32,13 @@ export function Stack({
     gap = 'base',
     align = 'stretch',
     justify = 'start',
+    as,
     style,
     testID,
     ...rest
 }: WebStackProps) {
     const theme = useTheme()
+    const Element = as ?? 'div'
 
     const stackStyle: CSSProperties = {
         display: 'flex',
@@ -43,8 +49,8 @@ export function Stack({
     }
 
     return (
-        <div data-testid={testID} style={{ ...stackStyle, ...style }} {...rest}>
+        <Element data-testid={testID} style={{ ...stackStyle, ...style }} {...rest}>
             {children}
-        </div>
+        </Element>
     )
 }

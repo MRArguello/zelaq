@@ -24,3 +24,11 @@ over ad-hoc margins whenever you're stacking elements.
 
 <Canvas of={StackStories.CenterAligned} />
 <Canvas of={StackStories.SpaceBetween} />
+
+## Semantic element
+
+Renders `<div>` by default. Override with `as` for real document structure — `section`,
+`article`, `header`, `footer`, `nav`, `main`, `aside` — while keeping the same flex-column
+layout. Web-only; native always renders RN's `View`.
+
+<Canvas of={StackStories.SemanticElement} />
