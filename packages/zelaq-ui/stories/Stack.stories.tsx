@@ -76,6 +76,27 @@ export const SpaceBetween: Story = {
   },
 };
 
+export const SemanticElement: Story = {
+  name: 'Semantic element (as prop)',
+  args: {
+    children: null,
+  },
+  render: () => (
+    <>
+      <Stack as="nav" gap="sm" style={{ background: '#f3f4f6', padding: 12 }}>
+        <Text variant="bodySmall">Rendered as &lt;nav&gt;</Text>
+      </Stack>
+      <Stack as="section" gap="sm" style={{ background: '#f3f4f6', padding: 12, marginTop: 8 }}>
+        <Text variant="bodySmall">Rendered as &lt;section&gt;</Text>
+      </Stack>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('nav')).not.toBeNull();
+    await expect(canvasElement.querySelector('section')).not.toBeNull();
+  },
+};
+
 export const GapValues: Story = {
   name: 'Gap values',
   args: {

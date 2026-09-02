@@ -33,3 +33,4 @@ describe('mergeTheme', () => {
         expect(merged.colors).toEqual(lightTheme.colors)
     })
 })
+ 

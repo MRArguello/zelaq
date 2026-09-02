@@ -2,15 +2,21 @@ import * as React from 'react'
 import type { CSSProperties } from 'react'
 import type { BoxProps } from './Box.types'
 
+type BoxElement = 'div' | 'section' | 'article' | 'header' | 'footer' | 'nav' | 'main' | 'aside'
+
 type WebBoxProps = Omit<BoxProps, 'style'> &
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'style' | 'children'> & {
+    Omit<React.HTMLAttributes<HTMLElement>, 'style' | 'children'> & {
         style?: CSSProperties
+        /** Overrides the HTML element rendered (defaults to 'div'). */
+        as?: BoxElement
     }
 
-export function Box({ children, style, testID, ...rest }: WebBoxProps) {
+export function Box({ children, style, testID, as, ...rest }: WebBoxProps) {
+    const Element = as ?? 'div'
+
     return (
-        <div data-testid={testID} style={style} {...rest}>
+        <Element data-testid={testID} style={style} {...rest}>
             {children}
-        </div>
+        </Element>
     )
 }

@@ -74,6 +74,21 @@ export const WithButton: Story = {
   },
 };
 
+export const SemanticElement: Story = {
+  name: 'Semantic element (as prop)',
+  args: {
+    children: statusContent,
+  },
+  render: () => (
+    <Card as="article" variant="outlined" style={{ width: 280 }}>
+      {statusContent}
+    </Card>
+  ),
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('article')).not.toBeNull();
+  },
+};
+
 export const AllVariants: Story = {
   name: 'All variants',
   args: {
