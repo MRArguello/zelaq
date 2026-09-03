@@ -1,51 +1,55 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import jsxA11y from 'eslint-plugin-jsx-a11y'
-import reactNativeA11y from 'eslint-plugin-react-native-a11y'
-import storybook from 'eslint-plugin-storybook'
-import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactNativeA11y from 'eslint-plugin-react-native-a11y';
+import storybook from 'eslint-plugin-storybook';
+import tseslint from 'typescript-eslint';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
-const dirname = import.meta.dirname
+const dirname = import.meta.dirname;
 
 export default defineConfig([
-    globalIgnores(['lib', 'storybook-static']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [js.configs.recommended, tseslint.configs.recommended, reactHooks.configs.flat.recommended],
-        languageOptions: {
-            ecmaVersion: 2020,
-            globals: { ...globals.browser, ...globals.node },
-            parserOptions: {
-                tsconfigRootDir: dirname,
-            },
-        },
+  globalIgnores(['lib', 'storybook-static']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: { ...globals.browser, ...globals.node },
+      parserOptions: {
+        tsconfigRootDir: dirname,
+      },
     },
-    {
-        // Web renderers: DOM accessibility rules (aria-*, semantic HTML).
-        files: ['**/*.tsx'],
-        ignores: ['**/*.native.tsx'],
-        plugins: { 'jsx-a11y': jsxA11y },
-        rules: jsxA11y.configs.recommended.rules,
+  },
+  {
+    // Web renderers: DOM accessibility rules (aria-*, semantic HTML).
+    files: ['**/*.tsx'],
+    ignores: ['**/*.native.tsx'],
+    plugins: { 'jsx-a11y': jsxA11y },
+    rules: jsxA11y.configs.recommended.rules,
+  },
+  {
+    // Native renderers: RN accessibility props (accessibilityRole/Label/State, etc).
+    files: ['**/*.native.tsx'],
+    plugins: { 'react-native-a11y': reactNativeA11y },
+    rules: {
+      'react-native-a11y/has-accessibility-hint': 'off',
+      'react-native-a11y/has-accessibility-props': 'error',
+      'react-native-a11y/has-valid-accessibility-actions': 'error',
+      'react-native-a11y/has-valid-accessibility-component-type': 'error',
+      'react-native-a11y/has-valid-accessibility-descriptors': 'error',
+      'react-native-a11y/has-valid-accessibility-role': 'error',
+      'react-native-a11y/has-valid-accessibility-state': 'error',
+      'react-native-a11y/has-valid-accessibility-states': 'error',
+      'react-native-a11y/has-valid-accessibility-traits': 'error',
+      'react-native-a11y/has-valid-accessibility-value': 'error',
+      'react-native-a11y/no-nested-touchables': 'error',
     },
-    {
-        // Native renderers: RN accessibility props (accessibilityRole/Label/State, etc).
-        files: ['**/*.native.tsx'],
-        plugins: { 'react-native-a11y': reactNativeA11y },
-        rules: {
-            'react-native-a11y/has-accessibility-hint': 'off',
-            'react-native-a11y/has-accessibility-props': 'error',
-            'react-native-a11y/has-valid-accessibility-actions': 'error',
-            'react-native-a11y/has-valid-accessibility-component-type': 'error',
-            'react-native-a11y/has-valid-accessibility-descriptors': 'error',
-            'react-native-a11y/has-valid-accessibility-role': 'error',
-            'react-native-a11y/has-valid-accessibility-state': 'error',
-            'react-native-a11y/has-valid-accessibility-states': 'error',
-            'react-native-a11y/has-valid-accessibility-traits': 'error',
-            'react-native-a11y/has-valid-accessibility-value': 'error',
-            'react-native-a11y/no-nested-touchables': 'error',
-        },
-    },
-    ...storybook.configs['flat/recommended'],
-])
+  },
+  ...storybook.configs['flat/recommended'],
+]);

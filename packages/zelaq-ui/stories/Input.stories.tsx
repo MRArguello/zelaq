@@ -40,7 +40,9 @@ export const WithHelperText: Story = {
     const input = canvas.getByLabelText('Email address');
     const describedById = input.getAttribute('aria-describedby');
     await expect(describedById).toBeTruthy();
-    await expect(document.getElementById(describedById!)).toHaveTextContent('Use your work email.');
+    await expect(document.getElementById(describedById!)).toHaveTextContent(
+      'Use your work email.',
+    );
   },
 };
 
@@ -55,7 +57,9 @@ export const ErrorState: Story = {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText('Invalid email');
     await expect(input).toHaveAttribute('aria-invalid', 'true');
-    await expect(canvas.getByText('Enter a valid email address.')).toBeInTheDocument();
+    await expect(
+      canvas.getByText('Enter a valid email address.'),
+    ).toBeInTheDocument();
   },
 };
 
@@ -109,8 +113,16 @@ export const AllStates: Story = {
   render: () => (
     <Stack gap="md" style={{ width: 280 }}>
       <Input label="Name" placeholder="Ada Lovelace" />
-      <Input label="Email address" placeholder="you@example.com" helperText="Use your work email." />
-      <Input label="Invalid email" value="not-an-email" errorMessage="Enter a valid email address." />
+      <Input
+        label="Email address"
+        placeholder="you@example.com"
+        helperText="Use your work email."
+      />
+      <Input
+        label="Invalid email"
+        value="not-an-email"
+        errorMessage="Enter a valid email address."
+      />
       <Input label="Disabled field" value="Unavailable" disabled />
     </Stack>
   ),

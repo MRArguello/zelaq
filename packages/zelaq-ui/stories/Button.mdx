@@ -44,17 +44,17 @@ already has an accessible name from its text label.
 ```tsx
 // web
 import { Search } from 'lucide-react';
-<Button startIcon={<Search size={16} />}>Search</Button>
+<Button startIcon={<Search size={16} />}>Search</Button>;
 
 // React Native
 import { Search } from 'lucide-react-native';
-<Button startIcon={<Search size={16} color="#ffffff" />}>Search</Button>
+<Button startIcon={<Search size={16} color="#ffffff" />}>Search</Button>;
 ```
 
 ## accessibilityHint
 
 Supplemental context for when the result of an action isn't obvious from the label alone — not
-limited to icon-only controls. `accessibilityLabel="Delete Account"` is clear about *what*
+limited to icon-only controls. `accessibilityLabel="Delete Account"` is clear about _what_
 happens but not how consequential it is, so a hint still adds real information. Don't restate the
 label, and don't use it as a substitute for a real label.
 

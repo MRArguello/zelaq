@@ -1,45 +1,45 @@
-import * as React from 'react'
-import { Text as RNText } from 'react-native'
-import type { TextProps as RNTextProps } from 'react-native'
-import type { TextProps } from './Text.types'
-import { useTheme } from '../../theme'
-import { getTextTokens } from './Text.theme'
+import * as React from 'react';
+import { Text as RNText } from 'react-native';
+import type { TextProps as RNTextProps } from 'react-native';
+import type { TextProps } from './Text.types';
+import { useTheme } from '../../theme';
+import { getTextTokens } from './Text.theme';
 
 type NativeTextProps = TextProps &
-    Omit<RNTextProps, 'style' | 'children' | 'testID' | 'accessibilityLabel'>
+  Omit<RNTextProps, 'style' | 'children' | 'testID' | 'accessibilityLabel'>;
 
 export function Text({
-    children,
-    variant = 'body',
-    tone = 'default',
-    align = 'left',
-    style,
-    testID,
-    accessibilityLabel,
-    ...rest
+  children,
+  variant = 'body',
+  tone = 'default',
+  align = 'left',
+  style,
+  testID,
+  accessibilityLabel,
+  ...rest
 }: NativeTextProps) {
-    const theme = useTheme()
-    const tokens = getTextTokens(variant, tone, align, theme)
+  const theme = useTheme();
+  const tokens = getTextTokens(variant, tone, align, theme);
 
-    return (
-        <RNText
-            testID={testID}
-            accessibilityLabel={accessibilityLabel}
-            style={[
-                {
-                    color: tokens.color,
-                    // RN falls back to the platform font on its own if this isn't registered.
-                    fontFamily: tokens.fontFamily,
-                    fontSize: tokens.fontSize,
-                    fontWeight: tokens.fontWeight,
-                    lineHeight: tokens.lineHeight,
-                    textAlign: tokens.textAlign,
-                },
-                style,
-            ]}
-            {...rest}
-        >
-            {children}
-        </RNText>
-    )
+  return (
+    <RNText
+      testID={testID}
+      accessibilityLabel={accessibilityLabel}
+      style={[
+        {
+          color: tokens.color,
+          // RN falls back to the platform font on its own if this isn't registered.
+          fontFamily: tokens.fontFamily,
+          fontSize: tokens.fontSize,
+          fontWeight: tokens.fontWeight,
+          lineHeight: tokens.lineHeight,
+          textAlign: tokens.textAlign,
+        },
+        style,
+      ]}
+      {...rest}
+    >
+      {children}
+    </RNText>
+  );
 }

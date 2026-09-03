@@ -78,7 +78,9 @@ export const Alignment: Story = {
     children: 'Aligned text',
   },
   render: (args) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 240 }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 240 }}
+    >
       <Text {...args} align="left">
         Left
       </Text>
@@ -92,9 +94,15 @@ export const Alignment: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(getComputedStyle(canvas.getByText('Left')).textAlign).toBe('left');
-    await expect(getComputedStyle(canvas.getByText('Center')).textAlign).toBe('center');
-    await expect(getComputedStyle(canvas.getByText('Right')).textAlign).toBe('right');
+    await expect(getComputedStyle(canvas.getByText('Left')).textAlign).toBe(
+      'left',
+    );
+    await expect(getComputedStyle(canvas.getByText('Center')).textAlign).toBe(
+      'center',
+    );
+    await expect(getComputedStyle(canvas.getByText('Right')).textAlign).toBe(
+      'right',
+    );
   },
 };
 
@@ -116,7 +124,14 @@ export const HeadingLevels: Story = {
   ),
   play: async ({ canvasElement }) => {
     const headings = canvasElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    await expect(Array.from(headings).map((el) => el.tagName)).toEqual(['H1', 'H2', 'H3', 'H4', 'H5', 'H6']);
+    await expect(Array.from(headings).map((el) => el.tagName)).toEqual([
+      'H1',
+      'H2',
+      'H3',
+      'H4',
+      'H5',
+      'H6',
+    ]);
   },
 };
 

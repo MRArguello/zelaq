@@ -1,20 +1,20 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { Stack } from "expo-router";
-import { ZelaqProvider } from "zelaq-ui";
-import type { ThemeMode, ReduceMotionMode } from "zelaq-ui";
+import { createContext, useContext, useState, useEffect } from 'react';
+import { Stack } from 'expo-router';
+import { ZelaqProvider } from 'zelaq-ui';
+import type { ThemeMode, ReduceMotionMode } from 'zelaq-ui';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
 const ThemeModeContext = createContext<{
-  mode: ThemeMode
-  toggleMode: () => void
-  reduceMotion: ReduceMotionMode
-  toggleReduceMotion: () => void
+  mode: ThemeMode;
+  toggleMode: () => void;
+  reduceMotion: ReduceMotionMode;
+  toggleReduceMotion: () => void;
 }>({
-  mode: "light",
-  toggleMode: () => { },
-  reduceMotion: "system",
-  toggleReduceMotion: () => { },
+  mode: 'light',
+  toggleMode: () => {},
+  reduceMotion: 'system',
+  toggleReduceMotion: () => {},
 });
 
 export function useThemeModeToggle() {
@@ -22,11 +22,18 @@ export function useThemeModeToggle() {
 }
 
 export default function RootLayout() {
-  const [mode, setMode] = useState<ThemeMode>("light");
-  const toggleMode = () => setMode((current) => (current === "dark" ? "light" : "dark"));
-  const [reduceMotion, setReduceMotion] = useState<ReduceMotionMode>("system");
+  const [mode, setMode] = useState<ThemeMode>('light');
+  const toggleMode = () =>
+    setMode((current) => (current === 'dark' ? 'light' : 'dark'));
+  const [reduceMotion, setReduceMotion] = useState<ReduceMotionMode>('system');
   const toggleReduceMotion = () =>
-    setReduceMotion((current) => (current === "system" ? "always" : current === "always" ? "never" : "system"))
+    setReduceMotion((current) =>
+      current === 'system'
+        ? 'always'
+        : current === 'always'
+          ? 'never'
+          : 'system',
+    );
   const [fontsLoaded] = useFonts({
     Satoshi: require('../assets/fonts/Satoshi-Regular.otf'),
     'Satoshi-Medium': require('../assets/fonts/Satoshi-Medium.otf'),
@@ -39,7 +46,9 @@ export default function RootLayout() {
 
   if (!fontsLoaded) return null;
   return (
-    <ThemeModeContext.Provider value={{ mode, toggleMode, reduceMotion, toggleReduceMotion }}>
+    <ThemeModeContext.Provider
+      value={{ mode, toggleMode, reduceMotion, toggleReduceMotion }}
+    >
       <ZelaqProvider
         mode={mode}
         reduceMotion={reduceMotion}

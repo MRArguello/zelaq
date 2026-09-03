@@ -1,33 +1,38 @@
-import { useEffect, useState } from 'react'
-import type { PropsWithChildren } from 'react'
-import type { Preview } from '@storybook/react-vite'
-import { withThemeByDataAttribute } from '@storybook/addon-themes'
-import { DocsContainer as BaseDocsContainer } from '@storybook/addon-docs/blocks'
-import type { DocsContainerProps } from '@storybook/addon-docs/blocks'
-import { themes } from 'storybook/theming'
-import { ZelaqProvider, useTheme } from '../src'
-import type { ThemeMode, ReduceMotionMode } from '../src'
+import { useEffect, useState } from 'react';
+import type { PropsWithChildren } from 'react';
+import type { Preview } from '@storybook/react-vite';
+import { withThemeByDataAttribute } from '@storybook/addon-themes';
+import { DocsContainer as BaseDocsContainer } from '@storybook/addon-docs/blocks';
+import type { DocsContainerProps } from '@storybook/addon-docs/blocks';
+import { themes } from 'storybook/theming';
+import { ZelaqProvider, useTheme } from '../src';
+import type { ThemeMode, ReduceMotionMode } from '../src';
 
 function SyncCanvasBackground({ children }: { children: React.ReactNode }) {
-  const theme = useTheme()
+  const theme = useTheme();
   useEffect(() => {
-    document.body.style.backgroundColor = theme.colors.background
-  }, [theme.colors.background])
-  return <>{children}</>
+    document.body.style.backgroundColor = theme.colors.background;
+  }, [theme.colors.background]);
+  return <>{children}</>;
 }
 
 function readDocsTheme() {
-  return document.documentElement.getAttribute('data-theme') === 'dark' ? themes.dark : themes.light
+  return document.documentElement.getAttribute('data-theme') === 'dark'
+    ? themes.dark
+    : themes.light;
 }
 
 function CustomDocsContainer(props: PropsWithChildren<DocsContainerProps>) {
-  const [theme, setTheme] = useState(readDocsTheme)
+  const [theme, setTheme] = useState(readDocsTheme);
   useEffect(() => {
-    const observer = new MutationObserver(() => setTheme(readDocsTheme()))
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
-    return () => observer.disconnect()
-  }, [])
-  return <BaseDocsContainer {...props} theme={theme} />
+    const observer = new MutationObserver(() => setTheme(readDocsTheme()));
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+    return () => observer.disconnect();
+  }, []);
+  return <BaseDocsContainer {...props} theme={theme} />;
 }
 
 const preview: Preview = {
@@ -58,7 +63,7 @@ const preview: Preview = {
     },
 
     a11y: {
-      test: 'error'
+      test: 'error',
     },
 
     options: {

@@ -1,19 +1,17 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-        "noEmit": false,
-        "declaration": true,
-        "emitDeclarationOnly": true
-    },
-    "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "lib",
-        "node_modules",
-        "**/*.test.ts",
-        "**/*.test.tsx",
-        "**/__tests__/**",
-        "**/__mocks__/**"
-    ]
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "lib",
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/__tests__/**",
+    "**/__mocks__/**"
+  ]
 }

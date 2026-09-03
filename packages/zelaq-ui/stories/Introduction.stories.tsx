@@ -11,7 +11,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function Swatch({ name, value, textColor }: { name: string; value: string; textColor: string }) {
+function Swatch({
+  name,
+  value,
+  textColor,
+}: {
+  name: string;
+  value: string;
+  textColor: string;
+}) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
       <div
@@ -24,7 +32,14 @@ function Swatch({ name, value, textColor }: { name: string; value: string; textC
           flexShrink: 0,
         }}
       />
-      <div style={{ fontFamily: 'monospace', fontSize: 13, lineHeight: 1.4, color: textColor }}>
+      <div
+        style={{
+          fontFamily: 'monospace',
+          fontSize: 13,
+          lineHeight: 1.4,
+          color: textColor,
+        }}
+      >
         <div>{name}</div>
         <div style={{ opacity: 0.6 }}>{value}</div>
       </div>
@@ -32,9 +47,21 @@ function Swatch({ name, value, textColor }: { name: string; value: string; textC
   );
 }
 
-function PaletteGrid({ palette, textColor }: { palette: Record<string, string>; textColor: string }) {
+function PaletteGrid({
+  palette,
+  textColor,
+}: {
+  palette: Record<string, string>;
+  textColor: string;
+}) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+        gap: 16,
+      }}
+    >
       {Object.entries(palette).map(([name, value]) => (
         <Swatch key={name} name={name} value={value} textColor={textColor} />
       ))}
@@ -49,16 +76,29 @@ export const Light: Story = {
   parameters: {
     a11y: { test: 'off' },
   },
-  render: () =>
-    <div style={{ background: lightPalette.mineral100, padding: 24, borderRadius: 1 }}>
+  render: () => (
+    <div
+      style={{
+        background: lightPalette.mineral100,
+        padding: 24,
+        borderRadius: 1,
+      }}
+    >
       <PaletteGrid palette={lightPalette} textColor={lightPalette.ink900} />
-    </div>,
+    </div>
+  ),
 };
 
 export const Dark: Story = {
   name: 'Dark palette',
   render: () => (
-    <div style={{ background: darkPalette.mineral900, padding: 24, borderRadius: 1 }}>
+    <div
+      style={{
+        background: darkPalette.mineral900,
+        padding: 24,
+        borderRadius: 1,
+      }}
+    >
       <PaletteGrid palette={darkPalette} textColor={darkPalette.mineral100} />
     </div>
   ),

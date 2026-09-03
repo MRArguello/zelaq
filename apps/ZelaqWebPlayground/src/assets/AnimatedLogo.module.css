@@ -1,4 +1,4 @@
 .path {
-    fill: var(--logo-color, #115E59);
-    stroke: var(--logo-color, #115E59);
+  fill: var(--logo-color, #115e59);
+  stroke: var(--logo-color, #115e59);
 }

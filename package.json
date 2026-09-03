@@ -1,24 +1,28 @@
 {
-    "name": "zelaq-monorepo",
-    "private": true,
-    "packageManager": "pnpm@9.15.0",
-    "scripts": {
-        "build:ui": "pnpm --filter zelaq-ui build",
-        "dev:web": "pnpm --filter @zelaq/web-playground dev",
-        "dev:native": "pnpm --filter @zelaq/native-playground start",
-        "prepare": "husky",
-        "precommit": "pnpm -r --if-present run typecheck && pnpm -r --if-present run lint && pnpm -r --if-present run test && pnpm -r --if-present run test:native"
+  "name": "zelaq-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build:ui": "pnpm --filter zelaq-ui build",
+    "dev:web": "pnpm --filter @zelaq/web-playground dev",
+    "dev:native": "pnpm --filter @zelaq/native-playground start",
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "precommit": "pnpm -r --if-present run format:check && pnpm -r --if-present run typecheck && pnpm -r --if-present run lint && pnpm -r --if-present run test && pnpm -r --if-present run test:native"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "19.1.0",
+      "react-dom": "19.1.0"
     },
-    "pnpm": {
-        "overrides": {
-            "react": "19.1.0",
-            "react-dom": "19.1.0"
-        },
-        "patchedDependencies": {
-            "storybook@10.3.3": "patches/storybook@10.3.3.patch"
-        }
-    },
-    "devDependencies": {
-        "husky": "^9.1.7"
+    "patchedDependencies": {
+      "storybook@10.3.3": "patches/storybook@10.3.3.patch"
     }
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "prettier": "^3.9.6"
+  }
 }

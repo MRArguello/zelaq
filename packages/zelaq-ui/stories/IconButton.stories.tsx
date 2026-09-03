@@ -1,6 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, fireEvent, fn, userEvent, waitFor, within } from 'storybook/test';
-import { Settings, Trash2, X, ChevronDown, Check, Menu, AlertCircle } from 'lucide-react';
+import {
+  expect,
+  fireEvent,
+  fn,
+  userEvent,
+  waitFor,
+  within,
+} from 'storybook/test';
+import {
+  Settings,
+  Trash2,
+  X,
+  ChevronDown,
+  Check,
+  Menu,
+  AlertCircle,
+} from 'lucide-react';
 import { IconButton } from '../src';
 
 const meta = {
@@ -33,9 +48,13 @@ export const Default: Story = {
 
     const restingOpacity = getComputedStyle(button).opacity;
     await fireEvent.mouseDown(button);
-    await waitFor(() => expect(getComputedStyle(button).opacity).not.toBe(restingOpacity));
+    await waitFor(() =>
+      expect(getComputedStyle(button).opacity).not.toBe(restingOpacity),
+    );
     await fireEvent.mouseUp(button);
-    await waitFor(() => expect(getComputedStyle(button).opacity).toBe(restingOpacity));
+    await waitFor(() =>
+      expect(getComputedStyle(button).opacity).toBe(restingOpacity),
+    );
   },
 };
 
@@ -108,9 +127,21 @@ export const DifferentSizes: Story = {
   },
   render: (args) => (
     <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-      <IconButton {...args} icon={<AlertCircle size={14} />} accessibilityLabel="Small" />
-      <IconButton {...args} icon={<AlertCircle size={20} />} accessibilityLabel="Medium" />
-      <IconButton {...args} icon={<AlertCircle size={28} />} accessibilityLabel="Large" />
+      <IconButton
+        {...args}
+        icon={<AlertCircle size={14} />}
+        accessibilityLabel="Small"
+      />
+      <IconButton
+        {...args}
+        icon={<AlertCircle size={20} />}
+        accessibilityLabel="Medium"
+      />
+      <IconButton
+        {...args}
+        icon={<AlertCircle size={28} />}
+        accessibilityLabel="Large"
+      />
     </div>
   ),
 };
@@ -123,9 +154,21 @@ export const DifferentColors: Story = {
   },
   render: (args) => (
     <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-      <IconButton {...args} icon={<AlertCircle size={18} color="#f59e0b" />} accessibilityLabel="Warning" />
-      <IconButton {...args} icon={<AlertCircle size={18} color="#ef4444" />} accessibilityLabel="Error" />
-      <IconButton {...args} icon={<AlertCircle size={18} color="#10b981" />} accessibilityLabel="Success" />
+      <IconButton
+        {...args}
+        icon={<AlertCircle size={18} color="#f59e0b" />}
+        accessibilityLabel="Warning"
+      />
+      <IconButton
+        {...args}
+        icon={<AlertCircle size={18} color="#ef4444" />}
+        accessibilityLabel="Error"
+      />
+      <IconButton
+        {...args}
+        icon={<AlertCircle size={18} color="#10b981" />}
+        accessibilityLabel="Success"
+      />
     </div>
   ),
 };
