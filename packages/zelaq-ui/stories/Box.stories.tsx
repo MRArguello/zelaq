@@ -15,7 +15,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    style: { width: 200, height: 120, background: '#F4F8F7', border: '1px solid #7B9490' },
+    style: {
+      width: 200,
+      height: 120,
+      background: '#F4F8F7',
+      border: '1px solid #7B9490',
+    },
   },
   play: async ({ canvasElement }) => {
     const box = canvasElement.querySelector('div');
@@ -40,7 +45,12 @@ export const WithOnClick: Story = {
 export const WithContent: Story = {
   name: 'With content',
   args: {
-    style: { width: 240, padding: 16, background: '#F4F8F7', border: '1px solid #7B9490' },
+    style: {
+      width: 240,
+      padding: 16,
+      background: '#F4F8F7',
+      border: '1px solid #7B9490',
+    },
     children: <Text>Any content — Box has no layout opinion of its own.</Text>,
   },
 };

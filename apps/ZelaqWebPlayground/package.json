@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b --noEmit",
     "lint": "eslint .",
+    "format": "prettier --write . --ignore-path ../../.prettierignore",
+    "format:check": "prettier --check . --ignore-path ../../.prettierignore",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -27,6 +29,6 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
-    "zelaq-ui": "^0.5.0"
+    "zelaq-ui": "^0.5.2"
   }
 }

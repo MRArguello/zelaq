@@ -1,6 +1,6 @@
 # Zelaq Web Playground
 
-Web playground for developing and testing [`zelaq-ui`](../../packages/zelaq-ui). 
+Web playground for developing and testing [`zelaq-ui`](../../packages/zelaq-ui).
 
 ## Running
 

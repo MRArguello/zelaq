@@ -1,5 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, fireEvent, fn, userEvent, waitFor, within } from 'storybook/test';
+import {
+  expect,
+  fireEvent,
+  fn,
+  userEvent,
+  waitFor,
+  within,
+} from 'storybook/test';
 import { Search, Plus } from 'lucide-react';
 import { Button } from '../src';
 
@@ -32,9 +39,13 @@ export const Primary: Story = {
 
     const restingOpacity = getComputedStyle(button).opacity;
     await fireEvent.mouseDown(button);
-    await waitFor(() => expect(getComputedStyle(button).opacity).not.toBe(restingOpacity));
+    await waitFor(() =>
+      expect(getComputedStyle(button).opacity).not.toBe(restingOpacity),
+    );
     await fireEvent.mouseUp(button);
-    await waitFor(() => expect(getComputedStyle(button).opacity).toBe(restingOpacity));
+    await waitFor(() =>
+      expect(getComputedStyle(button).opacity).toBe(restingOpacity),
+    );
   },
 };
 
@@ -87,7 +98,8 @@ export const WithAccessibilityHint: Story = {
   name: 'Destructive action with hint',
   args: {
     variant: 'secondary',
-    accessibilityHint: 'Permanently deletes your account and all associated data',
+    accessibilityHint:
+      'Permanently deletes your account and all associated data',
     children: 'Delete Account',
   },
 };

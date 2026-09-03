@@ -1,6 +1,14 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, fn, screen, userEvent, waitFor, waitForElementToBeRemoved, within } from 'storybook/test';
+import {
+  expect,
+  fn,
+  screen,
+  userEvent,
+  waitFor,
+  waitForElementToBeRemoved,
+  within,
+} from 'storybook/test';
 import { Dialog, Stack, Text, Button, Input } from '../src';
 
 const meta = {
@@ -18,8 +26,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-type DialogStoryProps = Omit<React.ComponentProps<typeof Dialog>, 'open' | 'onClose'>
-function DialogDemo({ triggerLabel, ...args }: DialogStoryProps & { triggerLabel: string }) {
+type DialogStoryProps = Omit<
+  React.ComponentProps<typeof Dialog>,
+  'open' | 'onClose'
+>;
+function DialogDemo({
+  triggerLabel,
+  ...args
+}: DialogStoryProps & { triggerLabel: string }) {
   const [open, setOpen] = React.useState(false);
   return (
     <Stack gap="md" style={{ padding: 24 }}>
@@ -30,22 +44,31 @@ function DialogDemo({ triggerLabel, ...args }: DialogStoryProps & { triggerLabel
 }
 
 export const Responsive: Story = {
-  render: (args) => <DialogDemo {...args} triggerLabel="Open responsive dialog" />,
+  render: (args) => (
+    <DialogDemo {...args} triggerLabel="Open responsive dialog" />
+  ),
   args: {
     title: 'Delete project',
     presentation: 'responsive',
     children: (
       <Stack gap="md">
-        <Text>This action cannot be undone. Resize the window to see it switch between sheet and dialog.</Text>
+        <Text>
+          This action cannot be undone. Resize the window to see it switch
+          between sheet and dialog.
+        </Text>
         <Button>Delete</Button>
       </Stack>
     ),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole('button', { name: 'Open responsive dialog' }));
+    await userEvent.click(
+      canvas.getByRole('button', { name: 'Open responsive dialog' }),
+    );
 
-    const dialog = await screen.findByRole('dialog', { name: 'Delete project' });
+    const dialog = await screen.findByRole('dialog', {
+      name: 'Delete project',
+    });
     // Focus moves into the surface on open — see Dialog.tsx's minimal focus-management effect.
     await waitFor(() => expect(document.activeElement).toBe(dialog));
 
@@ -56,7 +79,9 @@ export const Responsive: Story = {
 
 export const ForcedDialog: Story = {
   name: 'Forced dialog',
-  render: (args) => <DialogDemo {...args} triggerLabel="Open centered dialog" />,
+  render: (args) => (
+    <DialogDemo {...args} triggerLabel="Open centered dialog" />
+  ),
   args: {
     title: 'Edit profile',
     presentation: 'dialog',
@@ -94,7 +119,10 @@ export const BackdropDismissDisabled: Story = {
     closeOnBackdropPress: false,
     children: (
       <Stack gap="md">
-        <Text>You must use the close button — tapping outside won&apos;t dismiss this.</Text>
+        <Text>
+          You must use the close button — tapping outside won&apos;t dismiss
+          this.
+        </Text>
         <Button>Acknowledge</Button>
       </Stack>
     ),
@@ -115,14 +143,19 @@ export const BackdropDismissDisabled: Story = {
 
 export const NoAnimation: Story = {
   name: 'Enter/exit animation disabled',
-  render: (args) => <DialogDemo {...args} triggerLabel="Open dialog (no animation)" />,
+  render: (args) => (
+    <DialogDemo {...args} triggerLabel="Open dialog (no animation)" />
+  ),
   args: {
     title: 'Instant open/close',
     presentation: 'dialog',
     animated: false,
     children: (
       <Stack gap="md">
-        <Text>Opens and closes immediately — no fade/scale transition. Use the × or Escape to close.</Text>
+        <Text>
+          Opens and closes immediately — no fade/scale transition. Use the × or
+          Escape to close.
+        </Text>
       </Stack>
     ),
   },
@@ -130,14 +163,19 @@ export const NoAnimation: Story = {
 
 export const LongContent: Story = {
   name: 'Long content (centered)',
-  render: (args) => <DialogDemo {...args} triggerLabel="Open dialog with long content" />,
+  render: (args) => (
+    <DialogDemo {...args} triggerLabel="Open dialog with long content" />
+  ),
   args: {
     title: 'Terms of service',
     presentation: 'dialog',
     children: (
       <Stack gap="md">
         {Array.from({ length: 20 }, (_, i) => (
-          <Text key={i}>Paragraph {i + 1} — long enough content to exceed the viewport height.</Text>
+          <Text key={i}>
+            Paragraph {i + 1} — long enough content to exceed the viewport
+            height.
+          </Text>
         ))}
         <Button>Accept</Button>
       </Stack>

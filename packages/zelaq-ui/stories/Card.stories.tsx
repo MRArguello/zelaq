@@ -39,7 +39,8 @@ export const Outlined: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const card = canvas.getByText('Project status').parentElement!.parentElement!;
+    const card =
+      canvas.getByText('Project status').parentElement!.parentElement!;
     await expect(card).toHaveStyle({ boxShadow: 'none' });
     const borderColor = getComputedStyle(card).borderColor;
     await expect(borderColor).not.toBe('rgba(0, 0, 0, 0)');
@@ -54,7 +55,8 @@ export const Elevated: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const card = canvas.getByText('Project status').parentElement!.parentElement!;
+    const card =
+      canvas.getByText('Project status').parentElement!.parentElement!;
     await expect(getComputedStyle(card).boxShadow).not.toBe('none');
   },
 };

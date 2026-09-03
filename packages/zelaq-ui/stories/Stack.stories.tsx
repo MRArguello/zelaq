@@ -86,7 +86,11 @@ export const SemanticElement: Story = {
       <Stack as="nav" gap="sm" style={{ background: '#f3f4f6', padding: 12 }}>
         <Text variant="bodySmall">Rendered as &lt;nav&gt;</Text>
       </Stack>
-      <Stack as="section" gap="sm" style={{ background: '#f3f4f6', padding: 12, marginTop: 8 }}>
+      <Stack
+        as="section"
+        gap="sm"
+        style={{ background: '#f3f4f6', padding: 12, marginTop: 8 }}
+      >
         <Text variant="bodySmall">Rendered as &lt;section&gt;</Text>
       </Stack>
     </>
@@ -109,7 +113,10 @@ export const GapValues: Story = {
           <Text variant="bodySmall" tone="muted">
             gap=&quot;{gap}&quot;
           </Text>
-          <Stack gap={gap} style={{ background: '#f3f4f6', padding: 8, borderRadius: 8 }}>
+          <Stack
+            gap={gap}
+            style={{ background: '#f3f4f6', padding: 8, borderRadius: 8 }}
+          >
             <div style={{ width: 60, height: 20, background: '#8FAEAA' }} />
             <div style={{ width: 60, height: 20, background: '#8FAEAA' }} />
             <div style={{ width: 60, height: 20, background: '#8FAEAA' }} />

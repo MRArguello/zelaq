@@ -58,13 +58,13 @@ contrast for any color you replace.
 
 Two ways to customize the theme:
 
-- **`ZelaqProvider`'s `theme` override** (see above) is for *systemic* changes — things meant to
+- **`ZelaqProvider`'s `theme` override** (see above) is for _systemic_ changes — things meant to
   shift together, like a brand recolor or dark mode. It's token-scoped, not component-scoped:
   `colors.secondaryBorder`, for example, is shared by `Card`'s outlined variant, `Button`'s
   secondary variant, and `Input`'s default border — overriding it changes all of them at once,
   everywhere the override's subtree reaches. There's no way to target just one component type
   through the theme.
-- **The `style` prop** every component accepts is for a *one-off* look on a single instance —
+- **The `style` prop** every component accepts is for a _one-off_ look on a single instance —
   `<Card style={{ borderColor: 'red' }}>` changes only that `Card`, nothing else.
 
 If you want a one-off look reused in multiple places, wrap the component instead of repeating the
@@ -138,9 +138,9 @@ packages with the same icon set. `react-native-svg` is a native module `lucide-r
 ## Typography
 
 ```ts
-theme.typography.body       // { fontFamily, fontSize: 16, fontWeight: '400', lineHeight: 24 }
-theme.typography.heading1   // { fontFamily, fontSize: 40, fontWeight: '700', lineHeight: 50 }
-theme.typography.fontFamily.sans // 'Satoshi'
+theme.typography.body; // { fontFamily, fontSize: 16, fontWeight: '400', lineHeight: 24 }
+theme.typography.heading1; // { fontFamily, fontSize: 40, fontWeight: '700', lineHeight: 50 }
+theme.typography.fontFamily.sans; // 'Satoshi'
 ```
 
 One family (`Satoshi`) across the kit, weights `400`/`500`/`700` are used. Full variant list and exact values: `Text`'s Storybook page. Override `typography` via `ZelaqProvider`'s `theme` prop to use a different font.
