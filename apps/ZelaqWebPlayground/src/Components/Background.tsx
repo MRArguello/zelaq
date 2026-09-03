@@ -59,7 +59,7 @@ export function PlaygroundBackground({
   return (
     <div
       style={{
-        height: '100vh',
+        minHeight: '100dvh',
         width: '100%',
         minWidth: '100vw',
         boxSizing: 'border-box',
@@ -67,7 +67,6 @@ export function PlaygroundBackground({
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        overflow: 'hidden',
       }}
     >
       <BackgroundImage theme={theme} />

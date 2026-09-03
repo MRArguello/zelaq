@@ -43,8 +43,8 @@ export function Button({
 }: NativeButtonProps) {
   const theme = useTheme();
   const tokens = getButtonTokens(variant, disabled, theme);
+
   const motionEnabled = useMotionEnabled(animated);
-  // useState, not useRef — react-hooks/refs flags reading `.current` during render.
   const [scale] = React.useState(() => new Animated.Value(1));
   const [pressed, setPressed] = React.useState(false);
 
@@ -75,8 +75,6 @@ export function Button({
         animateTo(1);
       }}
       testID={testID}
-      // A plain array, not a function — Animated's style extraction doesn't reliably
-      // resolve Pressable's ({ pressed }) => [...] render-prop form.
       style={[
         styles.base,
         tokens.container,

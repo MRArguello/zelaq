@@ -49,9 +49,10 @@ export function Button({
   animated = true,
   ...rest
 }: WebButtonProps) {
-  const [pressed, setPressed] = React.useState(false);
   const theme = useTheme();
   const tokens = getButtonTokens(variant, disabled, theme);
+
+  const [pressed, setPressed] = React.useState(false);
   const hintId = React.useId();
   const motionEnabled = useMotionEnabled(animated);
   const isPressed = pressed && !disabled;
@@ -76,7 +77,6 @@ export function Button({
     alignItems: 'center',
     justifyContent: 'center',
     gap: startIcon || endIcon ? toRem(tokens.container.gap) : undefined,
-    // currentColor for startIcon/endIcon — siblings of the label span, don't inherit its color otherwise.
     color: tokens.label.color,
   };
 
