@@ -23,7 +23,11 @@ export function Box({ children, style, testID, as, ...rest }: WebBoxProps) {
   const Element = as ?? 'div';
 
   return (
-    <Element data-testid={testID} style={style} {...rest}>
+    <Element
+      data-testid={testID}
+      style={{ boxSizing: 'border-box', ...style }}
+      {...rest}
+    >
       {children}
     </Element>
   );

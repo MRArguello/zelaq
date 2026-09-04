@@ -9,6 +9,7 @@ import {
   type ThemeMode,
   type ReduceMotionMode,
 } from 'zelaq-ui';
+import { version as zelaqUiVersion } from 'zelaq-ui/package.json';
 
 const ON_IMAGE_TEXT_COLOR = 'rgba(255, 255, 255, 0.92)';
 
@@ -80,7 +81,7 @@ export function Footer({
         </Button>
       </Box>
       <Text style={{ color: ON_IMAGE_TEXT_COLOR }}>
-        v0.5.2 ·
+        v{zelaqUiVersion} ·
         <Link
           style={{ color: ON_IMAGE_TEXT_COLOR }}
           href="https://github.com/MRArguello/zelaq"
