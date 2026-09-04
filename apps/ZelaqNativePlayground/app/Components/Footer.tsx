@@ -10,6 +10,7 @@ import {
   type ReduceMotionMode,
 } from 'zelaq-ui';
 import { Sun, Moon, Zap, ZapOff, RotateCw } from 'lucide-react-native';
+import { version as zelaqUiVersion } from 'zelaq-ui/package.json';
 
 const ON_IMAGE_TEXT_COLOR = 'rgba(255, 255, 255, 0.92)';
 
@@ -75,7 +76,7 @@ export default function Footer({
         </Button>
       </Box>
       <Text style={{ color: ON_IMAGE_TEXT_COLOR }}>
-        v0.5.3 ·
+        v{zelaqUiVersion} ·
         <Link
           style={{ color: ON_IMAGE_TEXT_COLOR }}
           href="https://github.com/MRArguello/zelaq"
