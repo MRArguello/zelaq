@@ -61,7 +61,6 @@ export function PlaygroundBackground({
       style={{
         minHeight: '100dvh',
         width: '100%',
-        minWidth: '100vw',
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
