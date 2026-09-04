@@ -55,6 +55,7 @@ export function Stack({
   const Element = as ?? 'div';
 
   const stackStyle: CSSProperties = {
+    boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
     gap: toRem(theme.space[gap]),

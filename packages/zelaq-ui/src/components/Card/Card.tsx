@@ -35,6 +35,7 @@ export function Card({
   const Element = as ?? 'div';
 
   const cardStyle: CSSProperties = {
+    boxSizing: 'border-box',
     backgroundColor: tokens.container.backgroundColor,
     borderRadius: tokens.container.borderRadius,
     border: `${tokens.container.borderWidth}px solid ${tokens.container.borderColor}`,
