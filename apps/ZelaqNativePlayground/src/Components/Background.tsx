@@ -35,7 +35,7 @@ export default function PlaygroundBackground({
           theme.colors.backdrop,
         ]}
         locations={[0, 0.3, 0.7, 1]}
-        style={StyleSheet.absoluteFillObject}
+        style={StyleSheet.absoluteFill}
       />
 
       {children}

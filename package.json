@@ -13,8 +13,8 @@
   },
   "pnpm": {
     "overrides": {
-      "react": "19.1.0",
-      "react-dom": "19.1.0"
+      "react": "19.2.3",
+      "react-dom": "19.2.3"
     },
     "patchedDependencies": {
       "storybook@10.3.3": "patches/storybook@10.3.3.patch"

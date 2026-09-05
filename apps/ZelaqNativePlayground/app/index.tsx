@@ -3,12 +3,12 @@ import { ScrollView } from 'react-native';
 import { Stack, Text, useTheme } from 'zelaq-ui';
 import type { ThemeMode } from 'zelaq-ui';
 import { useThemeModeToggle } from './_layout';
-import { useIsCompactLayout } from './hooks/useIsCompactLayout';
+import { useIsCompactLayout } from '../src/hooks/useIsCompactLayout';
 
-import Form from './Components/Form';
-import PlaygroundBackground from './Components/Background';
-import Footer from './Components/Footer';
-import AnimatedLogo from './assets/AnimatedLogo';
+import Form from '../src/Components/Form';
+import PlaygroundBackground from '../src/Components/Background';
+import Footer from '../src/Components/Footer';
+import AnimatedLogo from '../src/assets/AnimatedLogo';
 
 const LOGO_COLOR: Record<ThemeMode, string> = {
   dark: '#115E59',
